@@ -11,11 +11,11 @@ class BundesligaSeeder extends Seeder
      */
     public function run()
     {
-        $league = \App\Models\League::where(['name' => 'Bundesliga'])->first();
+        $league = \App\League::where(['name' => 'Bundesliga'])->first();
 
         if ($league) {
 
-            if (\App\Models\Team::where(['leagueId' => $league->id])->count() > 2) {
+            if (\App\Team::where(['leagueId' => $league->id])->count() > 2) {
                 return false;
             }
 
@@ -149,7 +149,7 @@ class BundesligaSeeder extends Seeder
 
 
         } else {
-            $league = \App\Models\League::firstOrNew([
+            $league = \App\League::firstOrNew([
                 'name' => 'Bundesliga',
                 'logoPath' => 'leagues-logo/bundesliga.png'
             ]);

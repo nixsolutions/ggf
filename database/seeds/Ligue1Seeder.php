@@ -11,11 +11,11 @@ class Ligue1Seeder extends Seeder
      */
     public function run()
     {
-        if (\App\Models\League::where(['name' => 'Ligue 1'])->count() > 0) {
+        if (\App\League::where(['name' => 'Ligue 1'])->count() > 0) {
             return false;
         }
 
-        $league = \App\Models\League::firstOrNew([
+        $league = \App\League::firstOrNew([
             'name' => 'Ligue 1',
             'logoPath' => 'leagues-logo/ligue1.png'
         ]);

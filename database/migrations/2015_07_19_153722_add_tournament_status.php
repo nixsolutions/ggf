@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
-use App\Models\Tournament;
+use Illuminate\Support\Facades\Schema;
+use App\Tournament;
 
 class AddTournamentStatus extends Migration
 {

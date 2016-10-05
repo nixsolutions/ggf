@@ -11,11 +11,11 @@ class NationalTeamsFranceSeeder extends Seeder
      */
     public function run()
     {
-        $league = \App\Models\League::where([
+        $league = \App\League::where([
             'name' => 'National teams',
         ])->firstOrFail();
 
-        if (\App\Models\Team::where(['name' => 'France'])->count() > 0) {
+        if (\App\Team::where(['name' => 'France'])->count() > 0) {
             return false;
         }
 

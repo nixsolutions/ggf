@@ -1,8 +1,9 @@
 <?php
 
-use App\Models\Match;
+use App\Match;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateMatchesTable extends Migration
 {

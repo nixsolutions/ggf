@@ -11,11 +11,44 @@
 |
 */
 
-$factory->define(App\User::class, function ($faker) {
+$factory->define(App\League::class, function ($faker) {
+    return [
+        'name' => $faker->company,
+        'logoPath' => ''
+    ];
+});
+
+$factory->define(\App\Match::class, function () {
+    return [
+        'homeScore' => 0,
+        'awayScore' => 0,
+        'homePenaltyScore' => 0,
+        'awayPenaltyScore' => 0,
+        'round' => 1,
+        'status' => \App\Match::STATUS_NOT_STARTED,
+        'gameType' => \App\Match::GAME_TYPE_GROUP_STAGE,
+        'resultType' => \App\Match::RESULT_TYPE_UNKNOWN
+    ];
+});
+
+$factory->define(\App\Member::class, function ($faker) {
     return [
         'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => str_random(10),
-        'remember_token' => str_random(10),
+        'facebookId' => $faker->randomNumber(6)
+    ];
+});
+
+$factory->define(\App\Team::class, function ($faker) {
+    return [
+        'name' => $faker->company,
+        'logoPath' => ''
+    ];
+});
+
+$factory->define(\App\Tournament::class, function ($faker) {
+    return [
+        'name' => $faker->name,
+        'owner' => 'factory:App\Member',
+        'description' => $faker->text(50)
     ];
 });

@@ -3,6 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class AddTournamentOwnerColumn extends Migration
 {
@@ -16,7 +17,7 @@ class AddTournamentOwnerColumn extends Migration
         Schema::table('tournaments', function (Blueprint $table) {
 
             /**
-             * @var $firstMember \App\Models\Member
+             * @var $firstMember \App\Member
              */
             $firstMember = DB::table('members')->first();
 

@@ -11,13 +11,13 @@ class NationalTeams2Seeder extends Seeder
      */
     public function run()
     {
-        $league = \App\Models\League::firstOrNew([
+        $league = \App\League::firstOrNew([
             'name' => 'National teams',
             'logoPath' => 'leagues-logo/national-teams.png'
         ]);
         $league->save();
 
-        if (1 > \App\Models\Team::where(['name' => 'Austria'])->count()) {
+        if (1 > \App\Team::where(['name' => 'Austria'])->count()) {
             DB::table('teams')->insert([
                 'leagueId' => $league->id,
                 'name' => 'Austria',
@@ -27,7 +27,7 @@ class NationalTeams2Seeder extends Seeder
             ]);
         }
 
-        if (1 > \App\Models\Team::where(['name' => 'Denmark'])->count()) {
+        if (1 > \App\Team::where(['name' => 'Denmark'])->count()) {
             DB::table('teams')->insert([
                 'leagueId' => $league->id,
                 'name' => 'Denmark',
@@ -37,7 +37,7 @@ class NationalTeams2Seeder extends Seeder
             ]);
         }
 
-        if (1 > \App\Models\Team::where(['name' => 'Greece'])->count()) {
+        if (1 > \App\Team::where(['name' => 'Greece'])->count()) {
             DB::table('teams')->insert([
                 'leagueId' => $league->id,
                 'name' => 'Greece',
@@ -47,7 +47,7 @@ class NationalTeams2Seeder extends Seeder
             ]);
         }
 
-        if (1 > \App\Models\Team::where(['name' => 'Portugal'])->count()) {
+        if (1 > \App\Team::where(['name' => 'Portugal'])->count()) {
             DB::table('teams')->insert([
                 'leagueId' => $league->id,
                 'name' => 'Portugal',
@@ -57,7 +57,7 @@ class NationalTeams2Seeder extends Seeder
             ]);
         }
 
-        if (1 > \App\Models\Team::where(['name' => 'Switzerland'])->count()) {
+        if (1 > \App\Team::where(['name' => 'Switzerland'])->count()) {
             DB::table('teams')->insert([
                 'leagueId' => $league->id,
                 'name' => 'Switzerland',
