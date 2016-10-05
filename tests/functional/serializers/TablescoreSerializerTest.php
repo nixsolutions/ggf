@@ -3,20 +3,16 @@
 namespace App\Tests\Unit\Events;
 
 use App\League;
-use App\Match;
+use App\Member;
 use App\Team;
 use App\Tournament;
+use App\Match;
 use App\TournamentTeam;
-
-use App\Serializers\Tournament\StandingsSerializer;
 use App\Serializers\Tournament\TablescoresSerializer;
 use App\Tests\TestCase;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Laracasts\TestDummy\Factory;
-use Illuminate\Support\Debug\Dumper;
+
 
 class TablescoreSerializerTest extends TestCase
 {
@@ -31,17 +27,20 @@ class TablescoreSerializerTest extends TestCase
      */
     public function testSerializerWithMatchesList($teams, $matches, $result)
     {
-        /**
-         * @var $tournament Tournament
-         */
-        $tournament = Factory::create(Tournament::class);
-        $league = Factory::create(League::class);
+
+        $tournament = factory(Tournament::class)->create([
+            'owner' => $member = factory(Member::class)->create()->id
+        ]);
+        $league = factory(League::class)->create();
 
         for ($i = 1; $i <= $teams; $i++) {
+            $team = factory(Team::class)->create([
+                'leagueId' => $league->id
+            ]);
             TournamentTeam::forceCreate([
                 'id' => $i,
                 'tournamentId' => $tournament->id,
-                'teamId' => array_get(Factory::create(Team::class, ['leagueId' => $league->id]), 'id')
+                'teamId' => $team->id
             ]);
         }
 
@@ -66,7 +65,7 @@ class TablescoreSerializerTest extends TestCase
         $collection = $serializer->collection(Match::where(['tournamentId' => $tournament->id])->get());
 
         foreach ($result as $teamScore) {
-            $item = $collection->first(function($key, $item) use ($teamScore) {
+            $item = $collection->first(function($item, $key) use ($teamScore) {
                 return $item['teamId'] == $teamScore['team'];
             });
 

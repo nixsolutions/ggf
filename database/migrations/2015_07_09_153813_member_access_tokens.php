@@ -37,7 +37,7 @@ class MemberAccessTokens extends Migration
     public function down()
     {
         Schema::table('member_tokens', function(Blueprint $table) {
-            $table->dropForeign('member_tokens_memberId_foreign');
+            $table->dropForeign('member_tokens_memberid_foreign');
         });
 
         Schema::drop('member_tokens');
