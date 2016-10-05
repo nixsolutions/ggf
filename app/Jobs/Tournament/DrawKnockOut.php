@@ -1,16 +1,15 @@
 <?php
 
 namespace App\Jobs\Tournament;
-use App\Models\Match;
-use App\Models\Tournament;
+use App\Match;
+use App\Tournament;
 
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Debug\Dumper;
 
-class DrawKnockOut extends Job implements SelfHandling
+class DrawKnockOut extends Job
 {
     /**
      * @var Collection

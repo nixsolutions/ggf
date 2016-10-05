@@ -2,7 +2,7 @@
 
 namespace App\Jobs\Tournament;
 
-use App\Models\Tournament;
+use App\Tournament;
 
 abstract class Job extends \App\Jobs\Job
 {

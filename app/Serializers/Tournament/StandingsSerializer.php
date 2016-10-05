@@ -2,7 +2,7 @@
 
 namespace App\Serializers\Tournament;
 
-use App\Models\Match;
+use App\Match;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 

@@ -2,8 +2,8 @@
 
 namespace App\Auth;
 
-use App\Models\MemberToken;
-use App\Models\Member;
+use App\MemberToken;
+use App\Member;
 use Facebook\FacebookSession;
 use Facebook\FacebookAuthorizationException;
 use Facebook\FacebookRequest;
@@ -19,6 +19,9 @@ use Illuminate\Http\Request as HttpRequest;
 
 class Guard extends Illuminate\Auth\Guard implements AuthContract
 {
+
+    use \Illuminate\Auth\Authenticatable;
+
     /**
      * @param $code
      * @return null

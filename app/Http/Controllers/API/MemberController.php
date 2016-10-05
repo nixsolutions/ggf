@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Member;
-use App\Models\TeamMember;
+use App\Member;
+use App\TeamMember;
 use App\Transformers\MemberSearchTransformer;
 use App\Transformers\MemberTransformer;
 use Illuminate\Http\Request;

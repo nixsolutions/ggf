@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
-use App\Models\Team;
-use App\Models\Member;
+use Illuminate\Database\Eloquent\Model;
+use App\Team;
+use App\Member;
 use Illuminate\Database\Eloquent;
 
 class TeamMember extends Model {

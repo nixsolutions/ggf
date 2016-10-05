@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-use App\Models\Match;
+use App\Match;
 use Illuminate\Support\Collection;
 use League\Fractal\Resource\Collection as FractalCollection;
 use League\Fractal\TransformerAbstract;

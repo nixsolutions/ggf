@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class Tournament extends Model

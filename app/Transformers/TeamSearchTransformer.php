@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-use App\Models\Team;
+use App\Team;
 use League\Fractal\TransformerAbstract;
 
 class TeamSearchTransformer extends TransformerAbstract

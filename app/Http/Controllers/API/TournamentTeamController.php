@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Tournament;
-use App\Models\TournamentTeam;
+use App\Tournament;
+use App\TournamentTeam;
 use App\Transformers\TournamentTeamTransformer;
 
 use App\Http\Requests;

@@ -3,7 +3,7 @@
 namespace App\Listeners\Match;
 
 use App\Events\MatchWasFinished;
-use App\Models\Match;
+use App\Match;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;

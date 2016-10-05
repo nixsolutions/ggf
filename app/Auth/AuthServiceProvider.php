@@ -11,7 +11,7 @@ class AuthServiceProvider extends ServiceProvider
      * @inheritdoc
      */
     protected function registerAuthenticator()	{
-        $this->app->bind("auth", function($app) {
+        $this->app->bind('auth', function($app) {
             // Once the authentication service has actually been requested by the developer
             // we will set a variable in the application indicating such. This helps us
             // know that we need to set any queued cookies in the after event later.
@@ -19,7 +19,8 @@ class AuthServiceProvider extends ServiceProvider
             return new AuthManager($app);
         });
         $this->app->singleton('auth.driver', function ($app) {
-            return $app['auth']->driver();
+//            return $app['auth']->driver();
+            return $app['auth']->guard();
         });
     }
 }

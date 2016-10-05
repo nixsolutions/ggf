@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
-use App\Models\TeamMember;
+use Illuminate\Database\Eloquent\Model;
+use App\TeamMember;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 

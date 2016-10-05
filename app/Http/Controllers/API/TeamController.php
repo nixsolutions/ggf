@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\Tournament\RemoveTeam;
-use App\Models\Team;
-use App\Models\TournamentTeam;
+use App\Team;
+use App\TournamentTeam;
 use App\Transformers\TeamSearchTransformer;
 use App\Transformers\TournamentTeamTransformer;
 use Illuminate\Support\Facades\DB;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Member;
+use App\Member;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 

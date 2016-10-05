@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tournament;
+use App\Tournament;
 use Illuminate\Support\Facades\Request;
 
 class TournamentController extends Controller

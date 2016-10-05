@@ -44,7 +44,8 @@ class StartSession extends \Illuminate\Session\Middleware\StartSession
      */
     protected function getSessionId(Request $request, $session)
     {
-        return $this->auth->getSessionId($request);
+        //getSessionId
+        return $this->auth->getSession($request);
     }
 
     /**

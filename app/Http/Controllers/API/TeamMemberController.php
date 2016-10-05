@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\Team\AssignTeamMember;
 use App\Http\Requests\Team\RemoveTeamMember;
-use App\Models\Member;
-use App\Models\TeamMember;
+use App\Member;
+use App\TeamMember;
 use App\Transformers\TeamMemberSearchTransformer;
 use App\Transformers\TeamMemberTransformer;
 use Illuminate\Support\Debug\Dumper;

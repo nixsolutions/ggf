@@ -2,11 +2,11 @@
 
 namespace App\Tests\Unit\Events;
 
-use App\Models\League;
-use App\Models\Match;
-use App\Models\Team;
-use App\Models\Tournament;
-use App\Models\TournamentTeam;
+use App\League;
+use App\Match;
+use App\Team;
+use App\Tournament;
+use App\TournamentTeam;
 
 use App\Serializers\Tournament\StandingsSerializer;
 use App\Tests\TestCase;

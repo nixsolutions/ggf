@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Events\Tournament\TournamentWasReset;
 use App\Events\Tournament\TournamentWasStarted;
-use App\Models\TournamentTeam;
+use App\TournamentTeam;
 use Illuminate\Support\Facades\Log;
 
 class TournamentTeamObserver

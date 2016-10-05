@@ -3,7 +3,7 @@
 namespace App\Events\Tournament;
 
 use App\Events\Event;
-use App\Models\Tournament;
+use App\Tournament;
 
 abstract class AbstractTournamentDrawEvent extends Event
 {

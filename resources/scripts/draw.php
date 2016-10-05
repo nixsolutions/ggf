@@ -16,9 +16,9 @@ $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
 );
 
-$tournament = App\Models\Tournament::find(1);
+$tournament = App\Tournament::find(1);
 
-App\Models\Match::where(['tournamentId' => $tournament->id])->delete();
+App\Match::where(['tournamentId' => $tournament->id])->delete();
 
 $event = new App\Events\TournamentWasStarted($tournament);
 

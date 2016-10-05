@@ -2,13 +2,12 @@
 
 namespace App\Jobs\Tournament;
 
-use App\Models\Match;
-use App\Models\Tournament;
+use App\Match;
+use App\Tournament;
 
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Database\Eloquent\Collection;
 
-class DrawLeague extends Job implements SelfHandling
+class DrawLeague extends Job
 {
     /**
      * @var Array

@@ -6,7 +6,7 @@ use App\Events\Tournament\AbstractTournamentDrawEvent;
 use App\Events\TournamentWasStarted;
 use App\Jobs\Tournament\DrawKnockOut;
 use App\Jobs\Tournament\DrawLeague;
-use App\Models\Tournament;
+use App\Tournament;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;

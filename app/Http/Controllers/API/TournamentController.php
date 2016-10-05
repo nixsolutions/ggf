@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Match;
-use App\Models\Member;
-use App\Models\Team;
-use App\Models\Tournament;
-use App\Models\TournamentTeam;
+use App\Match;
+use App\Member;
+use App\Team;
+use App\Tournament;
+use App\TournamentTeam;
 use App\Serializers\Tournament\StandingsSerializer;
 use App\Serializers\Tournament\TablescoresSerializer;
 use App\Transformers\StandingsTransformer;

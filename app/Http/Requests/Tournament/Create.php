@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Tournament;
 
 use App\Http\Requests\Request;
-use App\Models\Tournament;
+use App\Tournament;
 
 class Create extends Request
 {

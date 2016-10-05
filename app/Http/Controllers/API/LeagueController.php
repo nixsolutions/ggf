@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateLeague;
-use App\Models\League;
+use App\League;
 use App\Transformers\LeagueTransformer;
 use App\Transformers\TeamTransformer;
 use Illuminate\Support\Facades\Request;

@@ -97,6 +97,8 @@ return [
 
     'log' => 'single',
 
+    'env' => env('APP_ENV', 'production'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -113,7 +115,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
+
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
@@ -135,6 +137,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -144,6 +147,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\SessionServiceProvider::class,
         App\Providers\ValidatorServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Auth\AuthServiceProvider::class,
         App\Providers\EloquentServiceProvider::class,
 
@@ -201,6 +205,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class,
 
         'Form'=> Illuminate\Html\FormFacade::class,
         'HTML'=> Illuminate\Html\HtmlFacade::class

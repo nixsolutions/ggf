@@ -2,10 +2,10 @@
 
 namespace App\Tests\Functional\Http\API;
 
-use App\Models\Match;
-use App\Models\Team;
-use App\Models\Tournament;
-use App\Models\TournamentTeam;
+use App\Match;
+use App\Team;
+use App\Tournament;
+use App\TournamentTeam;
 use App\Events\TournamentWasStarted;
 
 use App\Tests\TestCase;
@@ -27,7 +27,7 @@ class UpdateMatchTest extends TestCase
      */
     public function testUpdateMatchScore($request, $response, $attributesToCheck)
     {
-        $member = Factory::create('App\Models\Member');
+        $member = Factory::create('App\Member');
 
         Auth::login($member);
 
@@ -41,30 +41,30 @@ class UpdateMatchTest extends TestCase
          * @var $match Match
          */
         $tournament = Factory::create(
-            'App\Models\Tournament',
+            'App\Tournament',
             array_get($request, 'tournament', [])
         );
-        $league = Factory::create('App\Models\League');
+        $league = Factory::create('App\League');
 
-        $homeTeam = Factory::create('App\Models\Team', [
+        $homeTeam = Factory::create('App\Team', [
             'leagueId' => $league->id
         ]);
 
-        $awayTeam = Factory::create('App\Models\Team', [
+        $awayTeam = Factory::create('App\Team', [
             'leagueId' => $league->id
         ]);
 
-        $homeTournamentTeam = Factory::create('App\Models\TournamentTeam', [
+        $homeTournamentTeam = Factory::create('App\TournamentTeam', [
             'teamId' => $homeTeam->id,
             'tournamentId' => $tournament->id
         ]);
 
-        $awayTournamentTeam = Factory::create('App\Models\TournamentTeam', [
+        $awayTournamentTeam = Factory::create('App\TournamentTeam', [
             'teamId' => $awayTeam->id,
             'tournamentId' => $tournament->id
         ]);
 
-        $match = Factory::create('App\Models\Match', [
+        $match = Factory::create('App\Match', [
             'tournamentId' => $tournament->id,
             'homeTournamentTeamId' => $homeTournamentTeam->id,
             'awayTournamentTeamId' => $awayTournamentTeam->id
@@ -261,28 +261,28 @@ class UpdateMatchTest extends TestCase
          * @var $awayTournamentTeam TournamentTeam
          * @var $match Match
          */
-        $tournament = Factory::create('App\Models\Tournament');
-        $league = Factory::create('App\Models\League');
+        $tournament = Factory::create('App\Tournament');
+        $league = Factory::create('App\League');
 
-        $homeTeam = Factory::create('App\Models\Team', [
+        $homeTeam = Factory::create('App\Team', [
             'leagueId' => $league->id
         ]);
 
-        $awayTeam = Factory::create('App\Models\Team', [
+        $awayTeam = Factory::create('App\Team', [
             'leagueId' => $league->id
         ]);
 
-        $homeTournamentTeam = Factory::create('App\Models\TournamentTeam', [
+        $homeTournamentTeam = Factory::create('App\TournamentTeam', [
             'teamId' => $homeTeam->id,
             'tournamentId' => $tournament->id
         ]);
 
-        $awayTournamentTeam = Factory::create('App\Models\TournamentTeam', [
+        $awayTournamentTeam = Factory::create('App\TournamentTeam', [
             'teamId' => $awayTeam->id,
             'tournamentId' => $tournament->id
         ]);
 
-        $match = Factory::create('App\Models\Match', [
+        $match = Factory::create('App\Match', [
             'tournamentId' => $tournament->id,
             'homeTournamentTeamId' => $homeTournamentTeam->id,
             'awayTournamentTeamId' => $awayTournamentTeam->id
@@ -310,7 +310,7 @@ class UpdateMatchTest extends TestCase
 
     public function testMatchUpdateFailForUpdateOldRoundOfKnockOutTournamentType()
     {
-        $member = Factory::create('App\Models\Member');
+        $member = Factory::create('App\Member');
 
         Auth::login($member);
 
@@ -319,14 +319,14 @@ class UpdateMatchTest extends TestCase
          * @var $league League
          */
         $tournament = Factory::create(
-            'App\Models\Tournament',
+            'App\Tournament',
             [
                 'type' => Tournament::TYPE_KNOCK_OUT
             ]
         );
-        $league = Factory::create('App\Models\League');
+        $league = Factory::create('App\League');
 
-        Factory::times(4)->create('App\Models\Team', ['leagueId' => $league->id])
+        Factory::times(4)->create('App\Team', ['leagueId' => $league->id])
             ->each(function($team, $key) use ($tournament) {
                 $tournament->tournamentTeams()->create([
                     'teamId' => $team->id,
@@ -396,7 +396,7 @@ class UpdateMatchTest extends TestCase
      */
     public function testMatchUpdateWithMatchResults($teams, $matches, $request, $response)
     {
-        $member = Factory::create('App\Models\Member');
+        $member = Factory::create('App\Member');
 
         Auth::login($member);
 
@@ -405,17 +405,17 @@ class UpdateMatchTest extends TestCase
          * @var $league League
          */
         $tournament = Factory::create(
-            'App\Models\Tournament',
+            'App\Tournament',
             [
                 'type' => Tournament::TYPE_KNOCK_OUT
             ]
         );
-        $league = Factory::create('App\Models\League');
+        $league = Factory::create('App\League');
 
         $tournamentTeams = new Collection();
 
         foreach ($teams as $teamName) {
-            $team = Factory::create('App\Models\Team', [
+            $team = Factory::create('App\Team', [
                 'leagueId' => $league->id,
                 'name' => $teamName
             ]);

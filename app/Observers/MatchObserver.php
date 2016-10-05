@@ -4,8 +4,8 @@ namespace App\Observers;
 
 use App\Events\MatchWasFinished;
 use App\Events\Tournament\RoundHasBeenFinished;
-use App\Models\Match;
-use App\Models\Tournament;
+use App\Match;
+use App\Tournament;
 use Illuminate\Support\Facades\Log;
 
 class MatchObserver

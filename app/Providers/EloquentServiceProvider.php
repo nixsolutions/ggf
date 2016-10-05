@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Match;
-use App\Models\Tournament;
-use App\Models\TournamentTeam;
+use App\Match;
+use App\Tournament;
+use App\TournamentTeam;
 use App\Observers\MatchObserver;
 use App\Observers\TournamentObserver;
 use App\Observers\TournamentTeamObserver;

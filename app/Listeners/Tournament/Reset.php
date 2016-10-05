@@ -2,8 +2,8 @@
 
 namespace App\Listeners\Tournament;
 
-use App\Models\Match;
-use App\Models\Tournament as TournamentModel;
+use App\Match;
+use App\Tournament as TournamentModel;
 use App\Events\Tournament\TournamentWasReset;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;

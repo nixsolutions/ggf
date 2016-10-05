@@ -2,9 +2,9 @@
 
 namespace App\Tests\Unit\Events\Tournament;
 
-use App\Models\Match;
-use App\Models\Tournament;
-use App\Models\TournamentTeam;
+use App\Match;
+use App\Tournament;
+use App\TournamentTeam;
 use App\Events\TournamentWasStarted;
 
 use App\Tests\TestCase;
@@ -29,16 +29,16 @@ class DrawLeagueTest extends TestCase
         /**
          * @var $tournament Tournament
          */
-        $tournament = Factory::create('App\Models\Tournament', [
+        $tournament = Factory::create('App\Tournament', [
             'type' => Tournament::TYPE_LEAGUE
         ]);
 
         /**
          * @var $tournament Tournament
          */
-        $league = Factory::create('App\Models\League');
+        $league = Factory::create('App\League');
 
-        Factory::times($teamsAmount)->create('App\Models\Team', ['leagueId' => $league->id])
+        Factory::times($teamsAmount)->create('App\Team', ['leagueId' => $league->id])
             ->each(function($team, $key) use ($tournament) {
                 $tournament->tournamentTeams()->create([
                     'teamId' => $team->id,

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateLeague;
 use App\Http\Requests\MatchUpdate;
-use App\Models\League;
-use App\Models\Match;
+use App\League;
+use App\Match;
 use App\Transformers\LeagueTransformer;
 use App\Transformers\MatchTransformer;
 use App\Transformers\TeamTransformer;

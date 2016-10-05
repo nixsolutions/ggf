@@ -2,8 +2,8 @@
 
 namespace App\Transformers;
 
-use App\Models\Member;
-use App\Models\TeamMember;
+use App\Member;
+use App\TeamMember;
 use Illuminate\Support\Debug\Dumper;
 use League\Fractal\TransformerAbstract;
 
