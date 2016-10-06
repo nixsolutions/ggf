@@ -4,6 +4,8 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 cd $DIR/../resources/frontend
 
+bower install
+
 # Build Ember Application
 echo "Build Ember (env: ${EMBER_ENV})"
 ./node_modules/.bin/ember build --environment=${EMBER_ENV}

@@ -6,14 +6,16 @@ cd $DIR/../
 
 # Install npm dependencies
 echo "NPM Install [backend]"
-npm install
+npm install  --allow-root
 
 cd $DIR/../resources/frontend
 
 # Install npm dependencies
 echo "NPM Install [frontend]"
-npm install
+npm install  --allow-root
 
 cd $DIR/../
+
+php artisan migrate
 
 sh bin/build.sh
