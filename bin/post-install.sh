@@ -16,6 +16,11 @@ npm install  --allow-root
 
 cd $DIR/../
 
-php artisan migrate
+echo "Migrations status before"
+php artisan migrate:status
+echo "Run migrations"
+php artisan migrate || exit 1
+echo "Migrations status after"
+php artisan migrate:status
 
 sh bin/build.sh
