@@ -2,18 +2,18 @@
 
 namespace App\Tests\Unit\Events\Tournament;
 
+use App\League;
 use App\Match;
+use App\Member;
+use App\Team;
 use App\Tournament;
 use App\TournamentTeam;
-use App\Events\TournamentWasStarted;
 
 use App\Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Log;
-use Laracasts\TestDummy\Factory;
 
 class DrawKnockOutTest extends TestCase
 {
@@ -27,19 +27,17 @@ class DrawKnockOutTest extends TestCase
      */
     public function testKnockOutDrawWithDifferrentTeamsAmount($teamsAmount, $matchesAmount, $expectedException = null)
     {
-        /**
-         * @var $tournament Tournament
-         */
-        $tournament = Factory::create('App\Tournament', [
+        $member = factory(Member::class)->create();
+        $tournament = factory(Tournament::class)->create([
+            'owner' => $member->id,
             'type' => Tournament::TYPE_KNOCK_OUT
         ]);
 
-        /**
-         * @var $tournament Tournament
-         */
-        $league = Factory::create('App\League');
+        $league = factory(League::class)->create();
 
-        Factory::times($teamsAmount)->create('App\MTeam', ['leagueId' => $league->id])
+        factory(Team::class, $teamsAmount)->create([
+            'leagueId' => $league->id
+        ])
             ->each(function($team, $key) use ($tournament) {
                 $tournament->tournamentTeams()->create([
                     'teamId' => $team->id,
@@ -59,6 +57,25 @@ class DrawKnockOutTest extends TestCase
         $this->assertEquals($matchesAmount, $tournament->matches()->getResults()->count());
     }
 
+    public function firstRoundDraw()
+    {
+        return [
+            [
+                'teamsAmount' => 3,
+                'matchesCount' => 2,
+                'expectedException' => \UnexpectedValueException::class
+            ],
+            [
+                'teamsAmount' => 2,
+                'matchesCount' => 2
+            ],
+            [
+                'teamsAmount' => 4,
+                'matchesCount' => 4
+            ]
+        ];
+    }
+
     /**
      * @param $teamsAmount
      * @param $nextRoundMatchesCount
@@ -68,19 +85,17 @@ class DrawKnockOutTest extends TestCase
      */
     public function testKnockOutNextRoundDraw($teamsAmount, $nextRoundMatchesCount, $currentRound)
     {
-        /**
-         * @var $tournament Tournament
-         */
-        $tournament = Factory::create('App\Tournament', [
+        $member = factory(Member::class)->create();
+        $tournament = factory(Tournament::class)->create([
+            'owner' => $member->id,
             'type' => Tournament::TYPE_KNOCK_OUT
         ]);
 
-        /**
-         * @var $tournament Tournament
-         */
-        $league = Factory::create('App\League');
+        $league = factory(League::class)->create();
 
-        Factory::times($teamsAmount)->create('App\Team', ['leagueId' => $league->id])
+        factory(Team::class, $teamsAmount)->create([
+            'leagueId' => $league->id
+        ])
             ->each(function($team, $key) use ($tournament) {
                 $tournament->tournamentTeams()->create([
                     'teamId' => $team->id,
@@ -118,25 +133,6 @@ class DrawKnockOutTest extends TestCase
             $nextRoundMatchesCount,
             $tournament->matches()->where(['status' => Match::STATUS_NOT_STARTED])->get()->count()
         );
-    }
-
-    public function firstRoundDraw()
-    {
-        return [
-            [
-                'teamsAmount' => 3,
-                'matchesCount' => 2,
-                'expectedException' => \UnexpectedValueException::class
-            ],
-            [
-                'teamsAmount' => 2,
-                'matchesCount' => 2
-            ],
-            [
-                'teamsAmount' => 4,
-                'matchesCount' => 4
-            ]
-        ];
     }
 
     public function nextRoundDraw()

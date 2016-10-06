@@ -17,7 +17,6 @@
         "barryvdh/laravel-ide-helper": "^2.1",
         "guzzlehttp/guzzle": "^6.2",
         "barryvdh/laravel-cors": "^0.8.0",
-        "laracasts/testdummy": "^2.3",
         "barryvdh/laravel-debugbar": "^2.2",
         "intouch/laravel-newrelic": "~2.0",
         "illuminate/html": "~5.0",

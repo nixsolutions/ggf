@@ -48,8 +48,11 @@ $factory->define(App\Team::class, function (Faker\Generator $faker) {
 $factory->define(App\Tournament::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-//        'owner' => 'factory:App\Member',
-//        'owner' => 'factory:App\Member',
         'description' => $faker->text(50)
+    ];
+});
+
+$factory->define(App\TournamentTeam::class, function () {
+    return [
     ];
 });

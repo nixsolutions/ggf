@@ -2,17 +2,16 @@
 
 namespace App\Tests\Unit\Events\Tournament;
 
+use App\League;
 use App\Match;
+use App\Team;
 use App\Tournament;
 use App\TournamentTeam;
-use App\Events\TournamentWasStarted;
-
 use App\Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Laracasts\TestDummy\Factory;
+use App\Member;
 
 class DrawLeagueTest extends TestCase
 {
@@ -26,19 +25,20 @@ class DrawLeagueTest extends TestCase
      */
     public function testSuccessLeagueDrawWithDifferrentTeamsAmount($teamsAmount, $matchesAmount)
     {
-        /**
-         * @var $tournament Tournament
-         */
-        $tournament = Factory::create('App\Tournament', [
+        $member = factory(Member::class)->create();
+        $tournament = factory(Tournament::class)->create([
+            'owner' => $member->id,
             'type' => Tournament::TYPE_LEAGUE
         ]);
 
         /**
          * @var $tournament Tournament
          */
-        $league = Factory::create('App\League');
+        $league = factory(League::class)->create();
 
-        Factory::times($teamsAmount)->create('App\Team', ['leagueId' => $league->id])
+        factory(Team::class, $teamsAmount)->create([
+            'leagueId' => $league->id
+        ])
             ->each(function($team, $key) use ($tournament) {
                 $tournament->tournamentTeams()->create([
                     'teamId' => $team->id,
@@ -102,46 +102,46 @@ class DrawLeagueTest extends TestCase
                 'teamsAmount' => 10,
                 'matchesCount' => 90,
             ],
-//            [
-//                'teamsAmount' => 11,
-//                'matchesCount' => 110,
-//            ],
-//            [
-//                'teamsAmount' => 12,
-//                'matchesCount' => 132,
-//            ],
-//            [
-//                'teamsAmount' => 13,
-//                'matchesCount' => 156,
-//            ],
-//            [
-//                'teamsAmount' => 14,
-//                'matchesCount' => 182,
-//            ],
-//            [
-//                'teamsAmount' => 15,
-//                'matchesCount' => 210,
-//            ],
-//            [
-//                'teamsAmount' => 16,
-//                'matchesCount' => 240,
-//            ],
-//            [
-//                'teamsAmount' => 17,
-//                'matchesCount' => 272,
-//            ],
-//            [
-//                'teamsAmount' => 18,
-//                'matchesCount' => 306,
-//            ],
-//            [
-//                'teamsAmount' => 19,
-//                'matchesCount' => 342,
-//            ],
-//            [
-//                'teamsAmount' => 20,
-//                'matchesCount' => 380,
-//            ],
+            [
+                'teamsAmount' => 11,
+                'matchesCount' => 110,
+            ],
+            [
+                'teamsAmount' => 12,
+                'matchesCount' => 132,
+            ],
+            [
+                'teamsAmount' => 13,
+                'matchesCount' => 156,
+            ],
+            [
+                'teamsAmount' => 14,
+                'matchesCount' => 182,
+            ],
+            [
+                'teamsAmount' => 15,
+                'matchesCount' => 210,
+            ],
+            [
+                'teamsAmount' => 16,
+                'matchesCount' => 240,
+            ],
+            [
+                'teamsAmount' => 17,
+                'matchesCount' => 272,
+            ],
+            [
+                'teamsAmount' => 18,
+                'matchesCount' => 306,
+            ],
+            [
+                'teamsAmount' => 19,
+                'matchesCount' => 342,
+            ],
+            [
+                'teamsAmount' => 20,
+                'matchesCount' => 380,
+            ],
         ];
     }
 }
