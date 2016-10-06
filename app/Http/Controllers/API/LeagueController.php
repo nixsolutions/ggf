@@ -6,8 +6,6 @@ use App\Http\Requests\CreateLeague;
 use App\League;
 use App\Transformers\LeagueTransformer;
 use App\Transformers\TeamTransformer;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Input;
 
 class LeagueController extends Controller
@@ -25,7 +23,7 @@ class LeagueController extends Controller
      */
     public function store(CreateLeague $request)
     {
-        $league = League::create($request->input('league'));
+        $league = League::create($request->input());
 
         return $this->response->collection(League::where(['id' => $league->id])->get(), new LeagueTransformer(), 'leagues');
     }

@@ -24,8 +24,8 @@ class CreateLeague extends Request
     public function rules()
     {
         return [
-            'league.name' => 'required|min:3',
-            'league.logoPath' => 'asset_exists'
+            'name' => 'required|min:3',
+            'logoPath' => 'asset_exists'
         ];
     }
 }
