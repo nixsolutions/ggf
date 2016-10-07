@@ -53,7 +53,7 @@ class MatchUpdate extends Request
         return [
             'match.homeScore' => 'required|integer',
             'match.awayScore' => 'required|integer',
-            'match.status' => 'required|in:' . join(',', Match::getAvailableStatuses()) . '|round_active|round_finished_for_pair'
+            'match.status' => 'required|in:' . implode(',', Match::getAvailableStatuses()) . '|round_active|round_finished_for_pair'
         ];
     }
 

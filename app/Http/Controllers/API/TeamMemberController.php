@@ -25,7 +25,7 @@ class TeamMemberController extends Controller
 
     public function assign(AssignTeamMember $request)
     {
-        $input = $request->get('teamMember');
+        $input = $request->input('teamMember');
 
         $attributes = [
             'memberId' => array_get($input, 'memberId'),

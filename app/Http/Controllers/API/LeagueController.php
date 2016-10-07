@@ -23,7 +23,7 @@ class LeagueController extends Controller
      */
     public function store(CreateLeague $request)
     {
-        $league = League::create($request->input());
+        $league = League::create($request->input('league'));
 
         return $this->response->collection(League::where(['id' => $league->id])->get(), new LeagueTransformer(), 'leagues');
     }

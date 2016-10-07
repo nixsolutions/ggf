@@ -26,8 +26,10 @@ class LeagueApiTest extends TestCase
     public function testCreateLeague()
     {
         $data = [
-            'name' => 'example',
-            'logoPath' => ' '
+            'league' => [
+                'name' => 'example',
+                'logoPath' => ' '
+            ]
         ];
 
         $this->json('POST', '/api/v1/leagues', $data);

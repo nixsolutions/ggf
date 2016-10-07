@@ -7,11 +7,7 @@ use App\Team;
 use App\TournamentTeam;
 use App\Transformers\TeamSearchTransformer;
 use App\Transformers\TournamentTeamTransformer;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Response;
 
 class TeamController extends Controller
 {
@@ -19,7 +15,7 @@ class TeamController extends Controller
     {
         $collection = TournamentTeam::where(['id' => $teamId]);
 
-        return $this->response->collection($collection->get(), new TournamentTeamTransformer(), 'teams');
+        return ($this->response->collection($collection->get(), new TournamentTeamTransformer(), 'teams'));
     }
 
     public function search()

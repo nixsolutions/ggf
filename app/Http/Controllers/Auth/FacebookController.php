@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Contracts\Auth\Guard;
-
+//use Illuminate\Contracts\Auth\Guard;
+use App\Auth\Guard;
 
 use Facebook\FacebookSession;
 use Illuminate\Support\Facades\Session;

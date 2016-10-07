@@ -56,3 +56,8 @@ $factory->define(App\TournamentTeam::class, function () {
     return [
     ];
 });
+
+$factory->define(App\TeamMember::class, function () {
+    return [
+    ];
+});

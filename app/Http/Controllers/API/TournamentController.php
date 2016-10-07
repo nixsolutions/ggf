@@ -28,11 +28,11 @@ use Sorskod\Larasponse\Larasponse;
 
 class TournamentController extends Controller
 {
-    public function __construct(Larasponse $response)
+    public function __construct (Larasponse $response)
     {
         $this->response = $response;
 
-        $this->middleware('auth', ['only' => ['update']]);
+//        $this->middleware('auth', ['only' => ['update']]);
     }
 
     public function catalogue()
@@ -98,6 +98,7 @@ class TournamentController extends Controller
         /**
          * @var Tournament $tournament
          */
+
         $tournament = Tournament::findOrFail($tournamentId);
         $tournament->update([
             'name' => Input::get('tournament.name'),

@@ -27,8 +27,8 @@ class Create extends Request
         return [
             'tournament.name' => 'required',
             'tournament.description' => '',
-            'tournament.type' => 'in:' . join(',', Tournament::getAvailableTypes()),
-            'tournament.membersType' => 'in:' . join(',', Tournament::getAvailableMembersType())
+            'tournament.type' => 'in:' . implode(',', Tournament::getAvailableTypes()),
+            'tournament.membersType' => 'in:' . implode(',', Tournament::getAvailableMembersType())
         ];
     }
 }

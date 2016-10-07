@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Contracts\Auth\Guard as G;
 
-class Guard extends Illuminate\Auth\Guard implements AuthContract
+class Guard
 {
-
     use \Illuminate\Auth\Authenticatable;
 
     /**

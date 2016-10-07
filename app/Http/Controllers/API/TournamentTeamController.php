@@ -15,7 +15,6 @@ use Sorskod\Larasponse\Larasponse;
 use App\Http\Requests\Tournament\AddTeam;
 use Symfony\Component\Process\Exception\LogicException;
 
-
 class TournamentTeamController extends Controller
 {
 
@@ -28,7 +27,8 @@ class TournamentTeamController extends Controller
 
     public function add(AddTeam $request)
     {
-        $tournament = Tournament::findOrFail($request->input('team.tournament'));
+        // Before ($request->input('team.tournament'))
+        $tournament = Tournament::findOrFail($request->input('team.tournamentId'));
 
         if (Tournament::STATUS_DRAFT !== $tournament->status) {
             throw new LogicException('Team can be assigned only to tournament with draft status.');
