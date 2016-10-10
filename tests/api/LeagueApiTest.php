@@ -12,7 +12,7 @@ class LeagueApiTest extends TestCase
 
     public function testGetLeagueCatalog()
     {
-        $leagues = factory(\App\League::class, 3)->create();
+        factory(\App\League::class, 3)->create();
         $this->get('/api/v1/leagues')
             ->seeJsonStructure([
                 'leagues' => [
@@ -36,7 +36,7 @@ class LeagueApiTest extends TestCase
     public function testGetLeagueTeams()
     {
         $league = factory(\App\League::class)->create();
-        $teams = factory(\App\Team::class, 4)->create([
+        factory(\App\Team::class, 4)->create([
             'leagueId' => $league->id
         ]);
 

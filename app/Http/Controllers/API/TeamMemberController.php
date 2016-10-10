@@ -8,11 +8,7 @@ use App\Member;
 use App\TeamMember;
 use App\Transformers\TeamMemberSearchTransformer;
 use App\Transformers\TeamMemberTransformer;
-use Illuminate\Support\Debug\Dumper;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class TeamMemberController

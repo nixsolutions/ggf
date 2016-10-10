@@ -3,13 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Events\MatchWasFinished;
-use App\Http\Requests\Request;
 use App\Listeners\Match\UpdateResultType;
 use App\Match;
 use App\Tournament;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class MatchUpdate extends Request

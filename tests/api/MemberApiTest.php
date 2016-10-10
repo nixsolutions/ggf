@@ -14,7 +14,6 @@ class MemberApiTest extends TestCase
     public function testCurrentMember()
     {
         $member = factory(Member::class)->create();
-
         Auth::login($member);
 
         $this->get('/api/v1/me')

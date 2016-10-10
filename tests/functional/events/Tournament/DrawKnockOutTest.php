@@ -7,12 +7,7 @@ use App\Match;
 use App\Member;
 use App\Team;
 use App\Tournament;
-use App\TournamentTeam;
-
 use App\Tests\TestCase;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DrawKnockOutTest extends TestCase

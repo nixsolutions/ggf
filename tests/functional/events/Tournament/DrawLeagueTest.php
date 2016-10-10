@@ -9,7 +9,6 @@ use App\Tournament;
 use App\TournamentTeam;
 use App\Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Member;
 

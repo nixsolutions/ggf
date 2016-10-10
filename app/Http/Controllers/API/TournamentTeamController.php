@@ -5,13 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Tournament;
 use App\TournamentTeam;
 use App\Transformers\TournamentTeamTransformer;
-
-use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request;
-use Sorskod\Larasponse\Larasponse;
 use App\Http\Requests\Tournament\AddTeam;
 use Symfony\Component\Process\Exception\LogicException;
 

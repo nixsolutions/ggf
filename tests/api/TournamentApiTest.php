@@ -61,7 +61,7 @@ class TournamentApiTest extends TestCase
             'tournamentId' => $tournament->id
         ]);
 
-        $match = factory(Match::class)->create([
+        factory(Match::class)->create([
             'tournamentId' => $tournament->id,
             'homeTournamentTeamId' => $homeTournamentTeam->id,
             'awayTournamentTeamId' => $awayTournamentTeam->id
@@ -101,7 +101,7 @@ class TournamentApiTest extends TestCase
             'owner' => $member->id,
         ]);
 
-        $match = $this->createMatch($tournament);
+        $this->createMatch($tournament);
 
         $this->json('GET', '/api/v1/tablescores', ['tournamentId' => $tournament->id])
             ->assertResponseStatus(200)
@@ -131,7 +131,7 @@ class TournamentApiTest extends TestCase
             'owner' => $member->id,
         ]);
 
-        $match = $this->createMatch($tournament);
+        $this->createMatch($tournament);
 
         $this->json('GET', '/api/v1/standings', ['tournamentId' => $tournament->id])
             ->assertResponseStatus(200)

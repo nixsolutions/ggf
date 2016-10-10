@@ -10,9 +10,7 @@ use App\Match;
 use App\TournamentTeam;
 use App\Serializers\Tournament\TablescoresSerializer;
 use App\Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 
 class TablescoreSerializerTest extends TestCase
 {

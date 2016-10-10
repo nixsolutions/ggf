@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Team;
-use App\Member;
 use Illuminate\Database\Eloquent;
 
 /**

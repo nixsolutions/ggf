@@ -10,13 +10,11 @@ use Facebook\FacebookRequest;
 use Facebook\GraphUser;
 
 use Illuminate;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request as HttpRequest;
-use Illuminate\Contracts\Auth\Guard as G;
 
 /**
  * Class Guard

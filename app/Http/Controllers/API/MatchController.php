@@ -2,16 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\CreateLeague;
 use App\Http\Requests\MatchUpdate;
-use App\League;
 use App\Match;
-use App\Transformers\LeagueTransformer;
 use App\Transformers\MatchTransformer;
-use App\Transformers\TeamTransformer;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Input;
 
 /**
