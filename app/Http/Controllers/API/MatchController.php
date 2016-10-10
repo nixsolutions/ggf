@@ -14,8 +14,15 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Input;
 
+/**
+ * Class MatchController
+ * @package App\Http\Controllers\API
+ */
 class MatchController extends Controller
 {
+    /**
+     * @return array
+     */
     public function catalogue()
     {
         $teamId = Input::get('teamId');
@@ -39,6 +46,11 @@ class MatchController extends Controller
         return $this->response->collection($collection->get(), new MatchTransformer(), 'matches');
     }
 
+    /**
+     * @param $matchId
+     * @param MatchUpdate $request
+     * @return array
+     */
     public function update($matchId, MatchUpdate $request)
     {
         /**

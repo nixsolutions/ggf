@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Contracts\Auth\Guard as G;
 
+/**
+ * Class Guard
+ * @package App\Auth
+ */
 class Guard
 {
     use \Illuminate\Auth\Authenticatable;

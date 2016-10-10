@@ -8,8 +8,15 @@ use App\Transformers\LeagueTransformer;
 use App\Transformers\TeamTransformer;
 use Illuminate\Support\Facades\Input;
 
+/**
+ * Class LeagueController
+ * @package App\Http\Controllers\API
+ */
 class LeagueController extends Controller
 {
+    /**
+     * @return array
+     */
     public function catalogue()
     {
         return $this->response->collection(League::all(), new LeagueTransformer($this->response), 'leagues');

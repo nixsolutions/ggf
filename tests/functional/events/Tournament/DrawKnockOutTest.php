@@ -38,7 +38,7 @@ class DrawKnockOutTest extends TestCase
         factory(Team::class, $teamsAmount)->create([
             'leagueId' => $league->id
         ])
-            ->each(function($team, $key) use ($tournament) {
+            ->each(function ($team, $key) use ($tournament) {
                 $tournament->tournamentTeams()->create([
                     'teamId' => $team->id,
                     'tournamentId' => $tournament->id,
@@ -96,7 +96,7 @@ class DrawKnockOutTest extends TestCase
         factory(Team::class, $teamsAmount)->create([
             'leagueId' => $league->id
         ])
-            ->each(function($team, $key) use ($tournament) {
+            ->each(function ($team, $key) use ($tournament) {
                 $tournament->tournamentTeams()->create([
                     'teamId' => $team->id,
                     'tournamentId' => $tournament->id

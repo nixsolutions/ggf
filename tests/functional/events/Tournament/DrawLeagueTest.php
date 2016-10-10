@@ -39,7 +39,7 @@ class DrawLeagueTest extends TestCase
         factory(Team::class, $teamsAmount)->create([
             'leagueId' => $league->id
         ])
-            ->each(function($team, $key) use ($tournament) {
+            ->each(function ($team, $key) use ($tournament) {
                 $tournament->tournamentTeams()->create([
                     'teamId' => $team->id,
                     'tournamentId' => $tournament->id,
@@ -63,7 +63,7 @@ class DrawLeagueTest extends TestCase
             // verify matches per team
             $this->assertEquals(
                 ($teamsAmount - 1) * 2,
-                $matches->filter(function($match) use ($team) {
+                $matches->filter(function ($match) use ($team) {
                     return ($match->homeTournamentTeamId == $team->id
                         || $match->awayTournamentTeamId == $team->id);
                 })->count()

@@ -7,11 +7,21 @@ use App\Team;
 use App\Member;
 use Illuminate\Database\Eloquent;
 
+/**
+ * Class TeamMember
+ * @package App
+ */
 class TeamMember extends Model {
 
-	protected $table = 'team_members';
+    /**
+     * @var string
+     */
+    protected $table = 'team_members';
 
-	protected $fillable = ['memberId', 'tournamentTeamId'];
+    /**
+     * @var array
+     */
+    protected $fillable = ['memberId', 'tournamentTeamId'];
 
 	/**
 	 * !!! Looks like an ugly workaround !!!
@@ -23,14 +33,23 @@ class TeamMember extends Model {
 		return 'tournamentTeamId';
 	}
 
-	public $timestamps = false;
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
-	public function member()
+    /**
+     * @return Eloquent\Relations\BelongsTo
+     */
+    public function member()
 	{
 		return $this->belongsTo(Member::class, 'memberId');
 	}
 
-	public function tournamentTeam()
+    /**
+     * @return Eloquent\Relations\BelongsTo
+     */
+    public function tournamentTeam()
 	{
 		return $this->belongsTo(TournamentTeam::class, 'tournamentTeamId');
 	}

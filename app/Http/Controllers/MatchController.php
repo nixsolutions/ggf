@@ -6,6 +6,10 @@ use App\Match;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 
+/**
+ * Class MatchController
+ * @package App\Http\Controllers
+ */
 class MatchController extends Controller
 {
     /**

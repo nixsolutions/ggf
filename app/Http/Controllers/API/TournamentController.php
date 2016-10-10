@@ -26,15 +26,25 @@ use League\Fractal\Manager;
 use Sorskod\Larasponse\Larasponse;
 
 
+/**
+ * Class TournamentController
+ * @package App\Http\Controllers\API
+ */
 class TournamentController extends Controller
 {
+    /**
+     * TournamentController constructor.
+     * @param Larasponse $response
+     */
     public function __construct(Larasponse $response)
     {
         $this->response = $response;
         parent::__construct($response);
-//        $this->middleware('auth', ['only' => ['update']]);
     }
 
+    /**
+     * @return array
+     */
     public function catalogue()
     {
         $collection = Tournament::with('tournamentTeams.team');
@@ -42,6 +52,10 @@ class TournamentController extends Controller
         return $this->response->collection($collection->get(), new TournamentTransformer($this->response), 'tournaments');
     }
 
+    /**
+     * @param $tournamentId
+     * @return array
+     */
     public function find($tournamentId)
     {
         $collection = Tournament::with('tournamentTeams.team')->where(['id' => $tournamentId]);
@@ -49,6 +63,9 @@ class TournamentController extends Controller
         return $this->response->collection($collection->get(), new TournamentTransformer($this->response), 'tournaments');
     }
 
+    /**
+     * @return array
+     */
     public function tablescores()
     {
         $serializer = new TablescoresSerializer();
@@ -63,6 +80,9 @@ class TournamentController extends Controller
         );
     }
 
+    /**
+     * @return array
+     */
     public function standings()
     {
         $serializer = new StandingsSerializer();
@@ -93,12 +113,12 @@ class TournamentController extends Controller
         return $this->response->collection(Tournament::where(['id' => $tournament->id])->get(), new TournamentTransformer($this->response), 'tournaments');
     }
 
+    /**
+     * @param $tournamentId
+     * @return array
+     */
     public function update($tournamentId)
     {
-        /**
-         * @var Tournament $tournament
-         */
-
         $tournament = Tournament::findOrFail($tournamentId);
         $tournament->update([
             'name' => Input::get('tournament.name'),

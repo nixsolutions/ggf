@@ -6,6 +6,10 @@ use Facebook\FacebookSession;
 use Illuminate\Support\Facades\Config;
 use Illuminate;
 
+/**
+ * Class AuthManager
+ * @package App\Auth
+ */
 class AuthManager extends Illuminate\Auth\AuthManager
 {
     /**

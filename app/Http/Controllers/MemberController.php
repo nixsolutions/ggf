@@ -6,6 +6,10 @@ use App\Member;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 
+/**
+ * Class MemberController
+ * @package App\Http\Controllers
+ */
 class MemberController extends Controller
 {
     /**

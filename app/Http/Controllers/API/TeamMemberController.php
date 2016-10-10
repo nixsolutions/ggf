@@ -14,8 +14,15 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Class TeamMemberController
+ * @package App\Http\Controllers\API
+ */
 class TeamMemberController extends Controller
 {
+    /**
+     * @return array
+     */
     public function catalogue()
     {
         $collection = TeamMember::with('Member')->where(['tournamentTeamId' => Input::get('tournamentTeamId')]);
@@ -23,6 +30,10 @@ class TeamMemberController extends Controller
         return $this->response->collection($collection->get(), new TeamMemberTransformer(), 'teamMembers');
     }
 
+    /**
+     * @param AssignTeamMember $request
+     * @return array
+     */
     public function assign(AssignTeamMember $request)
     {
         $input = $request->input('teamMember');
@@ -37,12 +48,19 @@ class TeamMemberController extends Controller
         return $this->response->collection(TeamMember::where($attributes)->get(), new TeamMemberTransformer(), 'teamMembers');
     }
 
+    /**
+     * @param $teamMemberId
+     * @param RemoveTeamMember $request
+     * @return mixed
+     */
     public function remove($teamMemberId, RemoveTeamMember $request)
     {
-//        return TeamMember::where(['id' => $teamMemberId])->delete();
         return TeamMember::where(['memberId' => $teamMemberId])->delete();
     }
 
+    /**
+     * @return array
+     */
     public function search()
     {
         $tournamentId = Input::get('tournamentId');

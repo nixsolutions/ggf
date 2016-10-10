@@ -26,6 +26,9 @@ class Tournament extends Model
 
     const MIN_TEAMS_AMOUNT = 2;
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function tournamentTeams()
     {
         return $this->hasMany(TournamentTeam::class, 'tournamentId');

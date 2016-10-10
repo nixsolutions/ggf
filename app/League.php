@@ -4,15 +4,31 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class League
+ * @package App
+ */
 class League extends Model {
 
-	protected $table = 'leagues';
+    /**
+     * @var string
+     */
+    protected $table = 'leagues';
 
-	protected $fillable = ['name','logoPath', 'leagueId'];
+    /**
+     * @var array
+     */
+    protected $fillable = ['name','logoPath', 'leagueId'];
 
-	public $timestamps = false;
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
-	public function teams()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function teams()
 	{
 		return $this->hasMany(Team::class, 'leagueId');
 	}

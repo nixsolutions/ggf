@@ -5,6 +5,10 @@ namespace App\Auth;
 use App\Auth\AuthManager;
 use Illuminate\Auth\AuthServiceProvider as ServiceProvider;
 
+/**
+ * Class AuthServiceProvider
+ * @package App\Auth
+ */
 class AuthServiceProvider extends ServiceProvider
 {
     /**

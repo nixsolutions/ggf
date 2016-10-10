@@ -26,6 +26,10 @@ use Illuminate\Support\Facades\Session;
  */
 class FacebookController extends Controller
 {
+    /**
+     * @param Guard $auth
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function token(Guard $auth)
     {
         try {

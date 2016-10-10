@@ -44,7 +44,7 @@ class TablescoreSerializerTest extends TestCase
             ]);
         }
 
-        foreach($matches as $key => $match) {
+        foreach ($matches as $key => $match) {
             Match::create([
                 'tournamentId' => $tournament->id,
                 'homeTournamentTeamId' => $match['homeTeamId'],
@@ -65,7 +65,7 @@ class TablescoreSerializerTest extends TestCase
         $collection = $serializer->collection(Match::where(['tournamentId' => $tournament->id])->get());
 
         foreach ($result as $teamScore) {
-            $item = $collection->first(function($item, $key) use ($teamScore) {
+            $item = $collection->first(function ($item, $key) use ($teamScore) {
                 return $item['teamId'] == $teamScore['team'];
             });
 
