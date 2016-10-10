@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Tests\TestCase;
 
@@ -26,18 +24,13 @@ class LeagueApiTest extends TestCase
     public function testCreateLeague()
     {
         $data = [
-            'league' => [
-                'name' => 'example',
-                'logoPath' => ' '
-            ]
+            'name' => 'example',
+            'logoPath' => ' '
         ];
 
-        $this->json('POST', '/api/v1/leagues', $data);
+        $this->json('POST', '/api/v1/leagues', ['league' => $data]);
         $this->assertResponseStatus(200)
-            ->seeInDatabase('leagues', [
-                'name' => 'example',
-                'logoPath' => ' '
-            ]);
+            ->seeInDatabase('leagues', $data);
     }
 
     public function testGetLeagueTeams()

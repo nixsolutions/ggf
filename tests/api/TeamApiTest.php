@@ -20,6 +20,7 @@ class TeamApiTest extends TestCase
     {
         $member = factory(Member::class)->create();
         Auth::login($member);
+
         $tournament = factory(Tournament::class)->create([
             'owner' => $member->id,
         ]);

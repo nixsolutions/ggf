@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Tests\TestCase;
 use App\Member;
@@ -21,13 +19,11 @@ class TournamentApiTest extends TestCase
     protected function createTournament()
     {
         $member = factory(Member::class)->create();
-
         $tournament = factory(Tournament::class)->create([
             'owner' => $member->id,
         ]);
 
         $league = factory(League::class)->create();
-
         factory(Team::class, 4)->create([
             'leagueId' => $league->id
         ])
@@ -161,44 +157,31 @@ class TournamentApiTest extends TestCase
         Auth::login($member);
 
         $data = [
-            'tournament' => [
-                'name' => 'example',
-                'description' => 'example',
-            ]
+            'name' => 'example',
+            'description' => 'example',
         ];
 
-        $this->json('POST', '/api/v1/tournaments', $data);
+        $this->json('POST', '/api/v1/tournaments', ['tournament' => $data]);
         $this->assertResponseStatus(200)
-            ->seeInDatabase('tournaments', [
-                'name' => 'example',
-                'description' => 'example',
-            ]);
+            ->seeInDatabase('tournaments', $data);
     }
 
     public function testTournamentUpdate()
     {
         $member = factory(Member::class)->create();
         Auth::login($member);
-
         $tournament = $this->createTournament();
+
         $data = [
-            'tournament' => [
-                'name' => 'another example',
-                'type' => 'league',
-                'status' => 'draft',
-                'membersType' => 'single',
-                'description' => 'another example'
-            ]
+            'name' => 'another example',
+            'type' => 'league',
+            'status' => 'draft',
+            'membersType' => 'single',
+            'description' => 'another example'
         ];
-        $this->json('PUT', 'api/v1/tournaments/' . $tournament->id, $data)
+
+        $this->json('PUT', 'api/v1/tournaments/' . $tournament->id, ['tournament' => $data])
             ->assertResponseStatus(200)
-            ->seeInDatabase('tournaments', [
-                'id' => $tournament->id,
-                'name' => 'another example',
-                'type' => 'league',
-                'status' => 'draft',
-                'membersType' => 'single',
-                'description' => 'another example'
-            ]);
+            ->seeInDatabase('tournaments', $data);
     }
 }

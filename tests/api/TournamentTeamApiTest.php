@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Tests\TestCase;
 use App\Member;
@@ -19,13 +17,11 @@ class TournamentTeamApiTest extends TestCase
     protected function createTournament()
     {
         $member = factory(Member::class)->create();
-
         $tournament = factory(Tournament::class)->create([
             'owner' => $member->id,
         ]);
 
         $league = factory(League::class)->create();
-
         factory(Team::class, 4)->create([
             'leagueId' => $league->id
         ])
@@ -59,7 +55,6 @@ class TournamentTeamApiTest extends TestCase
     {
         $member = factory(Member::class)->create();
         Auth::login($member);
-
         $tournament = factory(Tournament::class)->create([
             'owner' => $member->id,
         ]);
@@ -70,17 +65,12 @@ class TournamentTeamApiTest extends TestCase
         ]);
 
         $data = [
-            'team' => [
-                'teamId' => $team->id,
-                'tournamentId' => $tournament->id
-            ]
+            'teamId' => $team->id,
+            'tournamentId' => $tournament->id
         ];
 
-        $this->json('POST', '/api/v1/teams', $data);
+        $this->json('POST', '/api/v1/teams', ['team' => $data]);
         $this->assertResponseStatus(200)
-            ->seeInDatabase('tournament_teams', [
-                'teamId' => $team->id,
-                'tournamentId' => $tournament->id
-            ]);
+            ->seeInDatabase('tournament_teams', $data);
     }
 }
