@@ -33,7 +33,7 @@ class LeagueController extends Controller
      */
     public function teams()
     {
-        $collection = League::find(Input::get('leagueId'))->teams();
+        $collection = League::findOrFail(Input::get('leagueId'))->teams();
 
         return $this->response->collection($collection->get(), new TeamTransformer(), 'leagueTeams');
     }

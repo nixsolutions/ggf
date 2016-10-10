@@ -28,10 +28,10 @@ use Sorskod\Larasponse\Larasponse;
 
 class TournamentController extends Controller
 {
-    public function __construct (Larasponse $response)
+    public function __construct(Larasponse $response)
     {
         $this->response = $response;
-
+        parent::__construct($response);
 //        $this->middleware('auth', ['only' => ['update']]);
     }
 
@@ -72,7 +72,7 @@ class TournamentController extends Controller
 
         return $this->response->collection(
             $serializer->collection($collection->get()),
-            new StandingsTransformer()  ,
+            new StandingsTransformer(),
             'standings'
         );
     }

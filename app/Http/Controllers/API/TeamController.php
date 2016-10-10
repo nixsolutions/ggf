@@ -13,9 +13,10 @@ class TeamController extends Controller
 {
     public function find($teamId)
     {
-        $collection = TournamentTeam::where(['id' => $teamId]);
+//        $collection = TournamentTeam::where(['id' => $teamId]);
+        $collection = TournamentTeam::where(['teamId' => $teamId]);
 
-        return ($this->response->collection($collection->get(), new TournamentTeamTransformer(), 'teams'));
+        return $this->response->collection($collection->get(), new TournamentTeamTransformer(), 'teams');
     }
 
     public function search()
@@ -31,6 +32,7 @@ class TeamController extends Controller
 
     public function remove($teamId, RemoveTeam $request)
     {
-        return TournamentTeam::where(['id' => $teamId])->delete();
+//        return TournamentTeam::where(['id' => $teamId])->delete();
+        return TournamentTeam::where(['teamId' => $teamId])->delete();
     }
 }

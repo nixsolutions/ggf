@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TournamentTeamApiTest extends TestCase
 {
-    use DatabaseMigrations, DatabaseTransactions;
+    use DatabaseTransactions;
 
     protected $structure = ['id', 'name', 'logoPath', 'teamId', 'tournamentId', 'tournament', 'updated_at'];
 

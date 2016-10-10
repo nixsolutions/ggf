@@ -15,7 +15,7 @@ use App\Member;
 
 class DrawLeagueTest extends TestCase
 {
-    use DatabaseMigrations, DatabaseTransactions;
+    use DatabaseTransactions;
 
     /**
      * @param $teamsAmount

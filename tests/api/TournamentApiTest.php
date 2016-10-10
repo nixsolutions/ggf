@@ -14,7 +14,7 @@ use App\Match;
 
 class TournamentApiTest extends TestCase
 {
-    use DatabaseMigrations, DatabaseTransactions;
+    use DatabaseTransactions;
 
     protected $structure = ['id', 'name', 'owner', 'status', 'type', 'teams' => [], 'description'];
 

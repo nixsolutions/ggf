@@ -16,7 +16,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TablescoreSerializerTest extends TestCase
 {
-    use DatabaseMigrations, DatabaseTransactions;
+    use DatabaseTransactions;
 
     /**
      * @param $teams

@@ -30,7 +30,7 @@ class MatchController extends Controller
         }
 
         if ($teamId) {
-            $collection->where(function($query) use ($teamId) {
+            $collection->where(function ($query) use ($teamId) {
                 $query->where('homeTournamentTeamId', $teamId)
                     ->orWhere('awayTournamentTeamId', $teamId);
             });
