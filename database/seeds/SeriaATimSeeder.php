@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SeriaATimSeeder extends Seeder
 {
@@ -11,10 +12,6 @@ class SeriaATimSeeder extends Seeder
      */
     public function run()
     {
-        if (\App\League::where(['name' => 'Seria A TIM'])->count() > 0) {
-            return false;
-        }
-
         $league = \App\League::firstOrNew([
             'name' => 'Seria A TIM',
             'logoPath' => 'leagues-logo/seriaa-tim.png'

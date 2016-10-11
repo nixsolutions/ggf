@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BundesligaSeeder extends Seeder
 {
@@ -14,10 +15,6 @@ class BundesligaSeeder extends Seeder
         $league = \App\League::where(['name' => 'Bundesliga'])->first();
 
         if ($league) {
-
-            if (\App\Team::where(['leagueId' => $league->id])->count() > 2) {
-                return false;
-            }
 
             DB::table('teams')->insert([
                 'leagueId' => $league->id,

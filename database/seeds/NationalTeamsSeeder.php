@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class NationalTeamsSeeder extends Seeder
 {
@@ -11,10 +12,6 @@ class NationalTeamsSeeder extends Seeder
      */
     public function run()
     {
-        if (\App\League::where(['name' => 'National teams'])->count() > 0) {
-            return false;
-        }
-
         $league = \App\League::firstOrNew([
             'name' => 'National teams',
             'logoPath' => 'leagues-logo/national-teams.png'
