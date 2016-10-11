@@ -3,28 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\Match;
-use App\Member;
-use App\Team;
 use App\Tournament;
-use App\TournamentTeam;
 use App\Serializers\Tournament\StandingsSerializer;
 use App\Serializers\Tournament\TablescoresSerializer;
 use App\Transformers\StandingsTransformer;
 use App\Transformers\TournamentTransformer;
-use App\Transformers\MatchTransformer;
 use App\Transformers\TablescoresTransformer;
-
 use App\Http\Requests\Tournament\Create as CreateTournament;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Debug\Dumper;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request;
-use League\Fractal\Manager;
 use Sorskod\Larasponse\Larasponse;
-
 
 /**
  * Class TournamentController

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Auth\Guard;
+//use Illuminate\Contracts\Auth\Guard;
+use App\Auth\Guard;
 
 /**
  * Class AuthController
@@ -10,6 +11,7 @@ use Illuminate\Contracts\Auth\Guard;
  */
 class AuthController extends Controller
 {
+
     /**
      * @param Guard $auth
      * @return \Illuminate\Http\JsonResponse

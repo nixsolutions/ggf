@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\TeamMember;
-
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class Member extends Model implements Authenticatable

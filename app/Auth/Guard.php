@@ -8,15 +8,12 @@ use Facebook\FacebookSession;
 use Facebook\FacebookAuthorizationException;
 use Facebook\FacebookRequest;
 use Facebook\GraphUser;
-
 use Illuminate;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request as HttpRequest;
-use Illuminate\Contracts\Auth\Guard as G;
 
 /**
  * Class Guard
@@ -24,8 +21,6 @@ use Illuminate\Contracts\Auth\Guard as G;
  */
 class Guard
 {
-    use \Illuminate\Auth\Authenticatable;
-
     /**
      * @param $code
      * @return null
@@ -94,18 +89,14 @@ class Guard
         return $accessToken;
     }
 
-    /**
-     * Log the user out of the application.
-     *
-     * @return void
-     */
     public function logout()
     {
-        $user = $this->user();
+        $user = Auth::user();
 
         // If we have an event dispatcher instance, we can fire off the logout event
         // so any further processing can be done. This allows the developer to be
         // listening for anytime a user signs out of this application manually.
+
         $this->clearUserDataFromStorage();
 
         MemberToken::where(['sessionId' => Session::getId()])->delete();
