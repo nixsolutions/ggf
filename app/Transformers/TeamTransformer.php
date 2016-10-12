@@ -5,10 +5,21 @@ namespace App\Transformers;
 use App\Team;
 use League\Fractal\TransformerAbstract;
 
+/**
+ * Class TeamTransformer
+ * @package App\Transformers
+ */
 class TeamTransformer extends TransformerAbstract
 {
+    /**
+     * @var array
+     */
     protected $defaultIncludes = [];
 
+    /**
+     * @param Team $team
+     * @return array
+     */
     public function transform(Team $team)
     {
         return [

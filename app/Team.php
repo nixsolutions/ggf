@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * Class Team
  * @package App
  */
-class Team extends Model {
+class Team extends Model
+{
 
     /**
      * @var string
@@ -18,7 +19,7 @@ class Team extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['name','logoPath', 'leagueId'];
+    protected $fillable = ['name', 'logoPath', 'leagueId'];
 
     /**
      * @var bool
@@ -29,16 +30,16 @@ class Team extends Model {
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function teamMembers()
-	{
-		return $this->hasMany(Member::class, 'teamId');
-	}
+    {
+        return $this->hasMany(Member::class, 'teamId');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function tournamentTeams()
-	{
-		return $this->hasMany(TournamentTeam::class, 'teamId');
-	}
+    {
+        return $this->hasMany(TournamentTeam::class, 'teamId');
+    }
 
 }

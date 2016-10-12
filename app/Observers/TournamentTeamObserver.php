@@ -2,15 +2,19 @@
 
 namespace App\Observers;
 
-use App\Events\Tournament\TournamentWasReset;
-use App\Events\Tournament\TournamentWasStarted;
 use App\TournamentTeam;
-use Illuminate\Support\Facades\Log;
 
+/**
+ * Class TournamentTeamObserver
+ * @package App\Observers
+ */
 class TournamentTeamObserver
 {
+    /**
+     * @param TournamentTeam $model
+     */
     public function saving(TournamentTeam $model)
     {
-        
+
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
@@ -40,7 +39,7 @@ class FacebookController extends Controller
                 'access_token' => $accessToken
             ]);
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::error(
                 "Exception occured, code: " . $e->getCode()
                 . " with message: " . $e->getMessage()

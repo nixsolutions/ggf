@@ -5,6 +5,10 @@ namespace App\Events\Tournament;
 use App\Events\Event;
 use App\Tournament;
 
+/**
+ * Class AbstractTournamentDrawEvent
+ * @package App\Events\Tournament
+ */
 abstract class AbstractTournamentDrawEvent extends Event
 {
     /**

@@ -5,10 +5,21 @@ namespace App\Transformers;
 use App\Match;
 use League\Fractal\TransformerAbstract;
 
+/**
+ * Class MatchTransformer
+ * @package App\Transformers
+ */
 class MatchTransformer extends TransformerAbstract
 {
+    /**
+     * @var array
+     */
     protected $defaultIncludes = [];
 
+    /**
+     * @param Match $match
+     * @return array
+     */
     public function transform(Match $match)
     {
         return [

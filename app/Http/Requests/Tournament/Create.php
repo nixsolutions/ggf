@@ -5,6 +5,10 @@ namespace App\Http\Requests\Tournament;
 use App\Http\Requests\Request;
 use App\Tournament;
 
+/**
+ * Class Create
+ * @package App\Http\Requests\Tournament
+ */
 class Create extends Request
 {
     /**

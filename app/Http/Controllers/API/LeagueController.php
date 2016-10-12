@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Input;
  *     )
  * )
  */
-
 class LeagueController extends Controller
 {
     /**

@@ -4,16 +4,17 @@ namespace App\Listeners\Match;
 
 use App\Events\MatchWasFinished;
 use App\Match;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Log;
 
+/**
+ * Class UpdateResultType
+ * @package App\Listeners\Match
+ */
 class UpdateResultType
 {
     /**
      * Handle the event.
      *
-     * @param  MatchWasFinished  $event
+     * @param  MatchWasFinished $event
      * @return void
      */
     public function handle(MatchWasFinished $event)

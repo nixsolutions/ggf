@@ -35,8 +35,6 @@ class Member extends Model implements Authenticatable
      */
     public $timestamps = true;
 
-
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -44,7 +42,6 @@ class Member extends Model implements Authenticatable
     {
         return $this->hasMany(TeamMember::class, 'memberId');
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough

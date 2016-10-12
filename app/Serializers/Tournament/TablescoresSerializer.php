@@ -5,6 +5,10 @@ namespace App\Serializers\Tournament;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 
+/**
+ * Class TablescoresSerializer
+ * @package App\Serializers\Tournament
+ */
 class TablescoresSerializer
 {
     /**

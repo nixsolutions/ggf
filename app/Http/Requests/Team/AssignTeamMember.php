@@ -5,6 +5,10 @@ namespace App\Http\Requests\Team;
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class AssignTeamMember
+ * @package App\Http\Requests\Team
+ */
 class AssignTeamMember extends Request
 {
     /**

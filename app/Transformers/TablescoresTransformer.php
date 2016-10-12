@@ -7,10 +7,21 @@ use Illuminate\Support\Collection;
 use League\Fractal\Resource\Collection as FractalCollection;
 use League\Fractal\TransformerAbstract;
 
+/**
+ * Class TablescoresTransformer
+ * @package App\Transformers
+ */
 class TablescoresTransformer extends TransformerAbstract
 {
+    /**
+     * @var array
+     */
     protected $defaultIncludes = [];
 
+    /**
+     * @param $teamRank
+     * @return array
+     */
     public function transform($teamRank)
     {
         return [

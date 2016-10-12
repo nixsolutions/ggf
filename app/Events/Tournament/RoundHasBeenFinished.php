@@ -2,11 +2,12 @@
 
 namespace App\Events\Tournament;
 
-use App\Events\Tournament\AbstractTournamentDrawEvent;
-use App\Tournament;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
+/**
+ * Class RoundHasBeenFinished
+ * @package App\Events\Tournament
+ */
 class RoundHasBeenFinished extends AbstractTournamentDrawEvent
 {
     use SerializesModels;

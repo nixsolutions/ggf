@@ -5,10 +5,11 @@ namespace App\Listeners\Tournament;
 use App\Match;
 use App\Tournament as TournamentModel;
 use App\Events\Tournament\TournamentWasReset;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Log;
 
+/**
+ * Class Reset
+ * @package App\Listeners\Tournament
+ */
 class Reset
 {
     /**
@@ -29,7 +30,7 @@ class Reset
     /**
      * Handle the event.
      *
-     * @param  TournamentWasReset  $event
+     * @param  TournamentWasReset $event
      * @return void
      */
     public function handle(TournamentWasReset $event)
@@ -44,6 +45,9 @@ class Reset
         $this->cleanupMatches();
     }
 
+    /**
+     * @return mixed
+     */
     protected function cleanupMatches()
     {
         return Match::where(['tournamentId' => $this->tournament->id])->delete();

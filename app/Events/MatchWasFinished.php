@@ -2,11 +2,13 @@
 
 namespace App\Events;
 
-use App\Events\Event;
 use App\Match;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
+/**
+ * Class MatchWasFinished
+ * @package App\Events
+ */
 class MatchWasFinished extends Event
 {
     use SerializesModels;

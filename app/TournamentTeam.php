@@ -19,7 +19,7 @@ class TournamentTeam extends Model
     /**
      * @var array
      */
-    protected $fillable = ['tournamentId','teamId'];
+    protected $fillable = ['tournamentId', 'teamId'];
 
     /**
      * @var bool

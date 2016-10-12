@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent;
  * Class TeamMember
  * @package App
  */
-class TeamMember extends Model {
+class TeamMember extends Model
+{
 
     /**
      * @var string
@@ -21,15 +22,15 @@ class TeamMember extends Model {
      */
     protected $fillable = ['memberId', 'tournamentTeamId'];
 
-	/**
-	 * !!! Looks like an ugly workaround !!!
-	 *
-	 * @return string
-	 */
-	public function getKeyName()
-	{
-		return 'tournamentTeamId';
-	}
+    /**
+     * !!! Looks like an ugly workaround !!!
+     *
+     * @return string
+     */
+    public function getKeyName()
+    {
+        return 'tournamentTeamId';
+    }
 
     /**
      * @var bool
@@ -40,16 +41,16 @@ class TeamMember extends Model {
      * @return Eloquent\Relations\BelongsTo
      */
     public function member()
-	{
-		return $this->belongsTo(Member::class, 'memberId');
-	}
+    {
+        return $this->belongsTo(Member::class, 'memberId');
+    }
 
     /**
      * @return Eloquent\Relations\BelongsTo
      */
     public function tournamentTeam()
-	{
-		return $this->belongsTo(TournamentTeam::class, 'tournamentTeamId');
-	}
+    {
+        return $this->belongsTo(TournamentTeam::class, 'tournamentTeamId');
+    }
 
 }

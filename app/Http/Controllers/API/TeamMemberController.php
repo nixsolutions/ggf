@@ -130,8 +130,8 @@ class TeamMemberController extends Controller
         $tournamentId = Input::get('tournamentId');
         $collection = Member::with(['teamMembers', 'tournamentTeams'])->get();
 
-        $collection = $collection->filter(function($member) use ($tournamentId) {
-            $team = $member->tournamentTeams->first(function($tournamentTeam, $key) use ($tournamentId) {
+        $collection = $collection->filter(function ($member) use ($tournamentId) {
+            $team = $member->tournamentTeams->first(function ($tournamentTeam, $key) use ($tournamentId) {
                 return $tournamentTeam->tournamentId == $tournamentId;
             });
 

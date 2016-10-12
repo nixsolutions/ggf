@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Session\SessionServiceProvider as ISessionServiceProvider;
 
+/**
+ * Class SessionServiceProvider
+ * @package App\Providers
+ */
 class SessionServiceProvider extends ISessionServiceProvider
 {
     /**

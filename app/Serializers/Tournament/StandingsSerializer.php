@@ -2,10 +2,13 @@
 
 namespace App\Serializers\Tournament;
 
-use App\Match;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 
+/**
+ * Class StandingsSerializer
+ * @package App\Serializers\Tournament
+ */
 class StandingsSerializer
 {
     /**
@@ -17,7 +20,7 @@ class StandingsSerializer
 
         $matches = $matches->sortBy('id');
 
-        $matches->map(function($match) use ($standings) {
+        $matches->map(function ($match) use ($standings) {
 
             $pairId = [$match->homeTournamentTeam->id, $match->awayTournamentTeam->id];
             sort($pairId);

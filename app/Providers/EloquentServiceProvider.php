@@ -8,9 +8,12 @@ use App\TournamentTeam;
 use App\Observers\MatchObserver;
 use App\Observers\TournamentObserver;
 use App\Observers\TournamentTeamObserver;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class EloquentServiceProvider
+ * @package App\Providers
+ */
 class EloquentServiceProvider extends ServiceProvider
 {
     /**

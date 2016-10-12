@@ -4,6 +4,10 @@ namespace App\Jobs\Tournament;
 
 use App\Tournament;
 
+/**
+ * Class Job
+ * @package App\Jobs\Tournament
+ */
 abstract class Job extends \App\Jobs\Job
 {
     /**
@@ -19,5 +23,9 @@ abstract class Job extends \App\Jobs\Job
         $this->setTournament($tournament);
     }
 
+    /**
+     * @param Tournament $tournament
+     * @return mixed
+     */
     abstract protected function setTournament(Tournament $tournament);
 }

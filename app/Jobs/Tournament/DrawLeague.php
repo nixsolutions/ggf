@@ -4,9 +4,12 @@ namespace App\Jobs\Tournament;
 
 use App\Match;
 use App\Tournament;
-
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Class DrawLeague
+ * @package App\Jobs\Tournament
+ */
 class DrawLeague extends Job
 {
     /**
@@ -39,6 +42,9 @@ class DrawLeague extends Job
      */
     protected $pairCnt;
 
+    /**
+     * @param Tournament $tournament
+     */
     protected function setTournament(Tournament $tournament)
     {
         $this->tournament = $tournament;
@@ -160,7 +166,7 @@ class DrawLeague extends Job
      */
     protected function setPairCnt()
     {
-        $this->pairCnt = intval($this->teamsCount / 2);
+        $this->pairCnt = (int)$this->teamsCount / 2;
     }
 
     /**

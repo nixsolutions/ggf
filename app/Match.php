@@ -4,10 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Match
+ * @package App
+ */
 class Match extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'matches';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'tournamentId',
         'homeTournamentTeamId',
@@ -22,6 +32,9 @@ class Match extends Model
         'status',
     ];
 
+    /**
+     * @var bool
+     */
     public $timestamps = true;
 
     const GAME_TYPE_GROUP_STAGE = 'group';
@@ -42,16 +55,25 @@ class Match extends Model
     const POINTS_WIN = 3;
     const POINTS_DRAW = 1;
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function tournament()
     {
         return $this->belongsTo(Tournament::class, 'tournamentId');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function homeTournamentTeam()
     {
         return $this->belongsTo(TournamentTeam::class, 'homeTournamentTeamId');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function awayTournamentTeam()
     {
         return $this->belongsTo(TournamentTeam::class, 'awayTournamentTeamId');

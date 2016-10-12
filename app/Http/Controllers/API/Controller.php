@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers;
-use Illuminate\Support\Facades\Input;
 use Sorskod\Larasponse\Larasponse;
 
 /**

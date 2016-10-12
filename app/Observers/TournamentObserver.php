@@ -5,10 +5,16 @@ namespace App\Observers;
 use App\Events\Tournament\TournamentWasReset;
 use App\Events\Tournament\TournamentWasStarted;
 use App\Tournament;
-use Illuminate\Support\Facades\Log;
 
+/**
+ * Class TournamentObserver
+ * @package App\Observers
+ */
 class TournamentObserver
 {
+    /**
+     * @param Tournament $model
+     */
     public function updating(Tournament $model)
     {
         $dirtyStatus = array_get($model->getDirty(), 'status');

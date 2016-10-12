@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Contracts\Auth\Guard;
 use App\Auth\Guard;
 
 /**

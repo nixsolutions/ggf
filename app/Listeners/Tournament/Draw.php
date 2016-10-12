@@ -3,20 +3,20 @@
 namespace App\Listeners\Tournament;
 
 use App\Events\Tournament\AbstractTournamentDrawEvent;
-use App\Events\TournamentWasStarted;
 use App\Jobs\Tournament\DrawKnockOut;
 use App\Jobs\Tournament\DrawLeague;
 use App\Tournament;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Log;
 
+/**
+ * Class Draw
+ * @package App\Listeners\Tournament
+ */
 class Draw
 {
     /**
      * Handle the event.
      *
-     * @param  AbstractTournamentDrawEvent  $event
+     * @param  AbstractTournamentDrawEvent $event
      * @return void
      */
     public function handle(AbstractTournamentDrawEvent $event)

@@ -7,13 +7,21 @@ use Illuminate\Session\SessionManager;
 use Illuminate\Http\Request;
 use Closure;
 
+/**
+ * Class StartSession
+ * @package App\Http\Middleware
+ */
 class StartSession extends \Illuminate\Session\Middleware\StartSession
 {
+    /**
+     * @var Guard
+     */
     protected $auth;
+
     /**
      * Create a new session middleware.
      *
-     * @param  \Illuminate\Session\SessionManager  $manager
+     * @param  \Illuminate\Session\SessionManager $manager
      * @return void
      */
     public function __construct(SessionManager $manager, Guard $auth)

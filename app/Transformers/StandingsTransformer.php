@@ -7,10 +7,21 @@ use Illuminate\Support\Collection;
 use League\Fractal\Resource\Collection as FractalCollection;
 use League\Fractal\TransformerAbstract;
 
+/**
+ * Class StandingsTransformer
+ * @package App\Transformers
+ */
 class StandingsTransformer extends TransformerAbstract
 {
+    /**
+     * @var array
+     */
     protected $defaultIncludes = [];
 
+    /**
+     * @param $pair
+     * @return array
+     */
     public function transform($pair)
     {
         return [

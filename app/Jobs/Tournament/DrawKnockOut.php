@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Jobs\Tournament;
+
 use App\Match;
 use App\Tournament;
-
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Debug\Dumper;
 
+/**
+ * Class DrawKnockOut
+ * @package App\Jobs\Tournament
+ */
 class DrawKnockOut extends Job
 {
     /**
@@ -34,6 +36,9 @@ class DrawKnockOut extends Job
         return [2, 4, 8, 16, 32, 64];
     }
 
+    /**
+     * @param Tournament $tournament
+     */
     protected function setTournament(Tournament $tournament)
     {
         $this->teams = new Collection();
@@ -107,18 +112,18 @@ class DrawKnockOut extends Job
 
             return $pairs;
         } else {
-            $currentPairs = $tournament->getPairs()->filter(function($pair) use ($round) {
+            $currentPairs = $tournament->getPairs()->filter(function ($pair) use ($round) {
                 return $pair->get('round') === $round - 1;
             });
 
             $roundWinners = new Collection();
 
-            $currentPairs->each(function($pair) use ($tournament, $roundWinners) {
+            $currentPairs->each(function ($pair) use ($tournament, $roundWinners) {
                 // detect pair winner
                 $roundWinners->push($tournament->getScore($pair->get('matches'))->first());
             });
 
-            return $this->teams->filter(function($team) use ($roundWinners) {
+            return $this->teams->filter(function ($team) use ($roundWinners) {
                 return $roundWinners->pluck('teamId')->contains($team['id']);
             })->chunk(2);
         }

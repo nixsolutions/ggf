@@ -5,6 +5,10 @@ namespace App\Http\Requests\Tournament;
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class AddTeam
+ * @package App\Http\Requests\Tournament
+ */
 class AddTeam extends Request
 {
     /**

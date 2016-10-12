@@ -2,6 +2,10 @@
 
 namespace App\Http\Requests;
 
+/**
+ * Class CreateLeague
+ * @package App\Http\Requests
+ */
 class CreateLeague extends Request
 {
     /**

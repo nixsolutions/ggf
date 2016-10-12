@@ -6,10 +6,16 @@ use App\Events\MatchWasFinished;
 use App\Events\Tournament\RoundHasBeenFinished;
 use App\Match;
 use App\Tournament;
-use Illuminate\Support\Facades\Log;
 
+/**
+ * Class MatchObserver
+ * @package App\Observers
+ */
 class MatchObserver
 {
+    /**
+     * @param Match $model
+     */
     public function updating(Match $model)
     {
         $dirtyStatus = array_get($model->getDirty(), 'status');
@@ -32,6 +38,9 @@ class MatchObserver
         }
     }
 
+    /**
+     * @param Match $model
+     */
     public function updated(Match $model)
     {
         $status = array_get($model->getDirty(), 'status');

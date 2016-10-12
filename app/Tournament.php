@@ -5,12 +5,25 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * Class Tournament
+ * @package App
+ */
 class Tournament extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'tournaments';
 
+    /**
+     * @var array
+     */
     protected $fillable = ['name', 'description', 'status', 'type', 'membersType'];
 
+    /**
+     * @var bool
+     */
     public $timestamps = true;
 
     const MEMBERS_TYPE_SINGLE = 'single';
@@ -34,6 +47,9 @@ class Tournament extends Model
         return $this->hasMany(TournamentTeam::class, 'tournamentId');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function matches()
     {
         return $this->hasMany(Match::class, 'tournamentId');
@@ -84,7 +100,7 @@ class Tournament extends Model
         // get pairs of current round matches
         $pairs = new Collection();
 
-        $this->matches->map(function($match) use ($pairs) {
+        $this->matches->map(function ($match) use ($pairs) {
 
             $pairId = [$match->homeTournamentTeam->id, $match->awayTournamentTeam->id];
             sort($pairId);
@@ -121,7 +137,7 @@ class Tournament extends Model
     {
         $score = new Collection();
 
-        $matches->map(function($match) use ($score) {
+        $matches->map(function ($match) use ($score) {
 
             $homeTeam = $score->pull($match->homeTournamentTeam->id);
             $awayTeam = $score->pull($match->awayTournamentTeam->id);
@@ -199,7 +215,7 @@ class Tournament extends Model
 
 
         // sort by points and goal difference
-        $score = $score->sort(function($a, $b) {
+        $score = $score->sort(function ($a, $b) {
             if ($b['points'] === $a['points']) {
                 return $b['goalsDifference'] - $a['goalsDifference'];
             }
@@ -209,7 +225,7 @@ class Tournament extends Model
 
         $previousRow = null;
         $position = 1;
-        $score = $score->map(function($row) use (&$previousRow, &$position) {
+        $score = $score->map(function ($row) use (&$previousRow, &$position) {
             if ($previousRow
                 && $previousRow['points'] > 0
                 && $previousRow['points'] == $row['points']
@@ -229,7 +245,7 @@ class Tournament extends Model
         });
 
         // alphabetical sort for teams on the same position
-        $score = $score->sortBy(function($team) {
+        $score = $score->sortBy(function ($team) {
             return $team['position'] . '-' . $team['name'];
         }, SORT_NUMERIC);
 
@@ -244,6 +260,9 @@ class Tournament extends Model
         return $this->getScore($matches)->first();
     }
 
+    /**
+     * @return int
+     */
     public function getCurrentRound()
     {
         $matches = $this->matches()->get();

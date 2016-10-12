@@ -10,6 +10,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Class MatchUpdate
+ * @package App\Http\Requests
+ */
 class MatchUpdate extends Request
 {
     /**
@@ -39,11 +43,11 @@ class MatchUpdate extends Request
         $match = Match::findOrFail($matchId)->replicate();
         $tournament = $match->tournament()->get()->first();
 
-        Validator::extend('round_active', function($attribute, $value, $parameters) use ($match, $tournament) {
+        Validator::extend('round_active', function ($attribute, $value, $parameters) use ($match, $tournament) {
             return $this->isRoundActive($match, $tournament);
         });
 
-        Validator::extend('round_finished_for_pair', function($attribute, $value, $parameters) use ($match, $tournament) {
+        Validator::extend('round_finished_for_pair', function ($attribute, $value, $parameters) use ($match, $tournament) {
             $match->status = $value;
             return $this->isRoundFinishedForPair($match, $tournament);
         });
@@ -55,7 +59,13 @@ class MatchUpdate extends Request
         ];
     }
 
-    protected function isRoundActive($match, $tournament) {
+    /**
+     * @param $match
+     * @param $tournament
+     * @return bool
+     */
+    protected function isRoundActive($match, $tournament)
+    {
 
         // rule is not applied for Leagues
         if (Tournament::TYPE_LEAGUE === $tournament->type) {

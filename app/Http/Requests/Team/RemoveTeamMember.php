@@ -5,6 +5,10 @@ namespace App\Http\Requests\Team;
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class RemoveTeamMember
+ * @package App\Http\Requests\Team
+ */
 class RemoveTeamMember extends Request
 {
     /**
