@@ -12,9 +12,9 @@ class TournamentTeamApiTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $structure = ['id', 'name', 'logoPath', 'teamId', 'tournamentId', 'tournament', 'updated_at'];
+    private $structure = ['id', 'name', 'logoPath', 'teamId', 'tournamentId', 'tournament', 'updated_at'];
 
-    protected function createTournament()
+    private function createTournament()
     {
         $member = factory(Member::class)->create();
         $tournament = factory(Tournament::class)->create([

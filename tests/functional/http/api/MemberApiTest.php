@@ -9,7 +9,7 @@ class MemberApiTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $structure = ['id', 'name', 'facebookId', 'created_at', 'updated_at'];
+    private $structure = ['id', 'name', 'facebookId', 'created_at', 'updated_at'];
 
     public function testCurrentMember()
     {

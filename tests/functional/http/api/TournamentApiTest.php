@@ -14,9 +14,9 @@ class TournamentApiTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $structure = ['id', 'name', 'owner', 'status', 'type', 'teams' => [], 'description'];
+    private $structure = ['id', 'name', 'owner', 'status', 'type', 'teams' => [], 'description'];
 
-    protected function createTournament()
+    private function createTournament()
     {
         $member = factory(Member::class)->create();
         $tournament = factory(Tournament::class)->create([
@@ -40,7 +40,7 @@ class TournamentApiTest extends TestCase
         return $tournament;
     }
 
-    protected function createMatch($tournament)
+    private function createMatch($tournament)
     {
         $league = factory(League::class)->create();
         $homeTeam = factory(Team::class)->create([

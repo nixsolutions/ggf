@@ -7,8 +7,8 @@ class LeagueApiTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $structure = ['id', 'name', 'logoPath'];
-    protected $teamStructure = ['id', 'leagueId', 'name', 'logoPath', 'updated_at'];
+    private $structure = ['id', 'name', 'logoPath'];
+    private $teamStructure = ['id', 'leagueId', 'name', 'logoPath', 'updated_at'];
 
     public function testGetLeagueCatalog()
     {

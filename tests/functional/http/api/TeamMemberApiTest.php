@@ -14,10 +14,10 @@ class TeamMemberApiTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $structure = ['id', 'name', 'teamId', 'memberId', 'team'];
-    protected $structureSearch = ['id', 'text', 'name', 'logoPath'];
+    private $structure = ['id', 'name', 'teamId', 'memberId', 'team'];
+    private $structureSearch = ['id', 'text', 'name', 'logoPath'];
 
-    protected function createTournament()
+    private function createTournament()
     {
         $owner = factory(Member::class)->create();
         $tournament = factory(Tournament::class)->create([
@@ -27,7 +27,7 @@ class TeamMemberApiTest extends TestCase
         return $tournament;
     }
 
-    protected function createTeamMember()
+    private function createTeamMember()
     {
         $member = factory(Member::class)->create();
         Auth::login($member);

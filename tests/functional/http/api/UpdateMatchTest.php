@@ -91,7 +91,7 @@ class UpdateMatchTest extends TestCase
             /**
              * @var $updatedRow Match
              */
-            $updatedRow = Match::find($match->id);
+            $updatedRow = Match::findOrFail($match->id);
 
             foreach ($attributesToCheck as $attribute => $value) {
                 $this->assertEquals($value, $updatedRow->getAttribute($attribute));
@@ -313,7 +313,7 @@ class UpdateMatchTest extends TestCase
         );
 
         $this->assertResponseStatus(Response::HTTP_FORBIDDEN);
-        $this->assertEquals(Match::find($match->id)->status, Match::STATUS_NOT_STARTED);
+        $this->assertEquals(Match::findOrFail($match->id)->status, Match::STATUS_NOT_STARTED);
     }
 
     public function testMatchUpdateFailForUpdateOldRoundOfKnockOutTournamentType()

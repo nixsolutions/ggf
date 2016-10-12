@@ -36,7 +36,7 @@ class MatchUpdate extends Request
          *
          * @var $match Match
          */
-        $match = Match::find($matchId)->replicate();
+        $match = Match::findOrFail($matchId)->replicate();
         $tournament = $match->tournament()->get()->first();
 
         Validator::extend('round_active', function($attribute, $value, $parameters) use ($match, $tournament) {
