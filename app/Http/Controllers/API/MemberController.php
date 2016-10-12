@@ -11,7 +11,16 @@ use Illuminate\Support\Facades\Auth;
 class MemberController extends Controller
 {
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @SWG\Get(
+     *     path="/api/v1/me",
+     *     description="Returns authenticated user",
+     *     operationId="current",
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get authenticated user"
+     *     )
+     * )
      */
     public function current()
     {

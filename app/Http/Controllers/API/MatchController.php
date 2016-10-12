@@ -14,7 +14,37 @@ use Illuminate\Support\Facades\Input;
 class MatchController extends Controller
 {
     /**
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/matches",
+     *     description="Returns all matches with specified tournamentId from the database",
+     *     operationId="catalogue",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament-team id",
+     *         in="query",
+     *         name="teamId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Status of match: started, not_started, finished",
+     *         in="query",
+     *         name="status",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Tournament id",
+     *         in="query",
+     *         name="tournamentId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get list of matches"
+     *     )
+     * )
      */
     public function catalogue()
     {
@@ -40,9 +70,44 @@ class MatchController extends Controller
     }
 
     /**
-     * @param $matchId
-     * @param MatchUpdate $request
-     * @return array
+     * @SWG\Put(
+     *     path="/api/v1/matches/{matchId}",
+     *     description="Update specified match",
+     *     operationId="update",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Match id",
+     *         in="path",
+     *         name="matchId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="New home score",
+     *         in="query",
+     *         name="match[homeScore]",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="New away score",
+     *         in="query",
+     *         name="match[awayScore]",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="New status",
+     *         in="query",
+     *         name="match[status]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully update specified match"
+     *     )
+     * )
      */
     public function update($matchId, MatchUpdate $request)
     {

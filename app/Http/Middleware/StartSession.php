@@ -10,7 +10,6 @@ use Closure;
 class StartSession extends \Illuminate\Session\Middleware\StartSession
 {
     protected $auth;
-
     /**
      * Create a new session middleware.
      *
@@ -19,6 +18,7 @@ class StartSession extends \Illuminate\Session\Middleware\StartSession
      */
     public function __construct(SessionManager $manager, Guard $auth)
     {
+        parent::__construct($manager);
         $this->manager = $manager;
         $this->auth = $auth;
     }
@@ -41,7 +41,6 @@ class StartSession extends \Illuminate\Session\Middleware\StartSession
      */
     protected function getSessionId(Request $request, $session)
     {
-        //getSessionId
         return $this->auth->getSession($request);
     }
 

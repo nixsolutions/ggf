@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BarclaysPremierLeagueSeeder extends Seeder
 {
@@ -11,10 +12,6 @@ class BarclaysPremierLeagueSeeder extends Seeder
      */
     public function run()
     {
-        if (\App\League::where(['name' => 'Barclays Premier League'])->count() > 0) {
-            return false;
-        }
-
         $league = \App\League::firstOrNew([
             'name' => 'Barclays Premier League',
             'logoPath' => 'leagues-logo/barclays-premier-league.png'

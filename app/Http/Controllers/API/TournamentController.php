@@ -31,7 +31,16 @@ class TournamentController extends Controller
     }
 
     /**
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/tournaments",
+     *     description="Returns all tournaments from database",
+     *     operationId="catalogue",
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get list of tournaments"
+     *     )
+     * )
      */
     public function catalogue()
     {
@@ -41,8 +50,23 @@ class TournamentController extends Controller
     }
 
     /**
-     * @param $tournamentId
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/tournaments/{tournamentId}",
+     *     description="Returns specified tournament from database",
+     *     operationId="find",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament id",
+     *         in="path",
+     *         name="tournamentId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get specified tournament"
+     *     )
+     * )
      */
     public function find($tournamentId)
     {
@@ -52,7 +76,23 @@ class TournamentController extends Controller
     }
 
     /**
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/tablescores",
+     *     description="Returns tablescores",
+     *     operationId="tablescores",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament id",
+     *         in="query",
+     *         name="tournamentId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get tablescores"
+     *     )
+     * )
      */
     public function tablescores()
     {
@@ -69,7 +109,23 @@ class TournamentController extends Controller
     }
 
     /**
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/standings",
+     *     description="Returns standings",
+     *     operationId="standings",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament id",
+     *         in="query",
+     *         name="tournamentId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get standings"
+     *     )
+     * )
      */
     public function standings()
     {
@@ -86,10 +142,44 @@ class TournamentController extends Controller
     }
 
     /**
-     * Create new tournament
-     *
-     * @param CreateTournament $request
-     * @return array
+     * @SWG\Post(
+     *     path="/api/v1/tournaments",
+     *     description="Create new tournament",
+     *     operationId="store",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament name",
+     *         in="query",
+     *         name="tournament[name]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Tournament description",
+     *         in="query",
+     *         name="tournament[description]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *      @SWG\Parameter(
+     *         description="Type of tournament: league, knock_out, multistage",
+     *         in="query",
+     *         name="tournament[type]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Members type: single, double",
+     *         in="query",
+     *         name="tournament[membersType]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully add tournament"
+     *     )
+     * )
      */
     public function store(CreateTournament $request)
     {
@@ -102,8 +192,58 @@ class TournamentController extends Controller
     }
 
     /**
-     * @param $tournamentId
-     * @return array
+     * @SWG\Put(
+     *     path="/api/v1/tournaments/{tournamentId}",
+     *     description="Update specified tournament",
+     *     operationId="update",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament id",
+     *         in="path",
+     *         name="tournamentId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Tournament name",
+     *         in="query",
+     *         name="tournament[name]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Tournament description",
+     *         in="query",
+     *         name="tournament[description]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Tournament status: draft, started, completed",
+     *         in="query",
+     *         name="tournament[status]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *      @SWG\Parameter(
+     *         description="Tournament type: league, knock_out, multistage",
+     *         in="query",
+     *         name="tournament[type]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Members type: single, double",
+     *         in="query",
+     *         name="tournament[membersType]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully update tournament"
+     *     )
+     * )
      */
     public function update($tournamentId)
     {

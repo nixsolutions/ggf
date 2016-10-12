@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class NationalTeamsFranceSeeder extends Seeder
 {
@@ -14,10 +15,6 @@ class NationalTeamsFranceSeeder extends Seeder
         $league = \App\League::where([
             'name' => 'National teams',
         ])->firstOrFail();
-
-        if (\App\Team::where(['name' => 'France'])->count() > 0) {
-            return false;
-        }
 
         DB::table('teams')->insert([
             'leagueId' => $league->id,

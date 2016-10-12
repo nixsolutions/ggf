@@ -148,6 +148,7 @@ return [
         App\Providers\SessionServiceProvider::class,
         App\Providers\ValidatorServiceProvider::class,
         App\Providers\BroadcastServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
         App\Auth\AuthServiceProvider::class,
         App\Providers\EloquentServiceProvider::class,
 
@@ -206,6 +207,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
+        'Gate' => Illuminate\Support\Facades\Gate::class,
 
         'Form'=> Illuminate\Html\FormFacade::class,
         'HTML'=> Illuminate\Html\HtmlFacade::class

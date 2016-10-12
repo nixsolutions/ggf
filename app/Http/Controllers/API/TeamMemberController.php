@@ -17,7 +17,23 @@ use Illuminate\Support\Facades\Input;
 class TeamMemberController extends Controller
 {
     /**
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/teamMembers",
+     *     description="Returns all members of specified team from tournament",
+     *     operationId="catalogue",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament-team id",
+     *         in="query",
+     *         name="tournamentTeamId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get list of team members"
+     *     )
+     * )
      */
     public function catalogue()
     {
@@ -27,8 +43,30 @@ class TeamMemberController extends Controller
     }
 
     /**
-     * @param AssignTeamMember $request
-     * @return array
+     * @SWG\Post(
+     *     path="/api/v1/teamMembers",
+     *     description="Create new member to specified team",
+     *     operationId="assign",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament-team id",
+     *         in="query",
+     *         name="teamMember[teamId]",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Member id",
+     *         in="query",
+     *         name="teamMember[memberId]",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully add member to team"
+     *     )
+     * )
      */
     public function assign(AssignTeamMember $request)
     {
@@ -45,9 +83,23 @@ class TeamMemberController extends Controller
     }
 
     /**
-     * @param $teamMemberId
-     * @param RemoveTeamMember $request
-     * @return mixed
+     * @SWG\Delete(
+     *     path="/api/v1/teamMembers/{teamMemberId}",
+     *     description="Remove member from specified team",
+     *     operationId="remove",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Member id",
+     *         in="path",
+     *         name="teamMemberId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully remove member from team"
+     *     )
+     * )
      */
     public function remove($teamMemberId, RemoveTeamMember $request)
     {
@@ -55,7 +107,23 @@ class TeamMemberController extends Controller
     }
 
     /**
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/teamMembers/search",
+     *     description="Returns members we search from database",
+     *     operationId="search",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament id",
+     *         in="query",
+     *         name="tournamentId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get members we search"
+     *     )
+     * )
      */
     public function search()
     {

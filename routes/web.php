@@ -11,32 +11,32 @@
 |
 */
 
-Route::group(['middleware' => 'cors'], function() {
+    Route::group(['middleware' => 'cors'], function () {
 
-    Route::post('/auth/facebook/token', 'Auth\FacebookController@token');
-    Route::post('/auth/logout', 'AuthController@logout');
+        Route::post('/auth/facebook/token', 'Auth\FacebookController@token');
+//        Route::post('/auth/logout', 'AuthController@logout');
 
-    Route::resource('tournament', 'TournamentController', [
-        'only' => ['index', 'store']
-    ]);
+        Route::resource('tournament', 'TournamentController', [
+            'only' => ['index', 'store']
+        ]);
 
-    Route::resource('team', 'TeamController', [
-        'only' => ['index', 'store']
-    ]);
+        Route::resource('team', 'TeamController', [
+            'only' => ['index', 'store']
+        ]);
 
-    Route::resource('member', 'MemberController', [
-        'only' => ['index', 'store']
-    ]);
+        Route::resource('member', 'MemberController', [
+            'only' => ['index', 'store']
+        ]);
 
-    Route::resource('match', 'MatchController', [
-        'only' => ['index', 'store']
-    ]);
+        Route::resource('match', 'MatchController', [
+            'only' => ['index', 'store']
+        ]);
 
-    Route::get('/', function () {
-        return view('app');
+        Route::get('/', function () {
+            return view('app');
+        });
+
+        Route::get('/welcome', function () {
+            return view('welcome');
+        });
     });
-
-    Route::get('/welcome', function () {
-        return view('welcome');
-    });
-});
