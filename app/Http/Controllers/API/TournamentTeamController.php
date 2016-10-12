@@ -23,7 +23,23 @@ class TournamentTeamController extends Controller
 {
 
     /**
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/teams",
+     *     description="Returns all teams from specified tournament",
+     *     operationId="catalogue",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament id",
+     *         in="query",
+     *         name="tournamentId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get list of teams"
+     *     )
+     * )
      */
     public function catalogue()
     {
@@ -33,8 +49,30 @@ class TournamentTeamController extends Controller
     }
 
     /**
-     * @param AddTeam $request
-     * @return array
+     * @SWG\Post(
+     *     path="/api/v1/teams",
+     *     description="Add new team to specified tournament",
+     *     operationId="add",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Tournament id",
+     *         in="query",
+     *         name="team[tournamentId]",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Team id",
+     *         in="query",
+     *         name="team[teamId]",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully add new team"
+     *     )
+     * )
      */
     public function add(AddTeam $request)
     {

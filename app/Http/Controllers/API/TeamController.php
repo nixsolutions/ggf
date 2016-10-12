@@ -16,8 +16,23 @@ use Illuminate\Support\Facades\Input;
 class TeamController extends Controller
 {
     /**
-     * @param $teamId
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/teams/{teamId}",
+     *     description="Returns specified team from tournament",
+     *     operationId="find",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Team id",
+     *         in="path",
+     *         name="teamId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get specified team"
+     *     )
+     * )
      */
     public function find($teamId)
     {
@@ -27,7 +42,23 @@ class TeamController extends Controller
     }
 
     /**
-     * @return array
+     * @SWG\Get(
+     *     path="/api/v1/teams/search",
+     *     description="Returns teams we search from database",
+     *     operationId="search",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="First letters of team name",
+     *         in="query",
+     *         name="term",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get teams we search"
+     *     )
+     * )
      */
     public function search()
     {
@@ -41,9 +72,23 @@ class TeamController extends Controller
     }
 
     /**
-     * @param $teamId
-     * @param RemoveTeam $request
-     * @return mixed
+     * @SWG\Delete(
+     *     path="/api/v1/teams/{teamId}",
+     *     description="Delete specified team from database",
+     *     operationId="remove",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Team id",
+     *         in="path",
+     *         name="teamId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully remove specified steam"
+     *     )
+     * )
      */
     public function remove($teamId, RemoveTeam $request)
     {
