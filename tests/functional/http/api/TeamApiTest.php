@@ -15,6 +15,7 @@ class TeamApiTest extends TestCase
 
     private $structure = ['id', 'name', 'logoPath', 'teamId', 'tournamentId', 'tournament', 'updated_at'];
     private $structureSearch = ['id', 'text', 'logoPath', 'updated_at'];
+    private $teamStructure = ['id', 'leagueId', 'name', 'logoPath', 'updated_at'];
 
     private function createTournamentTeam()
     {
@@ -36,6 +37,16 @@ class TeamApiTest extends TestCase
         ]);
 
         return $tournamentTeam;
+    }
+
+    private function createTeam()
+    {
+        $league = factory(\App\League::class)->create();
+        $team = factory(\App\Team::class)->create([
+            'leagueId' => $league->id,
+        ]);
+
+        return $team;
     }
 
     public function testGetTeam()
@@ -76,6 +87,42 @@ class TeamApiTest extends TestCase
             ->dontSeeInDatabase('tournament_teams', [
                 'teamId' => $tournamentTeam->teamId,
                 'tournamentId' => $tournamentTeam->tournamentId
+            ]);
+    }
+
+    public function testGetTeamCatalogue()
+    {
+        $this->createTeam();
+        $this->get('/api/v1/teams/all')
+            ->seeJsonStructure([
+                'teams' => [
+                    '*' => $this->teamStructure
+                ]
+            ]);
+    }
+
+    public function testStoreTeam()
+    {
+        $league = factory(\App\League::class)->create();
+        $data = [
+            'leagueId' => $league->id,
+            'name' => 'example',
+            'logoPath' => ' '
+        ];
+
+        $this->json('POST', '/api/v1/team/add', ['team' => $data]);
+        $this->assertResponseStatus(200)
+            ->seeInDatabase('teams', $data);
+    }
+
+    public function testTeamDelete()
+    {
+        $team = $this->createTeam();
+        $this->json('DELETE', '/api/v1/team/' . $team->id);
+        $this->assertResponseStatus(200)
+            ->dontSeeInDatabase('teams', [
+                'id' => $team->id,
+                'name' => $team->name
             ]);
     }
 }

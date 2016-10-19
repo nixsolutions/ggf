@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\Tournament\RemoveTeam;
+use App\League;
 use App\Team;
 use App\TournamentTeam;
 use App\Transformers\TeamSearchTransformer;
+use App\Transformers\TeamTransformer;
 use App\Transformers\TournamentTeamTransformer;
 use Illuminate\Support\Facades\Input;
+use App\Http\Requests\CreateTeam;
 
 /**
  * Class TeamController
@@ -15,6 +18,23 @@ use Illuminate\Support\Facades\Input;
  */
 class TeamController extends Controller
 {
+    /**
+     * @SWG\Get(
+     *     path="/api/v1/teams/all",
+     *     description="Returns all teams from the database",
+     *     operationId="catalogue",
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully get list of teams"
+     *     )
+     * )
+     */
+    public function catalogue()
+    {
+        return $this->response->collection(Team::all(), new TeamTransformer($this->response), 'teams');
+    }
+
     /**
      * @SWG\Get(
      *     path="/api/v1/teams/{teamId}",
@@ -74,7 +94,7 @@ class TeamController extends Controller
     /**
      * @SWG\Delete(
      *     path="/api/v1/teams/{teamId}",
-     *     description="Delete specified team from database",
+     *     description="Delete specified team from tournament",
      *     operationId="remove",
      *     produces={"application/json"},
      *     @SWG\Parameter(
@@ -86,12 +106,76 @@ class TeamController extends Controller
      *     ),
      *     @SWG\Response(
      *     response="200",
-     *     description="Successfully remove specified steam"
+     *     description="Successfully remove specified team"
      *     )
      * )
      */
     public function remove($teamId, RemoveTeam $request)
     {
         return TournamentTeam::where(['teamId' => $teamId])->delete();
+    }
+
+    /**
+     * @SWG\Post(
+     *     path="/api/v1/team/add",
+     *     description="Add new team to database",
+     *     operationId="store",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="League id",
+     *         in="formData",
+     *         name="team[leagueId]",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Team name",
+     *         in="formData",
+     *         name="team[name]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Path to team logo",
+     *         in="formData",
+     *         name="team[logoPath]",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully add new team"
+     *     )
+     * )
+     */
+    public function store(CreateTeam $request)
+    {
+        $team = Team::create($request->input('team'));
+
+        return $this->response->collection(Team::where(['id' => $team->id])->get(), new TeamTransformer(), 'teams');
+    }
+
+    /**
+     * @SWG\Delete(
+     *     path="/api/v1/team/{teamId}",
+     *     description="Delete specified team from database",
+     *     operationId="delete",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Team id",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *     response="200",
+     *     description="Successfully remove specified team"
+     *     )
+     * )
+     */
+    public function delete($id)
+    {
+        return Team::where(['id' => $id])->delete();
     }
 }
