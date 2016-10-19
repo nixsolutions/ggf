@@ -31,12 +31,13 @@ class DrawKnockOut extends Job
     /**
      * @return array
      */
-    static function listOfAvailableTeamsAmount()
+    static private function listOfAvailableTeamsAmount()
     {
         return [2, 4, 8, 16, 32, 64];
     }
 
     /**
+     * @name setTournament
      * @param Tournament $tournament
      */
     protected function setTournament(Tournament $tournament)
@@ -67,6 +68,7 @@ class DrawKnockOut extends Job
      * Execute the job.
      *
      * @return void
+     * @throws \UnexpectedValueException
      */
     public function handle()
     {
@@ -108,9 +110,7 @@ class DrawKnockOut extends Job
         if (1 === $round) {
             $this->teams = $this->teams->shuffle();
 
-            $pairs = $this->teams->chunk(2);
-
-            return $pairs;
+            return $this->teams->chunk(2);
         } else {
             $currentPairs = $tournament->getPairs()->filter(function ($pair) use ($round) {
                 return $pair->get('round') === $round - 1;
@@ -130,7 +130,9 @@ class DrawKnockOut extends Job
     }
 
     /**
+     * @name savePairs
      * @param $pairs
+     * @param string $gameType
      */
     protected function savePairs($pairs, $gameType = Match::GAME_TYPE_QUALIFY)
     {

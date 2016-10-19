@@ -9,7 +9,7 @@ class MemberToken extends Model
     /**
      * @var null
      */
-    protected $primaryKey = null;
+    protected $primaryKey;
 
     /**
      * @var bool

@@ -3,8 +3,6 @@
 namespace App\Transformers;
 
 use App\Member;
-use App\TeamMember;
-use Illuminate\Support\Debug\Dumper;
 use League\Fractal\TransformerAbstract;
 
 /**

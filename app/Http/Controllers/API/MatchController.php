@@ -108,6 +108,9 @@ class MatchController extends Controller
      *     description="Successfully update specified match"
      *     )
      * )
+     * @param $matchId
+     * @param MatchUpdate $request
+     * @return array
      */
     public function update($matchId, MatchUpdate $request)
     {

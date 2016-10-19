@@ -12,7 +12,9 @@ use Illuminate\Support\Collection;
 class TablescoresSerializer
 {
     /**
-     * @return Collection
+     * @name collection
+     * @param EloquentCollection $collection
+     * @return mixed
      */
     public function collection(EloquentCollection $collection)
     {

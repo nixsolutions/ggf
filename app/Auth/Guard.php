@@ -45,7 +45,7 @@ class Guard
         $accessToken = null;
         if (is_object($response) && isset($response->access_token)) {
             $accessToken = $response->access_token;
-        } elseif (is_array($response) && isset($response['access_token'])) {
+        } elseif (is_array($response) && array_key_exists('access_token', $response)) {
             $accessToken = $response['access_token'];
         }
 
@@ -53,9 +53,12 @@ class Guard
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \FacebookFacebookAuthorizationException
+     * @name facebookAuth
+     * @param $code
+     * @return null
+     * @throws \Facebook\FacebookSDKException
      * @throws \Facebook\FacebookRequestException
+     * @throws FacebookAuthorizationException
      */
     public function facebookAuth($code)
     {
@@ -114,10 +117,9 @@ class Guard
     }
 
     /**
-     *
-     *
-     * @param Request $request
-     * return string
+     * @name getSessionId
+     * @param HttpRequest $request
+     * @return mixed
      */
     public static function getSessionId(HttpRequest $request)
     {
