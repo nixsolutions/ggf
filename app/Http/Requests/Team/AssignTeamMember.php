@@ -29,8 +29,8 @@ class AssignTeamMember extends Request
     public function rules()
     {
         return [
-            'teamMember.teamId' => 'required||exists:tournament_teams,id',
-            'teamMember.memberId' => 'required|exists:members,id'
+            'teamMember.teamId' => 'required|integer|exists:tournament_teams,id',
+            'teamMember.memberId' => 'required|integer|exists:members,id'
         ];
     }
 }

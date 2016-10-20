@@ -24,8 +24,9 @@ class CreateTeam extends FormRequest
     public function rules()
     {
         return [
-            'team.leagueId' => 'required|exists:leagues,id',
-            'team.name' => 'required|min:3'
+            'team.leagueId' => 'required|integer|exists:leagues,id',
+            'team.name' => 'required|min:3|max:255',
+            'team.logoPath' => 'image|mimes:jpeg,bmp,png,jpg|max:10000'
         ];
     }
 }

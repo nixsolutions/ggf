@@ -29,7 +29,7 @@ class Create extends Request
     public function rules()
     {
         return [
-            'tournament.name' => 'required',
+            'tournament.name' => 'required|min:3|max:255',
             'tournament.description' => '',
             'tournament.type' => 'in:' . implode(',', Tournament::getAvailableTypes()),
             'tournament.membersType' => 'in:' . implode(',', Tournament::getAvailableMembersType())

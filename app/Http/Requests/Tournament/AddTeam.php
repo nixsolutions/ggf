@@ -29,8 +29,8 @@ class AddTeam extends Request
     public function rules()
     {
         return [
-            'team.teamId' => 'required||exists:teams,id',
-            'team.tournamentId' => 'required|exists:tournaments,id'
+            'team.teamId' => 'required|integer|exists:teams,id',
+            'team.tournamentId' => 'required|integer|exists:tournaments,id'
         ];
     }
 }

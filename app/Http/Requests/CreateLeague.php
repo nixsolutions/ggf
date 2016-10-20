@@ -26,7 +26,8 @@ class CreateLeague extends Request
     public function rules()
     {
         return [
-            'league.name' => 'required|min:3'
+            'league.name' => 'required|min:3|max:255',
+            'league.logoPath' => 'image|mimes:jpeg,bmp,png,jpg|max:10000'
         ];
     }
 }
