@@ -110,7 +110,7 @@ class TeamApiTest extends TestCase
         $data = [
             'leagueId' => $league->id,
             'name' => 'example',
-            'logoPath' => $uploadedFile,
+            'logo' => $uploadedFile,
         ];
 
         $this->post('/api/v1/team/add', ['team' => $data])
@@ -119,6 +119,35 @@ class TeamApiTest extends TestCase
                 'leagueId' => $league->id,
                 'name' => 'example'
             ]);
+    }
+
+    /**
+     * @dataProvider teamProvider
+     */
+    public function testBadValidStoreTeam($expected, $value, $field)
+    {
+        $this->json('POST', '/api/v1/team/add', ['team' => [$field => $value]])
+            ->assertResponseStatus(422)
+            ->seeJson($expected);
+    }
+
+    public function teamProvider()
+    {
+        $logoResponse = [
+            'team.logo' => [
+                'The team.logo must be a file of type: jpeg, bmp, png, jpg.',
+                'The team.logo must be an image.'
+            ]
+        ];
+        return [
+            [['The team.league id field is required.'], '', 'leagueId'],
+            [['The team.league id must be an integer.'], 'badId', 'leagueId'],
+            [['The selected team.league id is invalid.'], '0', 'leagueId'],
+            [['The team.name field is required.'], '', 'name'],
+            [['The team.name must be at least 3 characters.'], 'e', 'name'],
+            [['The team.name may not be greater than 255 characters.'], str_random(256), 'name'],
+            [$logoResponse, 'badFile', 'logo']
+        ];
     }
 
     public function testTeamDelete()

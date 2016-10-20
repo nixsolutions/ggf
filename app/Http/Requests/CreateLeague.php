@@ -27,7 +27,7 @@ class CreateLeague extends Request
     {
         return [
             'league.name' => 'required|min:3|max:255',
-            'league.logoPath' => 'image|mimes:jpeg,bmp,png,jpg|max:10000'
+            'league.logo' => 'image|mimes:jpeg,bmp,png,jpg|max:10000'
         ];
     }
 }

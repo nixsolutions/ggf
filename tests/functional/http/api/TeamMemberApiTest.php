@@ -97,6 +97,31 @@ class TeamMemberApiTest extends TestCase
             ]);
     }
 
+    /**
+     * @dataProvider teamMemberProvider
+     */
+    public function testBadValidCreateTeamMember($expected, $value, $field)
+    {
+        $member = factory(Member::class)->create();
+        Auth::login($member);
+
+        $this->json('POST', '/api/v1/teamMembers', ['teamMember' => [$field => $value]]);
+        $this->assertResponseStatus(422)
+            ->seeJson($expected);
+    }
+
+    public function teamMemberProvider()
+    {
+        return [
+            [['The team member.team id field is required.'], '', 'teamId'],
+            [['The team member.team id must be an integer.'], 'badId', 'teamId'],
+            [['The selected team member.team id is invalid.'], '0', 'teamId'],
+            [['The team member.member id field is required.'], '', 'memberId'],
+            [['The team member.member id must be an integer.'], 'badId', 'memberId'],
+            [['The selected team member.member id is invalid.'], '0', 'memberId']
+        ];
+    }
+
     public function testRemoveMember()
     {
         $teamMember = $this->createTeamMember();

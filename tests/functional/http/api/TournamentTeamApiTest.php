@@ -73,4 +73,29 @@ class TournamentTeamApiTest extends TestCase
         $this->assertResponseStatus(200)
             ->seeInDatabase('tournament_teams', $data);
     }
+
+    /**
+     * @dataProvider tournamentTeamProvider
+     */
+    public function testBadValidAddTournamentTeam($expected, $value, $field)
+    {
+        $member = factory(Member::class)->create();
+        Auth::login($member);
+
+        $this->json('POST', '/api/v1/teams', ['team' => [$field => $value]]);
+        $this->assertResponseStatus(422)
+            ->seeJson($expected);
+    }
+
+    public function tournamentTeamProvider()
+    {
+        return [
+            [['The team.team id field is required.'], '', 'teamId'],
+            [['The team.team id must be an integer.'], 'badId', 'teamId'],
+            [['The selected team.team id is invalid.'], '0', 'teamId'],
+            [['The team.tournament id field is required.'], '', 'tournamentId'],
+            [['The team.tournament id must be an integer.'], 'badId', 'tournamentId'],
+            [['The selected team.tournament id is invalid.'], '0', 'tournamentId'],
+        ];
+    }
 }

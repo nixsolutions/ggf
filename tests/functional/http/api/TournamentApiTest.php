@@ -166,6 +166,32 @@ class TournamentApiTest extends TestCase
             ->seeInDatabase('tournaments', $data);
     }
 
+    /**
+     * @dataProvider tournamentProvider
+     */
+    public function testBadValidTournamentCreate($expected, $value, $field)
+    {
+        $member = factory(Member::class)->create();
+        Auth::login($member);
+
+        $this->json('POST', '/api/v1/tournaments', ['tournament' => [$field => $value]]);
+        $this->assertResponseStatus(422)
+            ->seeJson($expected);
+    }
+
+    public function tournamentProvider()
+    {
+        return [
+            [['The tournament.name field is required.'], '', 'name'],
+            [['The tournament.name must be at least 3 characters.'], 'e', 'name'],
+            [['The tournament.name may not be greater than 255 characters.'], str_random(256), 'name'],
+            [['The tournament.description must be at least 3 characters.'], 'e', 'description'],
+            [['The tournament.description may not be greater than 255 characters.'], str_random(256), 'description'],
+            [['The selected tournament.type is invalid.'], 'badType', 'type'],
+            [['The selected tournament.members type is invalid.'], 'badType', 'membersType'],
+        ];
+    }
+
     public function testTournamentUpdate()
     {
         $member = factory(Member::class)->create();

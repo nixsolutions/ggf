@@ -28,7 +28,7 @@ class LeagueApiTest extends TestCase
 
         $data = [
             'name' => 'example',
-            'logoPath' => $uploadedFile,
+            'logo' => $uploadedFile,
         ];
 
         $this->post('/api/v1/leagues', ['league' => $data]);
@@ -36,6 +36,32 @@ class LeagueApiTest extends TestCase
             ->seeInDatabase('leagues', [
                 'name' => 'example'
             ]);
+    }
+
+    /**
+     * @dataProvider leagueProvider
+     */
+    public function testBadValidStoreTeam($expected, $value, $field)
+    {
+        $this->json('POST', '/api/v1/leagues', ['league' => [$field => $value]])
+            ->assertResponseStatus(422)
+            ->seeJson($expected);
+    }
+
+    public function leagueProvider()
+    {
+        $logoResponse = [
+            'league.logo' => [
+                'The league.logo must be a file of type: jpeg, bmp, png, jpg.',
+                'The league.logo must be an image.'
+            ]
+        ];
+        return [
+            [['The league.name field is required.'], '', 'name'],
+            [['The league.name must be at least 3 characters.'], 'e', 'name'],
+            [['The league.name may not be greater than 255 characters.'], str_random(256), 'name'],
+            [$logoResponse, 'badFile', 'logo']
+        ];
     }
 
     public function testGetLeagueTeams()

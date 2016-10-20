@@ -30,7 +30,7 @@ class Create extends Request
     {
         return [
             'tournament.name' => 'required|min:3|max:255',
-            'tournament.description' => '',
+            'tournament.description' => 'min:3|max:255',
             'tournament.type' => 'in:' . implode(',', Tournament::getAvailableTypes()),
             'tournament.membersType' => 'in:' . implode(',', Tournament::getAvailableMembersType())
         ];

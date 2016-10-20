@@ -26,7 +26,7 @@ class CreateTeam extends FormRequest
         return [
             'team.leagueId' => 'required|integer|exists:leagues,id',
             'team.name' => 'required|min:3|max:255',
-            'team.logoPath' => 'image|mimes:jpeg,bmp,png,jpg|max:10000'
+            'team.logo' => 'image|mimes:jpeg,bmp,png,jpg|max:10000'
         ];
     }
 }
