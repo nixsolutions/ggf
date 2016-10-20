@@ -41,11 +41,11 @@ class League extends Model
      */
     public function addLeague($request)
     {
-        $mime = $request->league['logoPath']->getMimeType();
+        $mime = $request->league['logo']->getMimeType();
         $mime = explode('/', $mime);
         $fileName = $request->league['name'] . '.' . $mime[1];
 
-        Storage::disk('public')->putFileAs('leagues-logo/', $request->league['logoPath'], $fileName);
+        Storage::disk('public')->putFileAs('leagues-logo/', $request->league['logo'], $fileName);
 
         $league = League::create([
             'name' => $request->league['name'],

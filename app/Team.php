@@ -51,11 +51,11 @@ class Team extends Model
      */
     public function addTeam($request)
     {
-        $mime = $request->team['logoPath']->getMimeType();
+        $mime = $request->team['logo']->getMimeType();
         $mime = explode('/', $mime);
         $fileName = $request->team['name'] . '.' . $mime[1];
 
-        Storage::disk('public')->putFileAs('teams-logo/', $request->team['logoPath'], $fileName);
+        Storage::disk('public')->putFileAs('teams-logo/', $request->team['logo'], $fileName);
 
         $team = Team::create([
             'leagueId' => $request->team['leagueId'],
