@@ -157,7 +157,10 @@ return [
         Sorskod\Larasponse\LarasponseServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Intouch\LaravelNewrelic\NewrelicServiceProvider::class
+        Intouch\LaravelNewrelic\NewrelicServiceProvider::class,
+
+        //Custom service provider
+        L5Swagger\L5SwaggerServiceProvider::class
 
     ],
 

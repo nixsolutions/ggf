@@ -67,6 +67,9 @@ class TournamentTeamController extends Controller
      *     description="Successfully add new team"
      *     )
      * )
+     * @param AddTeam $request
+     * @return array
+     * @throws \Symfony\Component\Process\Exception\LogicException
      */
     public function add(AddTeam $request)
     {

@@ -33,6 +33,8 @@ class TeamController extends Controller
      *     description="Successfully get specified team"
      *     )
      * )
+     * @param $teamId
+     * @return array
      */
     public function find($teamId)
     {
@@ -89,8 +91,10 @@ class TeamController extends Controller
      *     description="Successfully remove specified steam"
      *     )
      * )
+     * @param $teamId
+     * @return
      */
-    public function remove($teamId, RemoveTeam $request)
+    public function remove($teamId)
     {
         return TournamentTeam::where(['teamId' => $teamId])->delete();
     }

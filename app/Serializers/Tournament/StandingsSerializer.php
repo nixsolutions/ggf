@@ -12,6 +12,8 @@ use Illuminate\Support\Collection;
 class StandingsSerializer
 {
     /**
+     * @name collection
+     * @param EloquentCollection $matches
      * @return Collection
      */
     public function collection(EloquentCollection $matches)

@@ -67,6 +67,8 @@ class TeamMemberController extends Controller
      *     description="Successfully add member to team"
      *     )
      * )
+     * @param AssignTeamMember $request
+     * @return array
      */
     public function assign(AssignTeamMember $request)
     {
@@ -100,8 +102,10 @@ class TeamMemberController extends Controller
      *     description="Successfully remove member from team"
      *     )
      * )
+     * @param $teamMemberId
+     * @return
      */
-    public function remove($teamMemberId, RemoveTeamMember $request)
+    public function remove($teamMemberId)
     {
         return TeamMember::where(['memberId' => $teamMemberId])->delete();
     }
@@ -131,11 +135,11 @@ class TeamMemberController extends Controller
         $collection = Member::with(['teamMembers', 'tournamentTeams'])->get();
 
         $collection = $collection->filter(function ($member) use ($tournamentId) {
-            $team = $member->tournamentTeams->first(function ($tournamentTeam, $key) use ($tournamentId) {
+            $team = $member->tournamentTeams->first(function ($tournamentTeam) use ($tournamentId) {
                 return $tournamentTeam->tournamentId == $tournamentId;
             });
 
-            return is_null($team);
+            return null === $team;
         });
 
         return $this->response->collection(

@@ -19,13 +19,10 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
-//    protected $namespaceApi = 'App\Http\Controllers\API';
 
     /**
      * Define your route model bindings, pattern filters, etc.
-     *
-     * @param  \Illuminate\Routing\Router $router
-     * @return void
+     * @name boot
      */
     public function boot()
     {
