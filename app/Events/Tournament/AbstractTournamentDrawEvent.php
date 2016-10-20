@@ -17,9 +17,8 @@ abstract class AbstractTournamentDrawEvent extends Event
     public $tournament;
 
     /**
-     * Create a new event instance.
-     *
-     * @return void
+     * AbstractTournamentDrawEvent constructor.
+     * @param Tournament $tournament
      */
     public function __construct(Tournament $tournament)
     {

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 class DrawLeague extends Job
 {
     /**
-     * @var Array
+     * @var array
      */
     protected $teams = [];
 
@@ -43,6 +43,7 @@ class DrawLeague extends Job
     protected $pairCnt;
 
     /**
+     * @name setTournament
      * @param Tournament $tournament
      */
     protected function setTournament(Tournament $tournament)
@@ -53,10 +54,10 @@ class DrawLeague extends Job
             $team->team->homeMatchesAmount = 0;
             $team->team->wasPulledOut = false;
             $team->team->pulledOut = false;
-            array_push($this->teams, [
+            $this->teams[] = [
                 'id' => $team->id,
                 'name' => $team->team->name
-            ]);
+            ];
         }
 
         shuffle($this->teams);
@@ -70,6 +71,7 @@ class DrawLeague extends Job
      * Handle the job
      *
      * @return void
+     * @throws \UnexpectedValueException
      */
     public function handle()
     {
@@ -121,7 +123,7 @@ class DrawLeague extends Job
             for ($j = 1; $j < $this->pairCnt; $j++) {
                 $table[$i][] = [$a[$j], $a[$this->teamsCount - 1 - $j]];
             }
-            array_push($a, array_shift($a));
+            $a[] = array_shift($a);
         }
 
         $table = $this->addReversMarches($table);

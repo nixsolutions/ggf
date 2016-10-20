@@ -14,9 +14,8 @@ class AuthManager extends Illuminate\Auth\AuthManager
 {
     /**
      * Create a new manager instance.
-     *
-     * @param  \Illuminate\Foundation\Application $app
-     * @return void
+     * AuthManager constructor.
+     * @param Illuminate\Foundation\Application $app
      */
     public function __construct($app)
     {

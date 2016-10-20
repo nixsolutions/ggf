@@ -41,8 +41,8 @@ class FacebookController extends Controller
 
         } catch (\Exception $e) {
             Log::error(
-                "Exception occured, code: " . $e->getCode()
-                . " with message: " . $e->getMessage()
+                'Exception occured, code: ' . $e->getCode()
+                . ' with message: ' . $e->getMessage()
             );
         }
 

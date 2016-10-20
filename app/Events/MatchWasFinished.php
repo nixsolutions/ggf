@@ -20,8 +20,8 @@ class MatchWasFinished extends Event
 
     /**
      * Create a new event instance.
-     *
-     * @return void
+     * MatchWasFinished constructor.
+     * @param Match $match
      */
     public function __construct(Match $match)
     {

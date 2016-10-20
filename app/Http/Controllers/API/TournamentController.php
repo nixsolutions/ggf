@@ -67,6 +67,8 @@ class TournamentController extends Controller
      *     description="Successfully get specified tournament"
      *     )
      * )
+     * @param $tournamentId
+     * @return array
      */
     public function find($tournamentId)
     {
@@ -180,6 +182,8 @@ class TournamentController extends Controller
      *     description="Successfully add tournament"
      *     )
      * )
+     * @param CreateTournament $request
+     * @return array
      */
     public function store(CreateTournament $request)
     {
@@ -244,6 +248,8 @@ class TournamentController extends Controller
      *     description="Successfully update tournament"
      *     )
      * )
+     * @param $tournamentId
+     * @return array
      */
     public function update($tournamentId)
     {

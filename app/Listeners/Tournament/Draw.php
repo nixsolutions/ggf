@@ -18,6 +18,7 @@ class Draw
      *
      * @param  AbstractTournamentDrawEvent $event
      * @return void
+     * @throws \RuntimeException
      */
     public function handle(AbstractTournamentDrawEvent $event)
     {

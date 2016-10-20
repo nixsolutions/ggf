@@ -16,7 +16,8 @@ abstract class Job extends \App\Jobs\Job
     protected $tournament;
 
     /**
-     * @return void
+     * Job constructor.
+     * @param Tournament $tournament
      */
     public function __construct(Tournament $tournament)
     {

@@ -20,9 +20,9 @@ class StartSession extends \Illuminate\Session\Middleware\StartSession
 
     /**
      * Create a new session middleware.
-     *
-     * @param  \Illuminate\Session\SessionManager $manager
-     * @return void
+     * StartSession constructor.
+     * @param SessionManager $manager
+     * @param Guard $auth
      */
     public function __construct(SessionManager $manager, Guard $auth)
     {
@@ -44,10 +44,9 @@ class StartSession extends \Illuminate\Session\Middleware\StartSession
 
     /**
      * @param Request $request
-     * @param $session
      * @return mixed
      */
-    protected function getSessionId(Request $request, $session)
+    protected function getSessionId(Request $request)
     {
         return $this->auth->getSession($request);
     }

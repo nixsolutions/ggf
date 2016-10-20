@@ -67,6 +67,8 @@ class LeagueController extends Controller
      *     description="Successfully add new league"
      *     )
      * )
+     * @param CreateLeague $request
+     * @return array
      */
     public function store(CreateLeague $request)
     {

@@ -128,10 +128,10 @@ class Tournament extends Model
     }
 
     /**
-     *
      * @todo Make a refactoring for `pair` entity
-     *
-     * @param $matches
+     * @name getScore
+     * @param Collection $matches
+     * @return Collection|static
      */
     public function getScore(Collection $matches)
     {
@@ -253,7 +253,9 @@ class Tournament extends Model
     }
 
     /**
+     * @name getWinner
      * @param Collection $matches
+     * @return mixed
      */
     public function getWinner(Collection $matches)
     {

@@ -19,8 +19,7 @@ class Reset
 
     /**
      * Create the event listener.
-     *
-     * @return void
+     * Reset constructor.
      */
     public function __construct()
     {
