@@ -23,14 +23,19 @@ class LeagueApiTest extends TestCase
 
     public function testCreateLeague()
     {
+        $path = public_path('leagues-logo/ligue1.png');
+        $uploadedFile = new \Illuminate\Http\UploadedFile($path, null, 'png', null, null, true);
+
         $data = [
             'name' => 'example',
-            'logoPath' => ' '
+            'logoPath' => $uploadedFile,
         ];
 
-        $this->json('POST', '/api/v1/leagues', ['league' => $data]);
+        $this->post('/api/v1/leagues', ['league' => $data]);
         $this->assertResponseStatus(200)
-            ->seeInDatabase('leagues', $data);
+            ->seeInDatabase('leagues', [
+                'name' => 'example'
+            ]);
     }
 
     public function testGetLeagueTeams()

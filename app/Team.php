@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Requests\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class Team
@@ -42,4 +45,24 @@ class Team extends Model
         return $this->hasMany(TournamentTeam::class, 'teamId');
     }
 
+    /**
+     * @param $request
+     * @return static
+     */
+    public function addTeam($request)
+    {
+        $mime = $request->team['logoPath']->getMimeType();
+        $mime = explode('/', $mime);
+        $fileName = $request->team['name'] . '.' . $mime[1];
+
+        Storage::disk('public')->putFileAs('teams-logo/', $request->team['logoPath'], $fileName);
+
+        $team = Team::create([
+            'leagueId' => $request->team['leagueId'],
+            'name' => $request->team['name'],
+            'logoPath' => 'teams-logo/' . $fileName,
+        ]);
+
+        return $team;
+    }
 }

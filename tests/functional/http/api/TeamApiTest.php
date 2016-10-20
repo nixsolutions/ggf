@@ -104,15 +104,21 @@ class TeamApiTest extends TestCase
     public function testStoreTeam()
     {
         $league = factory(\App\League::class)->create();
+        $path = public_path('teams-logo/argentina.png');
+        $uploadedFile = new \Illuminate\Http\UploadedFile($path, null, 'png', null, null, true);
+
         $data = [
             'leagueId' => $league->id,
             'name' => 'example',
-            'logoPath' => ' '
+            'logoPath' => $uploadedFile,
         ];
 
-        $this->json('POST', '/api/v1/team/add', ['team' => $data]);
-        $this->assertResponseStatus(200)
-            ->seeInDatabase('teams', $data);
+        $this->post('/api/v1/team/add', ['team' => $data])
+            ->assertResponseStatus(200)
+            ->seeInDatabase('teams', [
+                'leagueId' => $league->id,
+                'name' => 'example'
+            ]);
     }
 
     public function testTeamDelete()

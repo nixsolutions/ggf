@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class League
@@ -32,6 +33,26 @@ class League extends Model
     public function teams()
     {
         return $this->hasMany(Team::class, 'leagueId');
+    }
+
+    /**
+     * @param $request
+     * @return static
+     */
+    public function addLeague($request)
+    {
+        $mime = $request->league['logoPath']->getMimeType();
+        $mime = explode('/', $mime);
+        $fileName = $request->league['name'] . '.' . $mime[1];
+
+        Storage::disk('public')->putFileAs('leagues-logo/', $request->league['logoPath'], $fileName);
+
+        $league = League::create([
+            'name' => $request->league['name'],
+            'logoPath' => 'leagues-logo/' . $fileName,
+        ]);
+
+        return $league;
     }
 
 }

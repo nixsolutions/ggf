@@ -25,8 +25,7 @@ class CreateTeam extends FormRequest
     {
         return [
             'team.leagueId' => 'required|exists:leagues,id',
-            'team.name' => 'required|min:3',
-//            'team.logoPath' => 'asset_exists'
+            'team.name' => 'required|min:3'
         ];
     }
 }

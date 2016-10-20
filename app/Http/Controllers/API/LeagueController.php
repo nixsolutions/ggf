@@ -60,7 +60,7 @@ class LeagueController extends Controller
      *         in="formData",
      *         name="league[logoPath]",
      *         required=false,
-     *         type="string"
+     *         type="file"
      *     ),
      *     @SWG\Response(
      *     response="200",
@@ -70,7 +70,8 @@ class LeagueController extends Controller
      */
     public function store(CreateLeague $request)
     {
-        $league = League::create($request->input('league'));
+        $league = new League();
+        $league = $league->addLeague($request);
 
         return $this->response->collection(League::where(['id' => $league->id])->get(), new LeagueTransformer(), 'leagues');
     }

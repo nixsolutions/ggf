@@ -136,11 +136,11 @@ class TeamController extends Controller
      *         type="string"
      *     ),
      *     @SWG\Parameter(
-     *         description="Path to team logo",
+     *         description="Team logo",
      *         in="formData",
      *         name="team[logoPath]",
      *         required=false,
-     *         type="string"
+     *         type="file"
      *     ),
      *     @SWG\Response(
      *     response="200",
@@ -150,7 +150,8 @@ class TeamController extends Controller
      */
     public function store(CreateTeam $request)
     {
-        $team = Team::create($request->input('team'));
+        $team = new Team();
+        $team = $team->addTeam($request);
 
         return $this->response->collection(Team::where(['id' => $team->id])->get(), new TeamTransformer(), 'teams');
     }
@@ -164,7 +165,7 @@ class TeamController extends Controller
      *     @SWG\Parameter(
      *         description="Team id",
      *         in="path",
-     *         name="id",
+     *         name="teamId",
      *         required=true,
      *         type="integer"
      *     ),
@@ -176,6 +177,7 @@ class TeamController extends Controller
      */
     public function delete($id)
     {
+        TournamentTeam::where(['teamId' => $id])->delete();
         return Team::where(['id' => $id])->delete();
     }
 }
