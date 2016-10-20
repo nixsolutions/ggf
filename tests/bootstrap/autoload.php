@@ -1,6 +1,5 @@
 <?php
 
-passthru("php artisan migrate:reset --force");
-passthru("php artisan migrate --force");
+passthru("php artisan migrate:refresh --force");
 
 require __DIR__ . '/../../bootstrap/autoload.php';
