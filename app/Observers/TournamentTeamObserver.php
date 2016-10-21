@@ -15,6 +15,5 @@ class TournamentTeamObserver
      */
     public function saving(TournamentTeam $model)
     {
-
     }
 }

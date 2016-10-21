@@ -80,8 +80,9 @@ class TeamMemberController extends Controller
         ];
 
         TeamMember::create($attributes);
+        $teamMember = TeamMember::where($attributes)->get();
 
-        return $this->response->collection(TeamMember::where($attributes)->get(), new TeamMemberTransformer(), 'teamMembers');
+        return $this->response->collection($teamMember, new TeamMemberTransformer(), 'teamMembers');
     }
 
     /**

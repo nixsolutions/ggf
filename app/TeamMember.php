@@ -52,5 +52,4 @@ class TeamMember extends Model
     {
         return $this->belongsTo(TournamentTeam::class, 'tournamentTeamId');
     }
-
 }

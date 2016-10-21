@@ -82,7 +82,7 @@ class Match extends Model
     /**
      * @return array
      */
-    static public function getAvailableResultTypes()
+    public static function getAvailableResultTypes()
     {
         return [
             self::RESULT_TYPE_UNKNOWN,
@@ -97,7 +97,7 @@ class Match extends Model
     /**
      * @return array
      */
-    static public function getAvailableGameTypes()
+    public static function getAvailableGameTypes()
     {
         return [
             self::GAME_TYPE_GROUP_STAGE,
@@ -109,7 +109,7 @@ class Match extends Model
     /**
      * @return array
      */
-    static public function getAvailableStatuses()
+    public static function getAvailableStatuses()
     {
         return [
             self::STATUS_STARTED,

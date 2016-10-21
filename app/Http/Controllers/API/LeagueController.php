@@ -74,8 +74,8 @@ class LeagueController extends Controller
     {
         $league = new League();
         $league = $league->addLeague($request);
-
-        return $this->response->collection(League::where(['id' => $league->id])->get(), new LeagueTransformer(), 'leagues');
+        $league = League::where(['id' => $league->id])->get();
+        return $this->response->collection($league, new LeagueTransformer(), 'leagues');
     }
 
     /**

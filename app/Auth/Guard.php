@@ -74,7 +74,9 @@ class Guard
          * @var GraphUser $userProfile
          */
         $userProfile = (new FacebookRequest(
-            $session, 'GET', '/me'
+            $session,
+            'GET',
+            '/me'
         ))->execute()->getGraphObject(GraphUser::className());
 
         $user = Member::firstOrNew(['facebookId' => $userProfile->getId()]);

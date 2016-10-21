@@ -38,7 +38,6 @@ class FacebookController extends Controller
                 'token_type' => 'bearer',
                 'access_token' => $accessToken
             ]);
-
         } catch (\Exception $e) {
             Log::error(
                 'Exception occured, code: ' . $e->getCode()

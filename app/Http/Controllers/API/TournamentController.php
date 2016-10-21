@@ -44,9 +44,9 @@ class TournamentController extends Controller
      */
     public function catalogue()
     {
-        $collection = Tournament::with('tournamentTeams.team');
+        $collection = Tournament::with('tournamentTeams.team')->get();
 
-        return $this->response->collection($collection->get(), new TournamentTransformer($this->response), 'tournaments');
+        return $this->response->collection($collection, new TournamentTransformer($this->response), 'tournaments');
     }
 
     /**
@@ -72,9 +72,9 @@ class TournamentController extends Controller
      */
     public function find($tournamentId)
     {
-        $collection = Tournament::with('tournamentTeams.team')->where(['id' => $tournamentId]);
+        $collection = Tournament::with('tournamentTeams.team')->where(['id' => $tournamentId])->get();
 
-        return $this->response->collection($collection->get(), new TournamentTransformer($this->response), 'tournaments');
+        return $this->response->collection($collection, new TournamentTransformer($this->response), 'tournaments');
     }
 
     /**
@@ -191,8 +191,9 @@ class TournamentController extends Controller
         $input['status'] = Tournament::STATUS_DRAFT;
 
         $tournament = Auth::user()->tournaments()->create($input);
+        $tournament = Tournament::where(['id' => $tournament->id])->get();
 
-        return $this->response->collection(Tournament::where(['id' => $tournament->id])->get(), new TournamentTransformer($this->response), 'tournaments');
+        return $this->response->collection($tournament, new TournamentTransformer($this->response), 'tournaments');
     }
 
     /**
@@ -261,7 +262,8 @@ class TournamentController extends Controller
             'membersType' => Input::get('tournament.membersType'),
             'description' => Input::get('tournament.description')
         ]);
+        $tournament = Tournament::where(['id' => $tournamentId])->get();
 
-        return $this->response->collection(Tournament::where(['id' => $tournamentId])->get(), new TournamentTransformer(), 'tournaments');
+        return $this->response->collection($tournament, new TournamentTransformer(), 'tournaments');
     }
 }

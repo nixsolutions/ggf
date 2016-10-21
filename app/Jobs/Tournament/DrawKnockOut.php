@@ -31,7 +31,7 @@ class DrawKnockOut extends Job
     /**
      * @return array
      */
-    static private function listOfAvailableTeamsAmount()
+    private static function listOfAvailableTeamsAmount()
     {
         return [2, 4, 8, 16, 32, 64];
     }

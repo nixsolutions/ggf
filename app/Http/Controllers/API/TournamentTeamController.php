@@ -80,7 +80,8 @@ class TournamentTeamController extends Controller
         }
 
         $team = TournamentTeam::create($request->input('team'));
+        $tournamentTeam = TournamentTeam::where(['id' => $team->id])->get();
 
-        return $this->response->collection(TournamentTeam::where(['id' => $team->id])->get(), new TournamentTeamTransformer(), 'teams');
+        return $this->response->collection($tournamentTeam, new TournamentTeamTransformer(), 'teams');
     }
 }

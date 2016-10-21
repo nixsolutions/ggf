@@ -54,5 +54,4 @@ class League extends Model
 
         return $league;
     }
-
 }

@@ -58,5 +58,4 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'before-match-update' => \App\Http\Middleware\BeforeMatchUpdateRequest::class,
     ];
-
 }

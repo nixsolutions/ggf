@@ -36,6 +36,4 @@ class AuthManager extends Illuminate\Auth\AuthManager
 
         return new Guard($provider, $this->app['session.store']);
     }
-
-
 }

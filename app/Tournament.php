@@ -58,7 +58,7 @@ class Tournament extends Model
     /**
      * @return array
      */
-    static public function getAvailableMembersType()
+    public static function getAvailableMembersType()
     {
         return [
             self::MEMBERS_TYPE_SINGLE,
@@ -69,7 +69,7 @@ class Tournament extends Model
     /**
      * @return array
      */
-    static public function getAvailableTypes()
+    public static function getAvailableTypes()
     {
         return [
             self::TYPE_LEAGUE,
@@ -81,7 +81,7 @@ class Tournament extends Model
     /**
      * @return array
      */
-    static public function getAvailableStatuses()
+    public static function getAvailableStatuses()
     {
         return [
             self::STATUS_DRAFT,
@@ -109,7 +109,10 @@ class Tournament extends Model
             $pair = $pairs->pull($pairId);
 
             if (!$pair) {
-                $teams = new Collection([$match->homeTournamentTeam->with('Team')->get(), $match->awayTournamentTeam->with('Team')->get()]);
+                $teams = new Collection([
+                    $match->homeTournamentTeam->with('Team')->get(),
+                    $match->awayTournamentTeam->with('Team')->get()
+                ]);
 
                 $pair = new Collection([
                     'id' => $pairId,
@@ -210,7 +213,6 @@ class Tournament extends Model
 
             $score->put($match->homeTournamentTeam->id, $homeTeam);
             $score->put($match->awayTournamentTeam->id, $awayTeam);
-
         });
 
 

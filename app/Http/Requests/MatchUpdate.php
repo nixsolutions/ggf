@@ -47,15 +47,20 @@ class MatchUpdate extends Request
             return $this->isRoundActive($match, $tournament);
         });
 
-        Validator::extend('round_finished_for_pair', function ($attribute, $value, $parameters) use ($match, $tournament) {
-            $match->status = $value;
-            return $this->isRoundFinishedForPair($match, $tournament);
-        });
+        Validator::extend(
+            'round_finished_for_pair',
+            function ($attribute, $value, $parameters) use ($match, $tournament) {
+                $match->status = $value;
+                return $this->isRoundFinishedForPair($match, $tournament);
+            }
+        );
+
+        $statuses = implode(',', Match::getAvailableStatuses());
 
         return [
             'match.homeScore' => 'required|integer',
             'match.awayScore' => 'required|integer',
-            'match.status' => 'required|in:' . implode(',', Match::getAvailableStatuses()) . '|round_active|round_finished_for_pair'
+            'match.status' => 'required|in:' . $statuses . '|round_active|round_finished_for_pair'
         ];
     }
 
