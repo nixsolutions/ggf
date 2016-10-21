@@ -1,0 +1,51 @@
+<project name="GGF" default="build">
+    <target name="build" depends="clean, prepare, phpunit, phpmd, phpcs"/>
+
+    <property name="basedir" value="."/>
+    <property name="applicationDir" value="${basedir}/app"/>
+    <property name="buildDir" value="${basedir}/build"/>
+
+    <!-- Clean up from previous builds -->
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${buildDir}/logs"/>
+    </target>
+
+    <!-- Prepare for the new build -->
+    <target name="prepare">
+        <mkdir dir="${buildDir}/logs"/>
+    </target>
+
+    <target name="phpunit" description="PHPUnit">
+        <echo message="Running unit tests with PHPUnit" />
+
+        <exec dir="${basedir}" executable="vendor/bin/phpunit" failonerror="false" osfamily="unix" output="${buildDir}/logs/phpunit.txt">
+            <arg line="--configuration ${basedir}/phpunit.xml"/>
+        </exec>
+
+    </target>
+
+    <target name="phpmd" description="PHP Mess Detector">
+        <property name="pmd" value="${buildDir}/logs/phpmd.xml" />
+
+        <exec dir="${basedir}" executable="vendor/bin/phpmd" failonerror="false" osfamily="unix">
+            <arg line="${applicationDir}" />
+            <arg line="xml" />
+            <arg line="naming,unusedcode,codesize" />
+            <arg line="--reportfile ${pmd}" />
+        </exec>
+
+    </target>
+
+    <target name="phpcs" description="PHP_CodeSniffer">
+
+        <exec dir="${basedir}" executable="vendor/bin/phpcs" failonerror="false" osfamily="unix" output="${buildDir}/logs/phpcs.txt">
+            <arg line="--tab-width=4" />
+            <arg line="--report=full" />
+            <arg line="--standard=PSR2" />
+            <arg line="--report-file=${buildDir}/logs/phpcs.xml" />
+            <arg line="${applicationDir}" />
+        </exec>
+
+    </target>
+
+</project>
