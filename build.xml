@@ -1,5 +1,5 @@
 <project name="GGF" default="build">
-    <target name="build" depends="clean, prepare, install, configs, config-update, phpunit, phpmd, phpcs"/>
+    <target name="build" depends="clean, prepare, configs, config-update, install, phpunit, phpmd, phpcs"/>
 
     <property name="basedir" value="."/>
     <property name="applicationDir" value="${basedir}/app"/>
