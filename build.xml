@@ -38,8 +38,8 @@
         <replace file="${basedir}/.env.local">
             <replacefilter token="{ENV}" value="${env}"/>
             <replacefilter token="{DEBUG}" value="${debug_local}"/>
-            <replacefilter token="{DB_HOST}" value="${db_connect_local}"/>
-            <replacefilter token="{DB_CONNECTION}" value="${db_host_local}"/>
+            <replacefilter token="{DB_HOST}" value="${db_host_local}"/>
+            <replacefilter token="{DB_CONNECTION}" value="${db_connect_local}"/>
             <replacefilter token="{DB_DATABASE}" value="${db_database_local}"/>
             <replacefilter token="{DB_USERNAME}" value="${db_username_local}"/>
             <replacefilter token="{DB_PASSWORD}" value="${db_password_local}"/>
