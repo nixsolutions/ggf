@@ -104,7 +104,7 @@ class TeamApiTest extends TestCase
     public function testStoreTeam()
     {
         $league = factory(\App\League::class)->create();
-        $path = public_path('teams-logo/argentina.png');
+        $path = public_path('test-logo/argentina.png');
         $uploadedFile = new \Illuminate\Http\UploadedFile($path, null, 'png', null, null, true);
 
         $data = [

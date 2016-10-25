@@ -23,7 +23,7 @@ class LeagueApiTest extends TestCase
 
     public function testCreateLeague()
     {
-        $path = public_path('leagues-logo/ligue1.png');
+        $path = public_path('test-logo/ligue1.png');
         $uploadedFile = new \Illuminate\Http\UploadedFile($path, null, 'png', null, null, true);
 
         $data = [

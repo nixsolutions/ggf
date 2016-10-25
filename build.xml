@@ -68,7 +68,7 @@
     <target name="phpunit" description="PHPUnit" depends="install">
         <echo message="Running unit tests with PHPUnit"/>
 
-        <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="false" osfamily="unix"
+        <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="true" osfamily="unix"
               output="${logsDir}/phpunit.txt">
             <arg line="--configuration ${basedir}/phpunit.xml"/>
         </exec>
