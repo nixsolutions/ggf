@@ -38,6 +38,7 @@
         <replace file="${basedir}/.env.local">
             <replacefilter token="{ENV}" value="${env}"/>
             <replacefilter token="{DEBUG}" value="${debug_local}"/>
+            <replacefilter token="{HOST}" value="${host_local}"/>
             <replacefilter token="{DB_HOST}" value="${db_host_local}"/>
             <replacefilter token="{DB_CONNECTION}" value="${db_connect_local}"/>
             <replacefilter token="{DB_DATABASE}" value="${db_database_local}"/>
@@ -45,17 +46,19 @@
             <replacefilter token="{DB_PASSWORD}" value="${db_password_local}"/>
             <replacefilter token="{FACEBOOK_ID}" value="${fb_id_local}"/>
             <replacefilter token="{FACEBOOK_SECRET}" value="${fb_secret_local}"/>
+            <replacefilter token="{FACEBOOK_REDIRECT}" value="${fb_redirect_local}"/>
         </replace>
         <replace file="${basedir}/.env.testing">
             <replacefilter token="{ENV}" value="${env}"/>
             <replacefilter token="{DEBUG}" value="${debug_testing}"/>
+            <replacefilter token="{HOST}" value="${host_testing}"/>
             <replacefilter token="{DB_HOST}" value="${db_host_testing}"/>
             <replacefilter token="{DB_CONNECTION}" value="${db_connect_testing}"/>
             <replacefilter token="{DB_DATABASE}" value="${db_database_testing}"/>
             <replacefilter token="{DB_USERNAME}" value="${db_username_testing}"/>
             <replacefilter token="{DB_USERNAME}" value="${db_username_testing}"/>
             <replacefilter token="{FACEBOOK_ID}" value="${fb_id_testing}"/>
-            <replacefilter token="{FACEBOOK_SECRET}" value="${db_secret_testing}"/>
+            <replacefilter token="{FACEBOOK_REDIRECT}" value="${db_redirect_testing}"/>
         </replace>
     </target>
 
