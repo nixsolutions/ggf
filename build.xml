@@ -1,51 +1,89 @@
 <project name="GGF" default="build">
-    <target name="build" depends="clean, prepare, phpunit, phpmd, phpcs"/>
+    <target name="build" depends="clean, prepare, install, configs, config-update, phpunit, phpmd, phpcs"/>
 
     <property name="basedir" value="."/>
     <property name="applicationDir" value="${basedir}/app"/>
     <property name="buildDir" value="${basedir}/build"/>
+    <property name="vendorDir" value="${basedir}/vendor/bin"/>
+    <property name="logsDir" value="${buildDir}/logs"/>
 
     <!-- Clean up from previous builds -->
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${buildDir}/logs"/>
+        <delete file="${basedir}/.env.local"/>
+        <delete file="${basedir}/.env.testing"/>
     </target>
 
     <!-- Prepare for the new build -->
-    <target name="prepare">
+    <target name="prepare" depends="clean">
         <mkdir dir="${buildDir}/logs"/>
+        <touch file="${basedir}/.env.local"/>
+        <touch file="${basedir}/.env.testing"/>
+        <chmod file="${buildDir}/logs" perm="755"/>
+    </target>
+
+    <target name="install" depends="prepare">
+        <chmod file="${basedir}/bin/post-install.sh" perm="755"/>
+        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log"> </exec>
+    </target>
+
+    <target name="configs">
+        <property name="forceConfig" value="true"/>
+        <copy overwrite="true" file="${basedir}/.env.example" tofile="${basedir}/.env.local"> </copy>
+        <copy overwrite="true" file="${basedir}/.env.example" tofile="${basedir}/.env.testing"> </copy>
+    </target>
+
+    <target name="config-update" depends="configs">
+        <replace file="${basedir}/.env.local">
+            <replacefilter token="{ENV}" value="${env}"/>
+            <replacefilter token="{DEBUG}" value="${debug_local}"/>
+            <replacefilter token="{DB_HOST}" value="${db_host_local}"/>
+            <replacefilter token="{DB_DATABASE}" value="${db_database_local}"/>
+            <replacefilter token="{DB_USERNAME}" value="${db_username_local}"/>
+            <replacefilter token="{DB_PASSWORD}" value="${db_password_local}"/>
+        </replace>
+        <replace file="${basedir}/.env.testing">
+            <replacefilter token="{ENV}" value="${env}"/>
+            <replacefilter token="{DEBUG}" value="${debug_testing}"/>
+            <replacefilter token="{DB_HOST}" value="${db_host_testing}"/>
+            <replacefilter token="{DB_DATABASE}" value="${db_database_testing}"/>
+            <replacefilter token="{DB_USERNAME}" value="${db_username_testing}"/>
+            <replacefilter token="{DB_USERNAME}" value="${db_username_testing}"/>
+        </replace>
     </target>
 
     <target name="phpunit" description="PHPUnit">
-        <echo message="Running unit tests with PHPUnit" />
+        <echo message="Running unit tests with PHPUnit"/>
 
-        <exec dir="${basedir}" executable="vendor/bin/phpunit" failonerror="false" osfamily="unix" output="${buildDir}/logs/phpunit.txt">
+        <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="false" osfamily="unix"
+              output="${logsDir}/phpunit.txt">
             <arg line="--configuration ${basedir}/phpunit.xml"/>
         </exec>
 
     </target>
 
     <target name="phpmd" description="PHP Mess Detector">
-        <property name="pmd" value="${buildDir}/logs/phpmd.xml" />
+        <property name="pmd" value="${logsDir}/phpmd.xml"/>
 
-        <exec dir="${basedir}" executable="vendor/bin/phpmd" failonerror="false" osfamily="unix">
-            <arg line="${applicationDir}" />
-            <arg line="xml" />
-            <arg line="naming,unusedcode,codesize" />
-            <arg line="--reportfile ${pmd}" />
+        <exec dir="${basedir}" executable="${vendorDir}/phpmd" failonerror="false" osfamily="unix">
+            <arg line="${applicationDir}"/>
+            <arg line="xml"/>
+            <arg line="naming,unusedcode,codesize"/>
+            <arg line="--reportfile ${pmd}"/>
         </exec>
 
     </target>
 
     <target name="phpcs" description="PHP_CodeSniffer">
 
-        <exec dir="${basedir}" executable="vendor/bin/phpcs" failonerror="false" osfamily="unix" output="${buildDir}/logs/phpcs.txt">
-            <arg line="--tab-width=4" />
-            <arg line="--report=full" />
-            <arg line="--standard=PSR2" />
-            <arg line="--report-file=${buildDir}/logs/phpcs.xml" />
-            <arg line="${applicationDir}" />
+        <exec dir="${basedir}" executable="${vendorDir}/phpcs" failonerror="false" osfamily="unix"
+              output="${logsDir}/phpcs.txt">
+            <arg line="--tab-width=4"/>
+            <arg line="--report=full"/>
+            <arg line="--standard=PSR2"/>
+            <arg line="--report-file=${logsDir}/phpcs.xml"/>
+            <arg line="${applicationDir}"/>
         </exec>
 
     </target>
-
 </project>

@@ -7,7 +7,7 @@
     "type": "project",
     "prefer-stable": true,
     "require": {
-        "php": ">=5.5.9",
+        "php": "7.0.*",
         "laravel/framework": "5.3.*",
         "laravel/homestead": "~3.0",
         "laravelcollective/html": "^5.1",
