@@ -78,7 +78,7 @@
     <target name="phpmd" description="PHP Mess Detector" depends="install">
         <property name="pmd" value="${logsDir}/phpmd.xml"/>
 
-        <exec dir="${basedir}" executable="${vendorDir}/phpmd" failonerror="true" osfamily="unix">
+        <exec dir="${basedir}" executable="${vendorDir}/phpmd" failonerror="false" osfamily="unix">
             <arg line="${applicationDir}"/>
             <arg line="xml"/>
             <arg line="naming,unusedcode,codesize"/>
