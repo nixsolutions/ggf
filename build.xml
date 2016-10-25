@@ -25,6 +25,7 @@
     <target name="install" depends="prepare">
         <chmod file="${basedir}/bin/post-install.sh" perm="755"/>
         <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log"> </exec>
+        <echo message="##teamcity[publishArtifacts '${logsDir}/post-install.log']" />
     </target>
 
     <target name="configs">
@@ -65,7 +66,7 @@
               output="${logsDir}/phpunit.txt">
             <arg line="--configuration ${basedir}/phpunit.xml"/>
         </exec>
-
+        <echo message="##teamcity[publishArtifacts '${logsDir}/phpunit.txt']" />
     </target>
 
     <target name="phpmd" description="PHP Mess Detector">
@@ -77,7 +78,7 @@
             <arg line="naming,unusedcode,codesize"/>
             <arg line="--reportfile ${pmd}"/>
         </exec>
-
+        <echo message="##teamcity[publishArtifacts '${logsDir}/phpmd.xml']" />
     </target>
 
     <target name="phpcs" description="PHP_CodeSniffer">
@@ -90,6 +91,7 @@
             <arg line="--report-file=${logsDir}/phpcs.xml"/>
             <arg line="${applicationDir}"/>
         </exec>
-
+        <echo message="##teamcity[publishArtifacts '${logsDir}/phpcs.xml']" />
+        <echo message="##teamcity[publishArtifacts '${logsDir}/phpcs.txt']" />
     </target>
 </project>
