@@ -16,6 +16,15 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 cd $DIR/../
 
+case "$env" in
+    testing)
+        cp -v .env.testing .env
+        ;;
+    *)
+        cp -v .env.local .env
+        ;;
+esac
+
 echo "Migrations status before"
 php artisan migrate:status
 echo "Run migrations"

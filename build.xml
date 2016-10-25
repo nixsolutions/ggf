@@ -22,12 +22,6 @@
         <chmod file="${buildDir}/logs" perm="755"/>
     </target>
 
-    <target name="install" depends="prepare">
-        <chmod file="${basedir}/bin/post-install.sh" perm="755"/>
-        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log"> </exec>
-        <echo message="##teamcity[publishArtifacts '${logsDir}/post-install.log']" />
-    </target>
-
     <target name="configs">
         <property name="forceConfig" value="true"/>
         <copy overwrite="true" file="${basedir}/.env.example" tofile="${basedir}/.env.local"> </copy>
@@ -60,6 +54,12 @@
             <replacefilter token="{FACEBOOK_ID}" value="${fb_id_testing}"/>
             <replacefilter token="{FACEBOOK_REDIRECT}" value="${db_redirect_testing}"/>
         </replace>
+    </target>
+
+    <target name="install">
+        <chmod file="${basedir}/bin/post-install.sh" perm="755"/>
+        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log"> </exec>
+        <echo message="##teamcity[publishArtifacts '${logsDir}/post-install.log']" />
     </target>
 
     <target name="phpunit" description="PHPUnit">
