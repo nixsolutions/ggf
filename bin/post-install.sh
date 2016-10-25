@@ -4,6 +4,34 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 #cd $DIR/../
 
+while getopts e: flag; do
+    case ${flag} in
+        e)
+            env=$OPTARG;
+            ;;
+        ?)
+            echo "$OPTARG"
+            exit;
+            ;;
+    esac
+done
+
+case "$env" in
+    testing)
+        cp -v .env.testing .env
+        ;;
+    *)
+        cp -v .env.local .env
+        ;;
+esac
+
+echo "Composer install"
+chmod -v +x ${DIR}/composer.sh
+${DIR}/composer.sh ${env}
+
+echo "Generate application key"
+php artisan key:generate
+
 # Install npm dependencies
 #echo "NPM Install [backend]"
 #npm install  --allow-root
@@ -15,15 +43,6 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 #npm install  --allow-root
 
 cd $DIR/../
-
-case "$env" in
-    testing)
-        cp -v .env.testing .env
-        ;;
-    *)
-        cp -v .env.local .env
-        ;;
-esac
 
 echo "Migrations status before"
 php artisan migrate:status

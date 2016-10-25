@@ -4,7 +4,8 @@ Homestead.yaml
 .vagrant
 .idea
 .env
-.env.*
+.env.local
+.env.testing
 resources/views/app.blade.php
 public/assets
 public/build

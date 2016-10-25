@@ -1,5 +1,5 @@
 <project name="GGF" default="build">
-    <target name="build" depends="clean, prepare, configs, config-update, install, phpunit, phpmd, phpcs"/>
+    <property file="build.properties"/>
 
     <property name="basedir" value="."/>
     <property name="applicationDir" value="${basedir}/app"/>
@@ -22,7 +22,7 @@
         <chmod file="${buildDir}/logs" perm="755"/>
     </target>
 
-    <target name="configs">
+    <target name="configs" depends="prepare">
         <property name="forceConfig" value="true"/>
         <copy overwrite="true" file="${basedir}/.env.example" tofile="${basedir}/.env.local"> </copy>
         <copy overwrite="true" file="${basedir}/.env.example" tofile="${basedir}/.env.testing"> </copy>
@@ -56,13 +56,15 @@
         </replace>
     </target>
 
-    <target name="install">
+    <target name="install" depends="config-update">
         <chmod file="${basedir}/bin/post-install.sh" perm="755"/>
-        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log"> </exec>
+        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log">
+            <arg line="-e ${env}"/>
+        </exec>
         <echo message="##teamcity[publishArtifacts '${logsDir}/post-install.log']" />
     </target>
 
-    <target name="phpunit" description="PHPUnit">
+    <target name="phpunit" description="PHPUnit" depends="install">
         <echo message="Running unit tests with PHPUnit"/>
 
         <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="false" osfamily="unix"
@@ -72,7 +74,7 @@
         <echo message="##teamcity[publishArtifacts '${logsDir}/phpunit.txt']" />
     </target>
 
-    <target name="phpmd" description="PHP Mess Detector">
+    <target name="phpmd" description="PHP Mess Detector" depends="install">
         <property name="pmd" value="${logsDir}/phpmd.xml"/>
 
         <exec dir="${basedir}" executable="${vendorDir}/phpmd" failonerror="false" osfamily="unix">
@@ -84,7 +86,7 @@
         <echo message="##teamcity[publishArtifacts '${logsDir}/phpmd.xml']" />
     </target>
 
-    <target name="phpcs" description="PHP_CodeSniffer">
+    <target name="phpcs" description="PHP_CodeSniffer" depends="install">
 
         <exec dir="${basedir}" executable="${vendorDir}/phpcs" failonerror="false" osfamily="unix"
               output="${logsDir}/phpcs.txt">
@@ -97,4 +99,6 @@
         <echo message="##teamcity[publishArtifacts '${logsDir}/phpcs.xml']" />
         <echo message="##teamcity[publishArtifacts '${logsDir}/phpcs.txt']" />
     </target>
+
+    <target name="build" depends="clean, prepare, configs, config-update, install, phpunit, phpmd, phpcs"/>
 </project>

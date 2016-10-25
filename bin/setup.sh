@@ -5,8 +5,7 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 cd $DIR/../
 
 # Install npm dependencies
-echo "Create .env"
-cp .env.example .env
+#echo "Create .env"
 
 echo "Composer install"
 #install composer
