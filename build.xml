@@ -50,7 +50,7 @@
             <replacefilter token="{DB_CONNECTION}" value="${db_connect_testing}"/>
             <replacefilter token="{DB_DATABASE}" value="${db_database_testing}"/>
             <replacefilter token="{DB_USERNAME}" value="${db_username_testing}"/>
-            <replacefilter token="{DB_USERNAME}" value="${db_username_testing}"/>
+            <replacefilter token="{DB_PASSWORD}" value="${db_password_testing}"/>
             <replacefilter token="{FACEBOOK_ID}" value="${fb_id_testing}"/>
             <replacefilter token="{FACEBOOK_REDIRECT}" value="${db_redirect_testing}"/>
         </replace>
@@ -58,7 +58,7 @@
 
     <target name="install" depends="config-update">
         <chmod file="${basedir}/bin/post-install.sh" perm="755"/>
-        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log">
+        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log" failonerror="true">
             <arg line="-e ${env}"/>
         </exec>
         <echo message="##teamcity[publishArtifacts '${logsDir}/post-install.log']" />
@@ -67,7 +67,7 @@
     <target name="phpunit" description="PHPUnit" depends="install">
         <echo message="Running unit tests with PHPUnit"/>
 
-        <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="false" osfamily="unix"
+        <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="true" osfamily="unix"
               output="${logsDir}/phpunit.txt">
             <arg line="--configuration ${basedir}/phpunit.xml"/>
         </exec>
@@ -77,7 +77,7 @@
     <target name="phpmd" description="PHP Mess Detector" depends="install">
         <property name="pmd" value="${logsDir}/phpmd.xml"/>
 
-        <exec dir="${basedir}" executable="${vendorDir}/phpmd" failonerror="false" osfamily="unix">
+        <exec dir="${basedir}" executable="${vendorDir}/phpmd" failonerror="true" osfamily="unix">
             <arg line="${applicationDir}"/>
             <arg line="xml"/>
             <arg line="naming,unusedcode,codesize"/>
@@ -88,7 +88,7 @@
 
     <target name="phpcs" description="PHP_CodeSniffer" depends="install">
 
-        <exec dir="${basedir}" executable="${vendorDir}/phpcs" failonerror="false" osfamily="unix"
+        <exec dir="${basedir}" executable="${vendorDir}/phpcs" failonerror="true" osfamily="unix"
               output="${logsDir}/phpcs.txt">
             <arg line="--tab-width=4"/>
             <arg line="--report=full"/>
