@@ -10,14 +10,10 @@ cp .env.example .env
 
 echo "Composer install"
 #install composer
-case "$env" in
-    *)
+
         echo  "Install Composer"
         chmod -v +x ${DIR}/composer.sh
-        ${DIR}/composer.sh ${env}
-        ;;
-esac
-composer install --no-interaction --prefer-source
+        ${DIR}/composer.sh
 
 echo "Generate application key"
 php artisan key:generate
