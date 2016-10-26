@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-#cd $DIR/../
+cd $DIR/../
 
 while getopts e: flag; do
     case ${flag} in
@@ -49,6 +49,6 @@ cd $DIR/../resources/frontend
 echo "NPM Install [frontend]"
 npm install  --allow-root
 
-#cd $DIR/../
+cd $DIR/../
 
 sh bin/build.sh
