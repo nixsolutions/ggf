@@ -56,5 +56,5 @@ rsync -aP --no-o --no-g --delete --progress $workspace/ $deployDir \
 
 echo -e "\tRunning install script/smoke tests"
 cd ${deployDir} ; \
-chmod -v +x $deployDir/bin/install.sh -h ${host} ; \
-$deployDir/bin/install.sh -e ${APP_ENV} ; 
+chmod -v +x $deployDir/bin/install.sh ${host} ; \
+$deployDir/bin/install.sh -e ${APP_ENV} ;
