@@ -49,4 +49,6 @@ cd $DIR/../resources/frontend
 echo "NPM Install [frontend]"
 npm install  --allow-root
 
+#cd $DIR/../
+
 sh bin/build.sh
