@@ -53,6 +53,22 @@ rsync -aP --no-o --no-g --delete --progress $workspace/ $deployDir \
 --exclude /.vagrant/ \
 --exclude /node_modules/ \
 --exclude /resources/frontend/node_modules/ \
+--exclude /resources/frontend/bower-components \
+--exclude /resources/frontend/tmp \
+--exclude /.env \
+--exclude /.env.local \
+--exclude /.env.testing \
+--exclude /build/ \
+--exclude /public/assets \
+--exclude /public/font \
+--exclude /public/leagues-logo \
+--exclude /public/teams-logo \
+--exclude /public/vendor \
+--exclude /storage/app \
+--exclude /storage/api-docs \
+--exclude /storage/debugbar \
+--exclude /storage/logs \
+--exclude /resources/views/app.blade.php \
 
 echo -e "\tRunning install script/smoke tests"
 cd ${deployDir} ; \
