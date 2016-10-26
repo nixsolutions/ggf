@@ -33,14 +33,14 @@ echo "Generate application key"
 php artisan key:generate
 
 # Install npm dependencies
-#echo "NPM Install [backend]"
-#npm install  --allow-root
+echo "NPM Install [backend]"
+npm install  --allow-root
 
-#cd $DIR/../resources/frontend
+cd $DIR/../resources/frontend
 
 # Install npm dependencies
-#echo "NPM Install [frontend]"
-#npm install  --allow-root
+echo "NPM Install [frontend]"
+npm install  --allow-root
 
 cd $DIR/../
 
@@ -51,4 +51,4 @@ php artisan migrate || exit 1
 echo "Migrations status after"
 php artisan migrate:status
 
-#sh bin/build.sh
+sh bin/build.sh
