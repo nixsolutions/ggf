@@ -59,7 +59,7 @@
 
     <target name="install" depends="config-update">
         <chmod file="${basedir}/bin/post-install.sh" perm="755"/>
-        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log" failonerror="true">
+        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log" failonerror="false">
             <arg line="-e ${env}"/>
         </exec>
         <echo message="##teamcity[publishArtifacts '${logsDir}/post-install.log']" />
