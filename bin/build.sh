@@ -8,7 +8,7 @@ bower install
 
 # Build Ember Application
 echo "Build Ember (env: ${EMBER_ENV})"
-./node_modules/.bin/ember build --environment=${EMBER_ENV}
+$DIR/../resources/frontend/node_modules/.bin/ember build --environment=${EMBER_ENV}
 
 # Copy
 cp dist/index.html $DIR/../resources/views/app.blade.php
