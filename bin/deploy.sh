@@ -56,7 +56,6 @@ rsync -aP --no-o --no-g --delete --progress $workspace/ $deployDir \
 --exclude /resources/frontend/bower-components \
 --exclude /resources/frontend/tmp \
 --exclude /.env \
---exclude /.env.local \
 --exclude /.env.testing \
 --exclude /build/ \
 --exclude /public/assets \
