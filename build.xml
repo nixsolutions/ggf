@@ -89,7 +89,7 @@
 
     <target name="phpcs" description="PHP_CodeSniffer" depends="install">
 
-        <exec dir="${basedir}" executable="${vendorDir}/phpcs" failonerror="true" osfamily="unix"
+        <exec dir="${basedir}" executable="${vendorDir}/phpcs" failonerror="false" osfamily="unix"
               output="${logsDir}/phpcs.txt">
             <arg line="--tab-width=4"/>
             <arg line="--report=full"/>
