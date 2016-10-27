@@ -10,6 +10,7 @@
     <!-- Clean up from previous builds -->
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${buildDir}/logs"/>
+        <delete dir="${logsDir}/phpunit-coverage"/>
         <delete file="${basedir}/.env.local"/>
         <delete file="${basedir}/.env.testing"/>
     </target>
@@ -17,6 +18,7 @@
     <!-- Prepare for the new build -->
     <target name="prepare" depends="clean">
         <mkdir dir="${buildDir}/logs"/>
+        <mkdir dir="${logsDir}/phpunit-coverage"/>
         <touch file="${basedir}/.env.local"/>
         <touch file="${basedir}/.env.testing"/>
         <chmod file="${buildDir}/logs" perm="755"/>
@@ -70,6 +72,9 @@
 
         <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="true" osfamily="unix"
               output="${logsDir}/phpunit.txt">
+            <arg line="--coverage-html ${logsDir}/phpunit-coverage"/>
+            <arg line="--debug"/>
+            <arg line="--teamcity"/>
             <arg line="--configuration ${basedir}/phpunit.xml"/>
         </exec>
         <echo message="##teamcity[publishArtifacts '${logsDir}/phpunit.txt']" />

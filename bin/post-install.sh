@@ -32,6 +32,29 @@ ${DIR}/composer.sh ${env}
 echo "Generate application key"
 php artisan key:generate
 
+echo "Change permissions"
+
+mkdir -p ${DIR}/../storage/debugbar/
+chmod -v a+w ${DIR}/../storage/debugbar/
+
+mkdir -p ${DIR}/../storage/framework/
+chmod -v a+w ${DIR}/../storage/framework/
+
+mkdir -p ${DIR}/../storage/framework/cache/
+chmod -v a+w ${DIR}/../storage/framework/cache/
+
+mkdir -p ${DIR}/../storage/framework/sessions/
+chmod -v a+w ${DIR}/../storage/framework/sessions/
+
+mkdir -p ${DIR}/../storage/framework/views/
+chmod -v a+w ${DIR}/../storage/framework/views/
+
+mkdir -p ${DIR}/../storage/logs/
+chmod -v a+w ${DIR}/../storage/logs/
+
+mkdir -p ${DIR}/../storage/api-docs/
+chmod -v a+w ${DIR}/../storage/api-docs/
+
 echo "Migrations status before"
 php artisan migrate:status
 echo "Run migrations"
