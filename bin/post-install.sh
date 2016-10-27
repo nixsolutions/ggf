@@ -41,13 +41,27 @@ php artisan migrate:status
 
 # Install npm dependencies
 echo "NPM Install [backend]"
-npm install  --allow-root
+case "$env" in
+    vagrant)
+        npm install  --allow-root
+        ;;
+    *)
+        npm install
+        ;;
+esac
 
 cd $DIR/../resources/frontend
 
 # Install npm dependencies
 echo "NPM Install [frontend]"
-npm install  --allow-root
+case "$env" in
+    vagrant)
+        npm install  --allow-root
+        ;;
+    *)
+        npm install
+        ;;
+esac
 
 cd $DIR/../
 
