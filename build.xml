@@ -72,7 +72,6 @@
 
         <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="true" osfamily="unix"
               output="${logsDir}/phpunit.txt">
-            <arg line="--coverage-html ${logsDir}/phpunit-coverage"/>
             <arg line="--debug"/>
             <arg line="--configuration ${basedir}/phpunit.xml"/>
         </exec>
