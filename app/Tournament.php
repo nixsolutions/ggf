@@ -130,6 +130,45 @@ class Tournament extends Model
         return $pairs;
     }
 
+    private function matchScore($match, $homeTeam, $awayTeam)
+    {
+        if (Match::STATUS_FINISHED == $match->status) {
+            $homeTeam['matches']++;
+            $awayTeam['matches']++;
+            $homeTeam['goalsScored'] += $match->homeScore;
+            $homeTeam['goalsAgainsted'] += $match->awayScore;
+            $homeTeam['goalsDifference'] = ($homeTeam['goalsScored'] - $homeTeam['goalsAgainsted']);
+
+            $awayTeam['goalsScored'] += $match->awayScore;
+            $awayTeam['goalsAgainsted'] += $match->homeScore;
+            $awayTeam['goalsDifference'] = ($awayTeam['goalsScored'] - $awayTeam['goalsAgainsted']);
+
+            switch ($match->resultType) {
+                case Match::RESULT_TYPE_HOME_WIN:
+                    $homeTeam['wins']++;
+                    $homeTeam['points'] += Match::POINTS_WIN;
+                    $awayTeam['losts']++;
+
+                    break;
+                case Match::RESULT_TYPE_AWAY_WIN:
+                    $awayTeam['wins']++;
+                    $homeTeam['losts']++;
+                    $awayTeam['points'] += Match::POINTS_WIN;
+
+                    break;
+                case Match::RESULT_TYPE_DRAW:
+                    $homeTeam['draws']++;
+                    $awayTeam['draws']++;
+                    $homeTeam['points'] += Match::POINTS_DRAW;
+                    $awayTeam['points'] += Match::POINTS_DRAW;
+
+                    break;
+            }
+        }
+
+        return $teams = ['homeTeam' => $homeTeam, 'awayTeam' => $awayTeam];
+    }
+
     /**
      * @todo Make a refactoring for `pair` entity
      * @name getScore
@@ -177,44 +216,10 @@ class Tournament extends Model
                 );
             }
 
-            if (Match::STATUS_FINISHED == $match->status) {
-                $homeTeam['matches']++;
-                $awayTeam['matches']++;
-                $homeTeam['goalsScored'] += $match->homeScore;
-                $homeTeam['goalsAgainsted'] += $match->awayScore;
-                $homeTeam['goalsDifference'] = ($homeTeam['goalsScored'] - $homeTeam['goalsAgainsted']);
-
-                $awayTeam['goalsScored'] += $match->awayScore;
-                $awayTeam['goalsAgainsted'] += $match->homeScore;
-                $awayTeam['goalsDifference'] = ($awayTeam['goalsScored'] - $awayTeam['goalsAgainsted']);
-
-                switch ($match->resultType) {
-                    case Match::RESULT_TYPE_HOME_WIN:
-                        $homeTeam['wins']++;
-                        $homeTeam['points'] += Match::POINTS_WIN;
-                        $awayTeam['losts']++;
-
-                        break;
-                    case Match::RESULT_TYPE_AWAY_WIN:
-                        $awayTeam['wins']++;
-                        $homeTeam['losts']++;
-                        $awayTeam['points'] += Match::POINTS_WIN;
-
-                        break;
-                    case Match::RESULT_TYPE_DRAW:
-                        $homeTeam['draws']++;
-                        $awayTeam['draws']++;
-                        $homeTeam['points'] += Match::POINTS_DRAW;
-                        $awayTeam['points'] += Match::POINTS_DRAW;
-
-                        break;
-                }
-            }
-
-            $score->put($match->homeTournamentTeam->id, $homeTeam);
-            $score->put($match->awayTournamentTeam->id, $awayTeam);
+            $teams =$this->matchScore($match, $homeTeam, $awayTeam);
+            $score->put($match->homeTournamentTeam->id, $teams['homeTeam']);
+            $score->put($match->awayTournamentTeam->id, $teams['awayTeam']);
         });
-
 
         // sort by points and goal difference
         $score = $score->sort(function ($a, $b) {
