@@ -74,7 +74,6 @@
               output="${logsDir}/phpunit.txt">
             <arg line="--coverage-html ${logsDir}/phpunit-coverage"/>
             <arg line="--debug"/>
-            <arg line="--teamcity"/>
             <arg line="--configuration ${basedir}/phpunit.xml"/>
         </exec>
         <echo message="##teamcity[publishArtifacts '${logsDir}/phpunit.txt']" />
