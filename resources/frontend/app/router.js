@@ -19,6 +19,8 @@ Router.map(function() {
   });
 
   this.resource('leagues', function() {
+    this.route('new');
+
     this.resource('league', {path: '/:id'}, function() {
       this.route('teams');
     });

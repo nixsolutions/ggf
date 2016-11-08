@@ -56,7 +56,8 @@
     "fs-extra": "^0.30.0",
     "path": "^0.12.7",
     "rsvp": "^3.0.18",
-    "torii": "^0.8.0"
+    "torii": "^0.8.0",
+    "ember-cli-form-data": "0.2.0"
   },
   "ember-addon": {
     "paths": [
