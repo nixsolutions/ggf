@@ -7,7 +7,7 @@ const {
 
 export default Route.extend(ApplicationRouteMixin, {
   model() {
-      return this.store.find('league-team', {leagueId: this.paramsFor('league').id});
+      return this.store.query('league-team', {leagueId: this.paramsFor('league').id});
   },
   setupController(controller, model) {
     controller.set('model', model);
