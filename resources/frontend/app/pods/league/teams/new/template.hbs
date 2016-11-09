@@ -1,0 +1,14 @@
+{{#md-modal action="closeModal"}}
+  <div class="modal-content">
+    <h4>Create a new team</h4>
+    <p>
+      {{ggf-teams.create-team submit="save"}}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat"
+      {{action 'closeModal'}}>
+      Cancel
+    </a>
+  </div>
+{{/md-modal}}
