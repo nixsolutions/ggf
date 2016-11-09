@@ -22,7 +22,9 @@ Router.map(function() {
     this.route('new');
 
     this.resource('league', {path: '/:id'}, function() {
-      this.route('teams');
+      this.route('teams', function () {
+        this.route('new');
+      });
     });
   });
 });
