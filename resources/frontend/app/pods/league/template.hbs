@@ -8,17 +8,6 @@
         {{ggf-md.md-tab value='teams' title='Teams' link='league.teams'}}
 
       {{/md-tabs}}
-      {{#if session.isAuthenticated }}
-
-        {{#md-fixed-btns
-          class="fixed-btns-example"
-          btnIcon="mdi-content-add"
-          btnClass="btn-large indigo"
-          action="createTeam"
-          actionArgs="0"}}
-
-        {{/md-fixed-btns}}
-      {{/if}}
 
       {{outlet}}
     </div>
