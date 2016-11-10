@@ -6,6 +6,16 @@
         {{#md-card
             title=team.name
         }}
+          {{#confirm-dialog
+            text="Are you sure?"
+            confirmButton="Continue"
+            confirmButtonClass="btn btn-success"
+            cancelButtonClass="btn btn-danger"
+          }}
+            <a {{action 'remove' team}} class="btn btn-info btn-lg">
+              <i class="mdi-action-delete"></i>
+            </a>
+          {{/confirm-dialog}}
           {{#md-card-content}}
             <img src="{{team.logoPath}}"/>
           {{/md-card-content}}
