@@ -1,10 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model() {
-    return this.store.createRecord('league');
-  },
-
   actions: {
     save(league) {
       const flashMessages = Ember.get(this, 'flashMessages');
