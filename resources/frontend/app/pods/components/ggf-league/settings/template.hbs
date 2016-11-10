@@ -7,16 +7,16 @@
       }}
     </div>
     <div class="col s12">
+      <label class="custom-file-upload">
+        {{ggf-input-file logo=logo id="file-upload"}}
+          <i class="fa fa-cloud-upload"></i> Upload image
+      </label>
+
       {{#if logo}}
         {{#md-card-content}}
           {{ggf-image-preview logo=logo width="100" height="100"}}
         {{/md-card-content}}
       {{/if}}
-
-      <label class="custom-file-upload">
-        {{ggf-input-file logo=logo id="file-upload"}}
-          <i class="fa fa-cloud-upload"></i> Upload image
-      </label>
     </div>
 
     <div class="input-field col s12">
