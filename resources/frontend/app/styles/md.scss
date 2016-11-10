@@ -7,23 +7,3 @@
   opacity:1.0;
   background-color: rgba(73, 82, 90, 0.5);
 }
-.ember-modal-overlay.confirm-dialog {
-  opacity: 1;
-}
-
-.dialog-content {
-  padding: 25px;
-  width: 500px;
-}
-
-.dialog-text {
-  padding-bottom: 20px;
-  font-size: 20px;
-  text-align: center;
-}
-
-.dialog-footer {
-  .cancel-button {
-    float: right;
-  }
-}

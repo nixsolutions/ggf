@@ -2,13 +2,13 @@
   position: inherit;
 
   .card-content {
-    height: 175px;
+    height: 128px;
     position: relative;
     img {
       position: absolute;
       height: 104px;
-      right: 3em;
-      top: 2.75em;
+      right: 2em;
+      top: 0.75em;
     }
 
     & .btn-floating {
@@ -20,6 +20,7 @@
   }
 
   .card-action {
+    min-height: 63px;
     a {
 
     }

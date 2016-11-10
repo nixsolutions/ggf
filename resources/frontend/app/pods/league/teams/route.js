@@ -13,7 +13,7 @@ export default Route.extend(ApplicationRouteMixin, {
     controller.set('model', model);
   },
   actions: {
-    remove(team) {
+    removeTeam(team) {
       const flashMessages = Ember.get(this, 'flashMessages');
 
       return team.destroyRecord().then(() => {
