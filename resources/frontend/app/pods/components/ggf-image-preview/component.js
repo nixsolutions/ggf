@@ -5,6 +5,7 @@ export default Ember.Component.extend({
     width: 100,
     height: 100,
     tagName: 'img',
+    classNames: ['preview-wrapper'],
     didInsertElement() {
         this.logoChanged();
     },
