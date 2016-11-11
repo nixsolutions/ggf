@@ -2,6 +2,8 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Tests\TestCase;
+use App\Member;
+use Illuminate\Support\Facades\Auth;
 
 class LeagueApiTest extends TestCase
 {
@@ -23,6 +25,9 @@ class LeagueApiTest extends TestCase
 
     public function testCreateLeague()
     {
+        $member = factory(Member::class)->create();
+        Auth::login($member);
+
         $path = base_path('tests/test-logo/ligue1.png');
         $uploadedFile = new \Illuminate\Http\UploadedFile($path, null, 'png', null, null, true);
 
@@ -43,6 +48,9 @@ class LeagueApiTest extends TestCase
      */
     public function testBadValidStoreTeam($expected, $value, $field)
     {
+        $member = factory(Member::class)->create();
+        Auth::login($member);
+
         $this->json('POST', '/api/v1/leagues', ['league' => [$field => $value]])
             ->assertResponseStatus(422)
             ->seeJson($expected);

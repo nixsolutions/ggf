@@ -80,6 +80,9 @@ class TeamApiTest extends TestCase
 
     public function testTeamRemove()
     {
+        $member = factory(Member::class)->create();
+        Auth::login($member);
+
         $tournamentTeam = $this->createTournamentTeam();
 
         $this->json('DELETE', '/api/v1/teams/' . $tournamentTeam->teamId);
@@ -103,6 +106,9 @@ class TeamApiTest extends TestCase
 
     public function testStoreTeam()
     {
+        $member = factory(Member::class)->create();
+        Auth::login($member);
+
         $league = factory(\App\League::class)->create();
         $path =  base_path('tests/test-logo/argentina.png');
         $uploadedFile = new \Illuminate\Http\UploadedFile($path, null, 'png', null, null, true);
@@ -113,7 +119,7 @@ class TeamApiTest extends TestCase
             'logo' => $uploadedFile,
         ];
 
-        $this->post('/api/v1/team/add', ['team' => $data])
+        $this->post('/api/v1/leagueTeams', ['leagueTeam' => $data])
             ->assertResponseStatus(200)
             ->seeInDatabase('teams', [
                 'leagueId' => $league->id,
@@ -126,34 +132,43 @@ class TeamApiTest extends TestCase
      */
     public function testBadValidStoreTeam($expected, $value, $field)
     {
-        $this->json('POST', '/api/v1/team/add', ['team' => [$field => $value]])
-            ->assertResponseStatus(422)
-            ->seeJson($expected);
+        $member = factory(Member::class)->create();
+        Auth::login($member);
+
+        $this->json('POST', '/api/v1/leagueTeams', ['leagueTeam' => [$field => $value]])
+            ->seeJson($expected)
+            ->assertResponseStatus(422);
     }
 
     public function teamProvider()
     {
         $logoResponse = [
-            'team.logo' => [
-                'The team.logo must be a file of type: jpeg, bmp, png, jpg.',
-                'The team.logo must be an image.'
+            'leagueTeam.logo' => [
+                'The league team.logo must be a file of type: jpeg, bmp, png, jpg.',
+                'The league team.logo must be an image.'
+            ],
+            'leagueTeam.leagueId' => [
+                'The league team.league id field is required.'
             ]
         ];
         return [
-            [['The team.league id field is required.'], '', 'leagueId'],
-            [['The team.league id must be an integer.'], 'badId', 'leagueId'],
-            [['The selected team.league id is invalid.'], '0', 'leagueId'],
-            [['The team.name field is required.'], '', 'name'],
-            [['The team.name must be at least 3 characters.'], 'e', 'name'],
-            [['The team.name may not be greater than 255 characters.'], str_random(256), 'name'],
+            [['The league team.league id field is required.'], '', 'leagueId'],
+            [['The league team.league id must be an integer.'], 'badId', 'leagueId'],
+            [['The selected league team.league id is invalid.'], '0', 'leagueId'],
+            [['The league team.league id field is required.'], '', 'name'],
+            [['The league team.name must be at least 3 characters.'], 'e', 'name'],
+            [['The league team.name may not be greater than 255 characters.'], str_random(256), 'name'],
             [$logoResponse, 'badFile', 'logo']
         ];
     }
 
     public function testTeamDelete()
     {
+        $member = factory(Member::class)->create();
+        Auth::login($member);
+
         $team = $this->createTeam();
-        $this->json('DELETE', '/api/v1/team/' . $team->id);
+        $this->json('DELETE', '/api/v1/leagueTeams/' . $team->id);
         $this->assertResponseStatus(200)
             ->dontSeeInDatabase('teams', [
                 'id' => $team->id,
