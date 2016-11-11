@@ -16,6 +16,7 @@ export default Ember.Mixin.create({
         this.send('logout');
         break;
       case 403:
+        this.errorNotifier('Forbidden');
         Ember.Logger.log('forbidden');
         break;
       case 404:

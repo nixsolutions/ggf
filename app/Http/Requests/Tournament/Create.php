@@ -4,6 +4,7 @@ namespace App\Http\Requests\Tournament;
 
 use App\Http\Requests\Request;
 use App\Tournament;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class Create
@@ -18,7 +19,7 @@ class Create extends Request
      */
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 
     /**

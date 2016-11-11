@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
+
 /**
  * Class CreateLeague
  * @package App\Http\Requests
@@ -15,7 +17,7 @@ class CreateLeague extends Request
      */
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 
     /**
