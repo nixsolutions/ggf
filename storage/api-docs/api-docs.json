@@ -42,11 +42,11 @@
                         "type": "string"
                     },
                     {
-                        "name": "league[logoPath]",
+                        "name": "league[logo]",
                         "in": "formData",
                         "description": "Path to league logo",
                         "required": false,
-                        "type": "string"
+                        "type": "file"
                     }
                 ],
                 "responses": {
@@ -75,6 +75,41 @@
                 "responses": {
                     "200": {
                         "description": "Successfully get list of leagues"
+                    }
+                }
+            },
+            "post": {
+                "description": "Add new team to database",
+                "operationId": "store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "leagueTeam[leagueId]",
+                        "in": "formData",
+                        "description": "League id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "leagueTeam[name]",
+                        "in": "formData",
+                        "description": "Team name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "leagueTeam[logo]",
+                        "in": "formData",
+                        "description": "Team logo",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully add new team"
                     }
                 }
             }
@@ -174,6 +209,20 @@
                 }
             }
         },
+        "/api/v1/teams/all": {
+            "get": {
+                "description": "Returns all teams from the database",
+                "operationId": "catalogue",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get list of teams"
+                    }
+                }
+            }
+        },
         "/api/v1/teams/{teamId}": {
             "get": {
                 "description": "Returns specified team from tournament",
@@ -197,7 +246,7 @@
                 }
             },
             "delete": {
-                "description": "Delete specified team from database",
+                "description": "Delete specified team from tournament",
                 "operationId": "remove",
                 "produces": [
                     "application/json"
@@ -213,7 +262,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully remove specified steam"
+                        "description": "Successfully remove specified team"
                     }
                 }
             }
@@ -237,6 +286,29 @@
                 "responses": {
                     "200": {
                         "description": "Successfully get teams we search"
+                    }
+                }
+            }
+        },
+        "/api/v1/leagueTeams/{teamId}": {
+            "delete": {
+                "description": "Delete specified team from database",
+                "operationId": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "teamId",
+                        "in": "path",
+                        "description": "Team id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully remove specified team"
                     }
                 }
             }

@@ -29,8 +29,8 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('/teams/search', 'API\TeamController@search');
 
     Route::get('/teams/all', 'API\TeamController@catalogue');
-    Route::post('/team/add', 'API\TeamController@store');
-    Route::delete('/team/{teamId}', 'API\TeamController@delete');
+    Route::post('/leagueTeams', 'API\TeamController@store');
+    Route::delete('/leagueTeams/{teamId}', 'API\TeamController@delete');
     Route::get('/teams/{teamId}', 'API\TeamController@find');
     Route::delete('/teams/{teamId}', 'API\TeamController@remove');
 

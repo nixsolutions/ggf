@@ -121,7 +121,7 @@ class TeamController extends Controller
 
     /**
      * @SWG\Post(
-     *     path="/api/v1/team/add",
+     *     path="/api/v1/leagueTeams",
      *     description="Add new team to database",
      *     operationId="store",
      *     produces={"application/json"},
@@ -157,12 +157,12 @@ class TeamController extends Controller
         $team = new Team();
         $team = $team->addTeam($request);
 
-        return $this->response->collection(Team::where(['id' => $team->id])->get(), new TeamTransformer(), 'teams');
+        return $this->response->collection(Team::where(['id' => $team->id])->get(), new TeamTransformer(), 'leagueTeams');
     }
 
     /**
      * @SWG\Delete(
-     *     path="/api/v1/team/{teamId}",
+     *     path="/api/v1/leagueTeams/{teamId}",
      *     description="Delete specified team from database",
      *     operationId="delete",
      *     produces={"application/json"},

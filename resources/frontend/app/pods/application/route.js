@@ -1,8 +1,12 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
+import ErrorHandlerMixin from './../../mixins/error-handler-mixin';
 
-export default Ember.Route.extend(ApplicationRouteMixin, {
+export default Ember.Route.extend(ApplicationRouteMixin, ErrorHandlerMixin, {
   actions: {
+    error (error) {
+      this.handleError(error);
+    },
     authenticate: function(provider) {
       const flashMessages = Ember.get(this, 'flashMessages');
 
