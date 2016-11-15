@@ -1,0 +1,13 @@
+{{#md-card
+    title=tournament.title
+}}
+
+  {{#md-card-content}}
+    {{tournament.description}}
+  {{/md-card-content}}
+
+  {{#md-card-action}}
+    {{#link-to 'tournament.standings' tournament.id}}View tournament{{/link-to}}
+  {{/md-card-action}}
+
+{{/md-card}}

@@ -1,0 +1,11 @@
+<div class="row">
+  {{#if isDraft }}
+    {{ggf-tournament.complete-setup}}
+  {{else}}
+    <div class="col s12">
+      {{ggf-tournament.matches-list matches=model}}
+    </div>
+  {{/if}}
+</div>
+
+{{outlet}}

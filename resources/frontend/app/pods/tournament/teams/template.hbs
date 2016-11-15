@@ -1,0 +1,18 @@
+<div class="row">
+  {{#with model.teams as |teams| }}
+    {{#each teams as |team|}}
+      <div class="col s12 m6 l4">
+        {{ggf-teams.card team=team remove="removeTeam"}}
+      </div>
+    {{/each}}
+  {{/with}}
+  {{#if session.isAuthenticated}}
+    {{#if model.isDraft}}
+      <div class="col s12 m6 l4">
+        {{ggf-teams.add-team tournamentId=model.tournamentId submit="addTeam" query="queryOptions"}}
+      </div>
+    {{/if}}
+  {{/if}}
+</div>
+
+{{outlet}}

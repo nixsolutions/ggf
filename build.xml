@@ -1,0 +1,108 @@
+<project name="GGF" default="build">
+    <property file="build.properties"/>
+
+    <property name="basedir" value="."/>
+    <property name="applicationDir" value="${basedir}/app"/>
+    <property name="buildDir" value="${basedir}/build"/>
+    <property name="vendorDir" value="${basedir}/vendor/bin"/>
+    <property name="logsDir" value="${buildDir}/logs"/>
+
+    <!-- Clean up from previous builds -->
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${buildDir}/logs"/>
+        <delete dir="${logsDir}/phpunit-coverage"/>
+        <delete file="${basedir}/.env.local"/>
+        <delete file="${basedir}/.env.testing"/>
+    </target>
+
+    <!-- Prepare for the new build -->
+    <target name="prepare" depends="clean">
+        <mkdir dir="${buildDir}/logs"/>
+        <mkdir dir="${logsDir}/phpunit-coverage"/>
+        <touch file="${basedir}/.env.local"/>
+        <touch file="${basedir}/.env.testing"/>
+        <chmod file="${buildDir}/logs" perm="755"/>
+    </target>
+
+    <target name="configs" depends="prepare">
+        <property name="forceConfig" value="true"/>
+        <copy overwrite="true" file="${basedir}/.env.example" tofile="${basedir}/.env.local"> </copy>
+        <copy overwrite="true" file="${basedir}/.env.example" tofile="${basedir}/.env.testing"> </copy>
+    </target>
+
+    <target name="config-update" depends="configs">
+        <replace file="${basedir}/.env.local">
+            <replacefilter token="{ENV}" value="${env}"/>
+            <replacefilter token="{DEBUG}" value="${debug_local}"/>
+            <replacefilter token="{HOST}" value="${host_local}"/>
+            <replacefilter token="{DB_HOST}" value="${db_host_local}"/>
+            <replacefilter token="{DB_CONNECTION}" value="${db_connect_local}"/>
+            <replacefilter token="{DB_DATABASE}" value="${db_database_local}"/>
+            <replacefilter token="{DB_USERNAME}" value="${db_username_local}"/>
+            <replacefilter token="{DB_PASSWORD}" value="${db_password_local}"/>
+            <replacefilter token="{FACEBOOK_ID}" value="${fb_id_local}"/>
+            <replacefilter token="{FACEBOOK_SECRET}" value="${fb_secret_local}"/>
+            <replacefilter token="{FACEBOOK_REDIRECT}" value="${fb_redirect_local}"/>
+        </replace>
+        <replace file="${basedir}/.env.testing">
+            <replacefilter token="{ENV}" value="${env}"/>
+            <replacefilter token="{DEBUG}" value="${debug_testing}"/>
+            <replacefilter token="{HOST}" value="${host_testing}"/>
+            <replacefilter token="{DB_HOST}" value="${db_host_testing}"/>
+            <replacefilter token="{DB_CONNECTION}" value="${db_connect_testing}"/>
+            <replacefilter token="{DB_DATABASE}" value="${db_database_testing}"/>
+            <replacefilter token="{DB_USERNAME}" value="${db_username_testing}"/>
+            <replacefilter token="{DB_PASSWORD}" value="${db_password_testing}"/>
+            <replacefilter token="{FACEBOOK_ID}" value="${fb_id_testing}"/>
+            <replacefilter token="{FACEBOOK_SECRET}" value="${fb_secret_testing}"/>
+            <replacefilter token="{FACEBOOK_REDIRECT}" value="${fb_redirect_testing}"/>
+        </replace>
+    </target>
+
+    <target name="install" depends="config-update">
+        <chmod file="${basedir}/bin/post-install.sh" perm="755"/>
+        <exec dir="${basedir}/" executable="./bin/post-install.sh" output="${logsDir}/post-install.log" failonerror="false">
+            <arg line="-e ${env}"/>
+        </exec>
+        <echo message="##teamcity[publishArtifacts '${logsDir}/post-install.log']" />
+    </target>
+
+    <target name="phpunit" description="PHPUnit" depends="install">
+        <echo message="Running unit tests with PHPUnit"/>
+
+        <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="true" osfamily="unix"
+              output="${logsDir}/phpunit.txt">
+            <arg line="--debug"/>
+            <arg line="--configuration ${basedir}/phpunit.xml"/>
+        </exec>
+        <echo message="##teamcity[publishArtifacts '${logsDir}/phpunit.txt']" />
+    </target>
+
+    <target name="phpmd" description="PHP Mess Detector" depends="install">
+        <property name="pmd" value="${logsDir}/phpmd.xml"/>
+
+        <exec dir="${basedir}" executable="${vendorDir}/phpmd" failonerror="false" osfamily="unix">
+            <arg line="${applicationDir}"/>
+            <arg line="xml"/>
+            <arg line="naming,unusedcode,codesize"/>
+            <arg line="--reportfile ${pmd}"/>
+        </exec>
+        <echo message="##teamcity[publishArtifacts '${logsDir}/phpmd.xml']" />
+    </target>
+
+    <target name="phpcs" description="PHP_CodeSniffer" depends="install">
+
+        <exec dir="${basedir}" executable="${vendorDir}/phpcs" failonerror="false" osfamily="unix"
+              output="${logsDir}/phpcs.txt">
+            <arg line="--tab-width=4"/>
+            <arg line="--report=full"/>
+            <arg line="--standard=PSR2"/>
+            <arg line="--report-file=${logsDir}/phpcs.xml"/>
+            <arg line="${applicationDir}"/>
+        </exec>
+        <echo message="##teamcity[publishArtifacts '${logsDir}/phpcs.xml']" />
+        <echo message="##teamcity[publishArtifacts '${logsDir}/phpcs.txt']" />
+    </target>
+
+    <target name="build" depends="clean, prepare, configs, config-update, install, phpunit, phpmd, phpcs"/>
+</project>

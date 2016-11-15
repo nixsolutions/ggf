@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "engines": {
+    "node": "0.12.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.8"
+  },
+  "dependencies": {
+    "laravel-elixir": "^2.0.0",
+    "bootstrap-sass": "^3.0.0"
+  }
+}

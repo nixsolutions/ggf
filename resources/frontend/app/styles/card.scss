@@ -1,0 +1,62 @@
+.card {
+  position: inherit;
+
+  .card-content {
+    height: 128px;
+    position: relative;
+    img {
+      position: absolute;
+      height: 104px;
+      right: 2em;
+      top: 0.75em;
+    }
+
+    & .btn-floating {
+      position: absolute;
+      z-index: 99;
+      top: 8px;
+      right: 8px;
+    }
+  }
+
+  .card-action {
+    min-height: 63px;
+    a {
+
+    }
+  }
+
+  .search-action {
+    text-align: center;
+  }
+
+  &.add-team {
+    .card-content {
+      padding-top: 48px;
+    }
+
+    .input-md {
+      width: 100%;
+    }
+
+    .undo {
+      float: right;
+    }
+  }
+
+  & .card-action .reveal-menu {
+    background: none;
+    float: right;
+    margin: -0.5em -0.5em 0 0;
+    box-shadow: none;
+    transition: box-shadow .25s;
+
+    i {
+      color: $card-link-color;
+    }
+    
+    .dropdown-content {
+      width: 80px;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+/vendor
+/node_modules
+Homestead.yaml
+.vagrant
+.idea
+.env
+.env.local
+.env.testing
+resources/views/app.blade.php
+public/assets
+public/build
+public/teams-logo
+public/leagues-logo
+public/font
+build/
+composer.phar

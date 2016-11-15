@@ -1,0 +1,647 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "GGF",
+        "description": "This is a sample server GGF",
+        "contact": {
+            "email": ""
+        },
+        "version": "1.0.0"
+    },
+    "host": "",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/api/v1/leagues": {
+            "get": {
+                "description": "Returns all leagues from the database",
+                "operationId": "catalogue",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get list of leagues"
+                    }
+                }
+            },
+            "post": {
+                "description": "Add new league to database",
+                "operationId": "store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "league[name]",
+                        "in": "formData",
+                        "description": "League name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "league[logo]",
+                        "in": "formData",
+                        "description": "Path to league logo",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully add new league"
+                    }
+                }
+            }
+        },
+        "/api/v1/leagueTeams": {
+            "get": {
+                "description": "Returns all teams from the specified league",
+                "operationId": "teams",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "leagueId",
+                        "in": "query",
+                        "description": "ID of league which teams we need",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get list of leagues"
+                    }
+                }
+            },
+            "post": {
+                "description": "Add new team to database",
+                "operationId": "store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "leagueTeam[leagueId]",
+                        "in": "formData",
+                        "description": "League id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "leagueTeam[name]",
+                        "in": "formData",
+                        "description": "Team name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "leagueTeam[logo]",
+                        "in": "formData",
+                        "description": "Team logo",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully add new team"
+                    }
+                }
+            }
+        },
+        "/api/v1/matches": {
+            "get": {
+                "description": "Returns all matches with specified tournamentId from the database",
+                "operationId": "catalogue",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "teamId",
+                        "in": "query",
+                        "description": "Tournament-team id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status of match: started, not_started, finished",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tournamentId",
+                        "in": "query",
+                        "description": "Tournament id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get list of matches"
+                    }
+                }
+            }
+        },
+        "/api/v1/matches/{matchId}": {
+            "put": {
+                "description": "Update specified match",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "matchId",
+                        "in": "path",
+                        "description": "Match id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "match[homeScore]",
+                        "in": "query",
+                        "description": "New home score",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "match[awayScore]",
+                        "in": "query",
+                        "description": "New away score",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "match[status]",
+                        "in": "query",
+                        "description": "New status",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully update specified match"
+                    }
+                }
+            }
+        },
+        "/api/v1/me": {
+            "get": {
+                "description": "Returns authenticated user",
+                "operationId": "current",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get authenticated user"
+                    }
+                }
+            }
+        },
+        "/api/v1/teams/all": {
+            "get": {
+                "description": "Returns all teams from the database",
+                "operationId": "catalogue",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get list of teams"
+                    }
+                }
+            }
+        },
+        "/api/v1/teams/{teamId}": {
+            "get": {
+                "description": "Returns specified team from tournament",
+                "operationId": "find",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "teamId",
+                        "in": "path",
+                        "description": "Team id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get specified team"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete specified team from tournament",
+                "operationId": "remove",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "teamId",
+                        "in": "path",
+                        "description": "Team id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully remove specified team"
+                    }
+                }
+            }
+        },
+        "/api/v1/teams/search": {
+            "get": {
+                "description": "Returns teams we search from database",
+                "operationId": "search",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "term",
+                        "in": "query",
+                        "description": "First letters of team name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get teams we search"
+                    }
+                }
+            }
+        },
+        "/api/v1/leagueTeams/{teamId}": {
+            "delete": {
+                "description": "Delete specified team from database",
+                "operationId": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "teamId",
+                        "in": "path",
+                        "description": "Team id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully remove specified team"
+                    }
+                }
+            }
+        },
+        "/api/v1/teamMembers": {
+            "get": {
+                "description": "Returns all members of specified team from tournament",
+                "operationId": "catalogue",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tournamentTeamId",
+                        "in": "query",
+                        "description": "Tournament-team id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get list of team members"
+                    }
+                }
+            },
+            "post": {
+                "description": "Create new member to specified team",
+                "operationId": "assign",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "teamMember[teamId]",
+                        "in": "query",
+                        "description": "Tournament-team id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "teamMember[memberId]",
+                        "in": "query",
+                        "description": "Member id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully add member to team"
+                    }
+                }
+            }
+        },
+        "/api/v1/teamMembers/{teamMemberId}": {
+            "delete": {
+                "description": "Remove member from specified team",
+                "operationId": "remove",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "teamMemberId",
+                        "in": "path",
+                        "description": "Member id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully remove member from team"
+                    }
+                }
+            }
+        },
+        "/api/v1/teamMembers/search": {
+            "get": {
+                "description": "Returns members we search from database",
+                "operationId": "search",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tournamentId",
+                        "in": "query",
+                        "description": "Tournament id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get members we search"
+                    }
+                }
+            }
+        },
+        "/api/v1/tournaments": {
+            "get": {
+                "description": "Returns all tournaments from database",
+                "operationId": "catalogue",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get list of tournaments"
+                    }
+                }
+            },
+            "post": {
+                "description": "Create new tournament",
+                "operationId": "store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tournament[name]",
+                        "in": "query",
+                        "description": "Tournament name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tournament[description]",
+                        "in": "query",
+                        "description": "Tournament description",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tournament[type]",
+                        "in": "query",
+                        "description": "Type of tournament: league, knock_out, multistage",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tournament[membersType]",
+                        "in": "query",
+                        "description": "Members type: single, double",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully add tournament"
+                    }
+                }
+            }
+        },
+        "/api/v1/tournaments/{tournamentId}": {
+            "get": {
+                "description": "Returns specified tournament from database",
+                "operationId": "find",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tournamentId",
+                        "in": "path",
+                        "description": "Tournament id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get specified tournament"
+                    }
+                }
+            },
+            "put": {
+                "description": "Update specified tournament",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tournamentId",
+                        "in": "path",
+                        "description": "Tournament id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tournament[name]",
+                        "in": "query",
+                        "description": "Tournament name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tournament[description]",
+                        "in": "query",
+                        "description": "Tournament description",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tournament[status]",
+                        "in": "query",
+                        "description": "Tournament status: draft, started, completed",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tournament[type]",
+                        "in": "query",
+                        "description": "Tournament type: league, knock_out, multistage",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tournament[membersType]",
+                        "in": "query",
+                        "description": "Members type: single, double",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully update tournament"
+                    }
+                }
+            }
+        },
+        "/api/v1/tablescores": {
+            "get": {
+                "description": "Returns tablescores",
+                "operationId": "tablescores",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tournamentId",
+                        "in": "query",
+                        "description": "Tournament id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get tablescores"
+                    }
+                }
+            }
+        },
+        "/api/v1/standings": {
+            "get": {
+                "description": "Returns standings",
+                "operationId": "standings",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tournamentId",
+                        "in": "query",
+                        "description": "Tournament id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get standings"
+                    }
+                }
+            }
+        },
+        "/api/v1/teams": {
+            "get": {
+                "description": "Returns all teams from specified tournament",
+                "operationId": "catalogue",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tournamentId",
+                        "in": "query",
+                        "description": "Tournament id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully get list of teams"
+                    }
+                }
+            },
+            "post": {
+                "description": "Add new team to specified tournament",
+                "operationId": "add",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "team[tournamentId]",
+                        "in": "query",
+                        "description": "Tournament id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "team[teamId]",
+                        "in": "query",
+                        "description": "Team id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully add new team"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}

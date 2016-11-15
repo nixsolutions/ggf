@@ -1,0 +1,15 @@
+{{#with model as |league|}}
+  <div class="row">
+    <div class="col m12">
+      <h3>{{league.name}}</h3>
+
+      {{#md-tabs selected='teams'}}
+
+        {{ggf-md.md-tab value='teams' title='Teams' link='league.teams'}}
+
+      {{/md-tabs}}
+
+      {{outlet}}
+    </div>
+  </div>
+{{/with}}
