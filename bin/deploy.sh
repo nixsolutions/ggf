@@ -5,7 +5,7 @@
 # -e - app environment
 # -c - current commit
 
-while getopts w:u:s:e:c: flag; do
+while getopts w:u:s:e:c:r: flag; do
     case $flag in
         w)
             workspace=$OPTARG;
@@ -22,7 +22,7 @@ while getopts w:u:s:e:c: flag; do
         c)
             currentCommit=$OPTARG;
             ;;
-        k)
+        r)
             server="$OPTARG";
             ;;
         ?)
