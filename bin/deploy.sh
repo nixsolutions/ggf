@@ -31,7 +31,7 @@ while getopts w:u:s:e:c:r: flag; do
     esac
 done
 
-if [ $APP_ENV -eq "demo" ]; then
+if [ $APP_ENV == "demo" ]; then
     deployDir="/home/dev/www_files/ggf_${APP_ENV}"
     exec_string="$user@$server:@$deployDir"
 else
