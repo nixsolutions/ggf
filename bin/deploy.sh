@@ -22,7 +22,7 @@ while getopts w:u:s:e:c: flag; do
         c)
             currentCommit=$OPTARG;
             ;;
-        r)
+        k)
             server="$OPTARG";
             ;;
         ?)
