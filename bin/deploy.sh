@@ -33,7 +33,7 @@ done
 
 if [ $APP_ENV == "demo" ]; then
     deployDir="/home/dev/www_files/ggf_${APP_ENV}"
-    exec_string="$user@$server:@$deployDir"
+    exec_string="$user@$server:$deployDir"
 else
     deployDir="/home/dev/src/ggf_${APP_ENV}"
     exec_string=$deployDir
@@ -46,7 +46,7 @@ echo -e "\tSyncing data in $deployDir with git tag $currentCommit"
 
 echo  " DEFAULT DEPLOY "
 
-rsync -aP --no-o --no-g --delete --progress $workspace/ $exec_string \
+rsync -aP --no-o --no-g --delete --progress $workspace/ ssh $exec_string \
 --exclude /.buildpacks \
 --exclude /.gitattributes \
 --exclude /.gitignore \
