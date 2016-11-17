@@ -46,7 +46,7 @@ echo -e "\tSyncing data in $deployDir with git tag $currentCommit"
 
 echo  " DEFAULT DEPLOY "
 
-rsync -aP --no-o --no-g --delete --progress $workspace/ ssh $exec_string \
+rsync -aP --no-o --no-g --delete --progress $workspace/ $exec_string \
 --exclude /.buildpacks \
 --exclude /.gitattributes \
 --exclude /.gitignore \
