@@ -77,7 +77,17 @@ rsync -aP --no-o --no-g --delete --progress $workspace/ $exec_string \
 --exclude /storage/logs \
 --exclude /resources/views/app.blade.php \
 
-echo -e "\tRunning install script/smoke tests"\
-cd ${deployDir} ; \
-chmod -v +x $deployDir/bin/post-install.sh ${host} ; \
-$deployDir/bin/post-install.sh -e ${APP_ENV} ;
+if [ $APP_ENV == "demo" ]; then
+    ssh -t $user@$server "\
+        echo -e "\tRunning install script/smoke tests"\
+        cd ${deployDir} ; \
+        chmod -v +x $deployDir/bin/post-install.sh ${host} ; \
+        $deployDir/bin/post-install.sh -e ${APP_ENV} ;
+    "
+else
+    echo -e "\tRunning install script/smoke tests"\
+    cd ${deployDir} ; \
+    chmod -v +x $deployDir/bin/post-install.sh ${host} ; \
+    $deployDir/bin/post-install.sh -e ${APP_ENV} ;
+fi
+
