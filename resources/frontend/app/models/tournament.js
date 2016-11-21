@@ -1,11 +1,12 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import EmberValidations from 'ember-validations';
 
 const { Model, attr, hasMany } = DS;
 
 const { computed } = Ember;
 
-export default Model.extend({
+export default Model.extend(EmberValidations.Mixin, {
   name:         attr('string'),
   description:  attr('string'),
   type:         attr('string'),
@@ -18,6 +19,10 @@ export default Model.extend({
 
   isDraft: computed('status', function () {
     return this.get('status') === 'draft';
+  }),
+
+  isStarted: computed('status', function () {
+    return this.get('status') === 'started';
   }),
 
   title: computed('name', 'type', function() {
@@ -37,5 +42,19 @@ export default Model.extend({
     }
 
     return `${name} (${type})`;
-  })
+  }),
+  validations: {
+    name: {
+      presence: true,
+      length: {
+        minimum: 3
+      }
+    },
+    description: {
+      length: {
+        minimum: 3
+      }
+    }
+
+  }
 });

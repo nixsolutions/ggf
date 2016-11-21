@@ -103,11 +103,17 @@ class TournamentController extends Controller
         $collection = Match::with(['homeTournamentTeam.team', 'awayTournamentTeam.team'])
             ->where(['tournamentId' => Input::get('tournamentId')]);
 
-        return $this->response->collection(
-            $serializer->collection($collection->get()),
-            new TablescoresTransformer(),
-            'tablescore'
-        );
+        $matches = $collection->get();
+
+        if (!empty($matches->all())) {
+            return $this->response->collection(
+                $serializer->collection($matches),
+                new TablescoresTransformer(),
+                'tablescore'
+            );
+        }
+
+        return $this->response->collection([]);
     }
 
     /**

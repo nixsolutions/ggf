@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  model() {
+    return this.store.createRecord('leagueTeam');
+  },
   actions: {
     closeModal() {
       this.transitionTo('league.teams');
@@ -11,17 +14,21 @@ export default Ember.Route.extend({
 
       team.leagueId = league.get('id');
 
-      let newTeam = this.store.createRecord('leagueTeam', team);
+      let newTeam = this.currentModel.setProperties(team);
 
-      newTeam.save().then(() => {
-        flashMessages.success('Team has been created');
+      newTeam.validate().then(() => {
+        newTeam.save().then(() => {
+          flashMessages.success('Team has been created');
 
-        const  route = this.container.lookup("route:league.teams");
-        route.refresh();
+          const  route = this.container.lookup("route:league.teams");
+          route.refresh();
 
-        this.transitionTo('league.teams');
+          this.transitionTo('league.teams');
+        }).catch(() => {
+          flashMessages.danger('Unable to create team');
+        });
       }).catch(() => {
-        flashMessages.danger('Unable to create league');
+        flashMessages.danger('Validation failed');
       });
 
     }

@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tournament: null,
+  league: null,
 
-  name: Ember.computed.oneWay('league.name'),
+  name: Ember.computed.alias('league.name'),
   logo: Ember.computed.alias('league.logo'),
   actions: {
     create() {

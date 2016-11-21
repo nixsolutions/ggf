@@ -54,6 +54,7 @@
     "ember-radio-button": "1.0.7",
     "ember-select-2": "1.3.0",
     "ember-truth-helpers": "1.2.0",
+    "ember-validations": "2.0.0-alpha.3",
     "fs-extra": "^0.30.0",
     "path": "^0.12.7",
     "rsvp": "^3.0.18",

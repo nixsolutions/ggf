@@ -5,6 +5,10 @@ const {
 } = Ember;
 
 export default Component.extend({
+  leagueTeam: null,
+
+  name: Ember.computed.alias('leagueTeam.name'),
+
   actions: {
     create() {
       const params = this.getProperties('name', 'logo');

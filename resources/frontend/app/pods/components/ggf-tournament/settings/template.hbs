@@ -1,51 +1,57 @@
 <div class="row">
-  <div class="col s12">
-    <div class="input-field col s12">
-      {{md-input
-          value=name
-          label='Tournament name'
-      }}
-    </div>
-
-    <div class="input-field col s12">
-      {{md-input
-          value=description
-          label='Tournament description'
-      }}
-    </div>
-
-    <div class="input-field col s12">
-      {{#md-radios selection=type}}
-        <p>{{md-radio value='league' name='League'}}</p>
-        <p>{{md-radio value='knock_out' name='Knock Out'}}</p>
-        <p>{{md-radio value='multistage' name='Multistage' disabled=true}}</p>
-      {{/md-radios}}
-    </div>
-
-    <div class="input-field col s12">
-      {{#md-radios selection=membersType}}
-        <p>{{md-radio value='single' name='Single'}}</p>
-        <p>{{md-radio value='double' name='Double'}}</p>
-      {{/md-radios}}
-    </div>
-
-    {{#if tournament.id}}
+  {{#form-wrapper for=tournament}}
+    <div class="col s12">
       <div class="input-field col s12">
-        {{#md-radios selection=status}}
-          <p>{{md-radio value='started' name='Started'}}</p>
-          <p>{{md-radio value='draft' name='Draft'}}</p>
-          <p>{{md-radio value='completed' name='Completed'}}</p>
+        {{#field-wrapper for="name" content=tournament}}
+          {{md-input
+            value=name
+            label='Tournament name'
+          }}
+        {{/field-wrapper}}
+      </div>
+
+      <div class="input-field col s12">
+        {{#field-wrapper for="description" content=tournament}}
+          {{md-input
+            value=description
+            label='Tournament description'
+          }}
+        {{/field-wrapper}}
+      </div>
+
+      <div class="input-field col s12">
+        {{#md-radios selection=type}}
+          <p>{{md-radio value='league' name='League'}}</p>
+          <p>{{md-radio value='knock_out' name='Knock Out'}}</p>
+          <p>{{md-radio value='multistage' name='Multistage' disabled=true}}</p>
         {{/md-radios}}
       </div>
-    {{/if}}
 
-    <div class="input-field col s12">
-      {{md-btn-submit
-          icon='mdi-content-send'
-          iconPosition='right'
-          text='Save'
-          action='save'
-      }}
+      <div class="input-field col s12">
+        {{#md-radios selection=membersType}}
+          <p>{{md-radio value='single' name='Single'}}</p>
+          <p>{{md-radio value='double' name='Double'}}</p>
+        {{/md-radios}}
+      </div>
+
+      {{#if tournament.id}}
+        <div class="input-field col s12">
+          {{#md-radios selection=status}}
+            <p>{{md-radio value='started' name='Started'}}</p>
+            <p>{{md-radio value='draft' name='Draft'}}</p>
+            <p>{{md-radio value='completed' name='Completed'}}</p>
+          {{/md-radios}}
+        </div>
+      {{/if}}
+
+      <div class="input-field col s12">
+        {{md-btn-submit
+            icon='mdi-content-send'
+            iconPosition='right'
+            text='Save'
+            action='save'
+        }}
+      </div>
     </div>
-  </div>
+  {{/form-wrapper}}
 </div>
