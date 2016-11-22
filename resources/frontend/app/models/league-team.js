@@ -1,10 +1,25 @@
 import DS from 'ember-data';
+import EmberValidations from 'ember-validations';
 
 const { Model, attr } = DS;
 
-export default Model.extend({
+export default Model.extend(EmberValidations.Mixin, {
   name:     attr('string'),
   logoPath: attr('string'),
-  logo: attr('file'),
+  logo:     attr('file'),
   leagueId: attr('number'),
+
+  validations: {
+    name: {
+      presence: true,
+      length: {
+        minimum: 3
+      }
+    },
+    logo: {
+      presence: {
+        message: 'image must be uploaded'
+      },
+    }
+  }
 });

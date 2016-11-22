@@ -26,26 +26,36 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       return new Ember.RSVP.Promise((resolve, reject) => {
         store.find('tournament', this.currentModel.tournament.get('id')).then((tournament) => {
 
+          if (tournament.get('isStarted') && tournament.get('teams').length <= 2) {
+            return flashMessages.danger('Tournament should have at least 2 teams.');
+          }
+
           // update `oneWay` binded attributes
           tournament.set('name', params.name);
           tournament.set('description', params.description);
 
-          tournament.save()
-            .then(() => {
-              resolve();
-              flashMessages.success('Tournament has been saved');
+          tournament.validate().then(() => {
+            tournament.save()
+              .then(() => {
+                resolve();
+                flashMessages.success('Tournament has been saved');
 
-            })
-            .catch((err) => {
-              tournament.rollbackAttributes();
+              })
+              .catch((err) => {
+                tournament.rollbackAttributes();
 
-              flashMessages.danger('Unable to save tournament');
+                flashMessages.danger('Unable to save tournament');
 
+                reject(err);
+              });
+          }).catch(() => {
 
-              reject(err);
-            });
+          });
         });
       });
     }
-  }
+  },
+  deactivate: function() {
+    this.currentModel.tournament.rollbackAttributes();
+  },
 });

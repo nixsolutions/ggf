@@ -12,16 +12,23 @@ export default Ember.Route.extend({
     save(tournament) {
       const flashMessages = Ember.get(this, 'flashMessages');
 
-      let newTournament = this.store.createRecord('tournament', tournament);
+      let newTournament = this.currentModel.setProperties(tournament);
 
-      newTournament.save().then(() => {
-        flashMessages.success('Tournament has been created');
+      newTournament.validate().then(() => {
+        newTournament.save().then(() => {
+          flashMessages.success('Tournament has been created');
 
-        this.transitionTo('tournament.teams', newTournament.id);
+          this.transitionTo('tournament.teams', newTournament.id);
+        }).catch(() => {
+          flashMessages.danger('Unable to create tournament');
+        });
       }).catch(() => {
-        flashMessages.danger('Unable to create tournament');
+        flashMessages.danger('Validation failed');
       });
-
     }
-  }
+  },
+
+  deactivate: function() {
+    this.currentModel.rollbackAttributes();
+  },
 });

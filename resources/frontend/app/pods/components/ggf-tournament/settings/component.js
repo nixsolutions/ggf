@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tournament: null,
 
-  name: Ember.computed.oneWay('tournament.name'),
-  description: Ember.computed.oneWay('tournament.description'),
+  name: Ember.computed.alias('tournament.name'),
+  description: Ember.computed.alias('tournament.description'),
   status: Ember.computed.alias('tournament.status'),
   type: Ember.computed.alias('tournament.type'),
   membersType: Ember.computed.alias('tournament.membersType'),

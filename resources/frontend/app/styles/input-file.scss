@@ -23,3 +23,25 @@ input[type="file"] {
   background-color: #2bbbad;
   transition: all .3s ease-out;
 }
+
+.error-span {
+  display: none;
+}
+
+.form-group {
+
+}
+.input-field {
+  .has-error {
+    .error-span {
+      margin-top: -32px;
+    }
+  }
+}
+.has-error {
+  .error-span {
+    display: block;
+    color: #ff0000;
+    padding-bottom: 10px;
+  }
+}
