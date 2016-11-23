@@ -4,6 +4,7 @@
 # -s - server host to deploy to
 # -e - app environment
 # -c - current commit
+# -r - ssh server
 
 while getopts w:u:s:e:c:r: flag; do
     case $flag in
@@ -33,10 +34,10 @@ done
 
 if [ $APP_ENV == "demo" ]; then
     deployDir="/home/dev/www_files/ggf_${APP_ENV}"
-    exec_string="$user@$server:$deployDir"
+    connectString="$user@$server:$deployDir"
 else
     deployDir="/home/dev/src/ggf_${APP_ENV}"
-    exec_string=$deployDir
+    connectString=$deployDir
 fi
 
 echo "DEPLOY DIR ======>  $deployDir   "
@@ -46,7 +47,7 @@ echo -e "\tSyncing data in $deployDir with git tag $currentCommit"
 
 echo  " DEFAULT DEPLOY "
 
-rsync -aP --no-o --no-g --delete --progress $workspace/ $exec_string \
+rsync -aP --no-o --no-g --delete --progress $workspace/ $connectString \
 --exclude /.buildpacks \
 --exclude /.gitattributes \
 --exclude /.gitignore \
