@@ -79,9 +79,11 @@ cd $DIR/../resources/frontend
 echo "NPM Install [frontend]"
 case "$env" in
     vagrant)
+        echo "vagrant env"
         npm install  --allow-root
         ;;
     *)
+        echo "demo env"
         npm install
         ;;
 esac
