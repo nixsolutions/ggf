@@ -4,8 +4,10 @@
 # -s - server host to deploy to
 # -e - app environment
 # -c - current commit
+# -r - ssh server
+# -d - deploy dir
 
-while getopts w:u:s:e:c: flag; do
+while getopts w:u:s:e:c:r:d: flag; do
     case $flag in
         w)
             workspace=$OPTARG;
@@ -22,23 +24,32 @@ while getopts w:u:s:e:c: flag; do
         c)
             currentCommit=$OPTARG;
             ;;
+        r)
+            server="$OPTARG";
+            ;;
+        d)
+            deployDir=$OPTARG;
+            ;;
         ?)
             exit;
             ;;
     esac
 done
 
-deployDir="/home/dev/src/ggf_${APP_ENV}"
+if [ -z $deployDir ]
+then
+    echo "##teamcity[buildStatus text='{build.status.text} (ERROR: deployDir could not be empty)']"
+    exit 1
+fi
 
 echo "DEPLOY DIR ======>  $deployDir   "
 echo "HOST       ======>  $host       "
 
 echo -e "\tSyncing data in $deployDir with git tag $currentCommit"
 
-mkdir -p $deployDir
-
 echo  " DEFAULT DEPLOY "
-rsync -aP --no-o --no-g --delete --progress $workspace/ $deployDir \
+
+rsync -aP --no-o --no-g --delete --progress $workspace/ $user@$server:$deployDir \
 --exclude /.buildpacks \
 --exclude /.gitattributes \
 --exclude /.gitignore \
@@ -69,7 +80,10 @@ rsync -aP --no-o --no-g --delete --progress $workspace/ $deployDir \
 --exclude /storage/logs \
 --exclude /resources/views/app.blade.php \
 
-echo -e "\tRunning install script/smoke tests"
-cd ${deployDir} ; \
-chmod -v +x $deployDir/bin/post-install.sh ${host} ; \
-$deployDir/bin/post-install.sh -e ${APP_ENV} ;
+# connect to remote host
+ssh -t $user@$server "\
+    cd ${deployDir} ; \
+    chmod -v +x $deployDir/bin/post-install.sh ${host} ; \
+    $deployDir/bin/post-install.sh -e ${APP_ENV} ;
+"
+
