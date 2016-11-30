@@ -166,7 +166,7 @@ class Tournament extends Model
             }
         }
 
-        return $teams = ['homeTeam' => $homeTeam, 'awayTeam' => $awayTeam];
+        return ['homeTeam' => $homeTeam, 'awayTeam' => $awayTeam];
     }
 
     /**

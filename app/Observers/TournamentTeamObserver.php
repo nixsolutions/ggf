@@ -10,10 +10,7 @@ use App\TournamentTeam;
  */
 class TournamentTeamObserver
 {
-    /**
-     * @param TournamentTeam $model
-     */
-    public function saving(TournamentTeam $model)
+    public function saving()
     {
     }
 }

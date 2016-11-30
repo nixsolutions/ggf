@@ -1,27 +1,30 @@
 <project name="GGF" default="build">
     <property file="build.properties"/>
 
-    <property name="basedir" value="."/>
-    <property name="applicationDir" value="${basedir}/app"/>
+    <property name="appDir" value="${basedir}/app"/>
     <property name="buildDir" value="${basedir}/build"/>
     <property name="vendorDir" value="${basedir}/vendor/bin"/>
     <property name="logsDir" value="${buildDir}/logs"/>
 
     <!-- Clean up from previous builds -->
     <target name="clean" description="Cleanup build artifacts">
-        <delete dir="${buildDir}/logs"/>
-        <delete dir="${logsDir}/phpunit-coverage"/>
         <delete file="${basedir}/.env.local"/>
         <delete file="${basedir}/.env.testing"/>
     </target>
 
     <!-- Prepare for the new build -->
     <target name="prepare" depends="clean">
-        <mkdir dir="${buildDir}/logs"/>
-        <mkdir dir="${logsDir}/phpunit-coverage"/>
+        <mkdir dir="${buildDir}"/>
+        <mkdir dir="${logsDir}" />
+        <mkdir dir="${logsDir}/coverage" />
+        <mkdir dir="${buildDir}/docs"/>
+        <mkdir dir="${buildDir}/coverage"/>
+        <mkdir dir="${buildDir}/phpcb"/>
+        <mkdir dir="${basedir}/logs"/>
         <touch file="${basedir}/.env.local"/>
         <touch file="${basedir}/.env.testing"/>
-        <chmod file="${buildDir}/logs" perm="755"/>
+        <chmod file="${logsDir}" perm="777"/>
+        <chmod file="${logsDir}/coverage" perm="777"/>
     </target>
 
     <target name="configs" depends="prepare">
@@ -67,42 +70,68 @@
         <echo message="##teamcity[publishArtifacts '${logsDir}/post-install.log']" />
     </target>
 
-    <target name="phpunit" description="PHPUnit" depends="install">
-        <echo message="Running unit tests with PHPUnit"/>
+    <target name="phpunit" description="PHPUnit">
+        <delete file="${logsDir}/phpunit.clover.xml" quiet="true" />
+        <delete dir="${logsDir}/coverage" quiet="true" />
+        <mkdir dir="${logsDir}/coverage"/>
+        <property name="junit" value="${logsDir}/tests-report.xml"/>
 
-        <exec dir="${basedir}" executable="${vendorDir}/phpunit" failonerror="true" osfamily="unix"
-              output="${logsDir}/phpunit.txt">
-            <arg line="--debug"/>
-            <arg line="--configuration ${basedir}/phpunit.xml"/>
+        <exec executable="${vendorDir}/phpunit" dir="${basedir}/tests" failonerror="true" osfamily="unix"
+              output="${logsDir}/phpunit.log">
+            <arg line="--verbose"/>
+            <arg line="-c ${basedir}/phpunit.xml"/>
+            <arg line='--log-junit "${logsDir}/tests-report.xml"'/>
+            <arg line='--coverage-clover "${logsDir}/clover.xml"'/>
+            <arg line='--coverage-html "${logsDir}/coverage/"'/>
         </exec>
-        <echo message="##teamcity[publishArtifacts '${logsDir}/phpunit.txt']" />
+        <zip destfile="${logsDir}/coverage.zip" basedir="${logsDir}/coverage"/>
+
+        <antcall target="publish"/>
     </target>
 
     <target name="phpmd" description="PHP Mess Detector" depends="install">
         <property name="pmd" value="${logsDir}/phpmd.xml"/>
 
         <exec dir="${basedir}" executable="${vendorDir}/phpmd" failonerror="false" osfamily="unix">
-            <arg line="${applicationDir}"/>
+            <arg line="${appDir}"/>
             <arg line="xml"/>
             <arg line="naming,unusedcode,codesize"/>
             <arg line="--reportfile ${pmd}"/>
         </exec>
-        <echo message="##teamcity[publishArtifacts '${logsDir}/phpmd.xml']" />
+
+        <antcall target="publish"/>
     </target>
 
-    <target name="phpcs" description="PHP_CodeSniffer" depends="install">
-
-        <exec dir="${basedir}" executable="${vendorDir}/phpcs" failonerror="false" osfamily="unix"
-              output="${logsDir}/phpcs.txt">
-            <arg line="--tab-width=4"/>
-            <arg line="--report=full"/>
-            <arg line="--standard=PSR2"/>
-            <arg line="--report-file=${logsDir}/phpcs.xml"/>
-            <arg line="${applicationDir}"/>
+    <target name="phpcb" description="PHP_CodeBrowser">
+        <mkdir dir="${logsDir}/phpcb"/>
+        <exec dir="${basedir}" executable="${vendorDir}/phpcb" failonerror="false" osfamily="unix">
+            <arg line="--log ${logsDir}"/>
+            <arg line="--source ${appDir}"/>
+            <arg line="--output ${logsDir}/phpcb"/>
         </exec>
-        <echo message="##teamcity[publishArtifacts '${logsDir}/phpcs.xml']" />
-        <echo message="##teamcity[publishArtifacts '${logsDir}/phpcs.txt']" />
+        <zip destfile="${logsDir}/phpcb.zip" basedir="${logsDir}/phpcb"/>
+        <delete dir="${logsDir}/phpcb"/>
+
+        <antcall target="publish"/>
     </target>
 
-    <target name="build" depends="clean, prepare, configs, config-update, install, phpunit, phpmd, phpcs"/>
+    <target name="phpcs" description="PHP_CodeSniffer">
+        <exec dir="${appDir}" executable="${vendorDir}/phpcs" failonerror="false" osfamily="unix" output="${logsDir}/phpcs.log">
+            <arg line="--tab-width=4" />
+            <arg line="--report=checkstyle" />
+            <arg line="--standard=PSR2" />
+            <arg line="--extensions=php"/>
+            <arg line="--ignore=js"/>
+            <arg line="--report-file=${logsDir}/phpcs.xml" />
+            <arg line="${appDir}" />
+        </exec>
+        <echo message="##teamcity[importData type='checkstyle' path='${logsDir}/phpcs.xml']" />
+        <antcall target="publish" />
+    </target>
+
+    <target name="publish">
+        <echo message="##teamcity[publishArtifacts '${logsDir}/']"/>
+    </target>
+
+    <target name="build" depends="clean, prepare, configs, config-update, install, phpunit, phpmd, phpcs, phpcb"/>
 </project>
