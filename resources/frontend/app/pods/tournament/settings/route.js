@@ -26,7 +26,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       return new Ember.RSVP.Promise((resolve, reject) => {
         store.find('tournament', this.currentModel.tournament.get('id')).then((tournament) => {
 
-          if (tournament.get('isStarted') && tournament.get('teams').length <= 2) {
+          if (tournament.get('isStarted') && tournament.get('teams').length < 2) {
             return flashMessages.danger('Tournament should have at least 2 teams.');
           }
 
