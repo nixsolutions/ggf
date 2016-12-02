@@ -6,7 +6,7 @@ cd $DIR/../
 
 # Install npm dependencies
 #echo "Create .env"
-cp .env.example .env
+cp .env.travis .env
 
 echo "Composer install"
 #install composer
