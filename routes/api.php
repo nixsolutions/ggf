@@ -16,6 +16,8 @@ use App\Http\Middleware\Authenticate;
 
 Route::group(['prefix' => 'v1'], function() {
 
+    Route::get('/ping', 'API\AuthController@ping');
+
     Route::get('/leagues', 'API\LeagueController@catalogue');
     Route::get('/leagueTeams', 'API\LeagueController@teams');
 
