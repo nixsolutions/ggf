@@ -19,8 +19,6 @@ module.exports = function(defaults) {
   
   var app = new EmberApp(defaults, options);
 
-  app.import('bower_components/moment/moment.js');
-
   if (process.env.NEW_RELIC_BROWSER_LICENSE_KEY && process.env.NEW_RELIC_BROWSER_APPLICATION_ID) {
     app.options['inlineContent'] = {
       'new-relic': {
