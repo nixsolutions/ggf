@@ -30,6 +30,7 @@ cache:
     - resources/frontend/node_modules/
     - resources/frontend/bower_components/
 notifications:
+  email: false
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/9e9d9d82773d7d722a37
