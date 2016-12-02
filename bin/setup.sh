@@ -15,9 +15,11 @@ echo "Composer install"
         chmod -v +x ${DIR}/composer.sh
 #        ${DIR}/composer.sh ${env}
         ${DIR}/composer.sh
+        ${DIR}/post-install.sh
 #       ;;
 #esac
 #composer install --no-interaction --prefer-source
+
 
 echo "Generate application key"
 php artisan key:generate
