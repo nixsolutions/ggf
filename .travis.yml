@@ -15,7 +15,9 @@ services:
 # try running against postgres 9.3
 addons:
   postgresql: "9.3"
-before_script:  
+before_script:
+  - chmod +x bin/setup.sh
+  - chmod +x bin/composer.sh
   - psql -c 'drop database if exists homestead_test;' -U postgres
   - psql -c 'create database homestead_test;' -U postgres
   - travis_retry composer install --no-interaction --prefer-source
