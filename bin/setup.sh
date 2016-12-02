@@ -6,6 +6,7 @@ cd $DIR/../
 
 # Install npm dependencies
 #echo "Create .env"
+cp .env.example .env
 
 echo "Composer install"
 #install composer
@@ -15,7 +16,6 @@ echo "Composer install"
         chmod -v +x ${DIR}/composer.sh
 #        ${DIR}/composer.sh ${env}
         ${DIR}/composer.sh
-        ${DIR}/post-install.sh
 #       ;;
 #esac
 #composer install --no-interaction --prefer-source
