@@ -2,6 +2,11 @@
 
 <a href="http://ggf.demo.php.nixdev.co" target="_blank">Demo</a>
 
+## Achievements
+
+[![Build Status](https://travis-ci.org/nixsolutions/ggf.svg?branch=master)](https://travis-ci.org/nixsolutions/ggf)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nixsolutions/ggf/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nixsolutions/ggf/?branch=master)
+
 ## Setup development environment with Homestead (per-project installation)
 
 1. Clone project
