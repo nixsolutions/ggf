@@ -7,6 +7,9 @@ var App;
 
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
+import {} from './overrides/route';
+
+
 App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,

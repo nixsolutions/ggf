@@ -18,7 +18,7 @@ export default Model.extend(EmberValidations.Mixin, {
     },
     logo: {
       presence: {
-        message: 'image must be uploaded'
+        message: 'you must upload an image'
       },
     }
   }
