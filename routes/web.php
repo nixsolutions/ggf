@@ -14,7 +14,7 @@
     Route::group(['middleware' => 'cors'], function () {
 
         Route::post('/auth/facebook/token', 'Auth\FacebookController@token');
-//        Route::post('/auth/logout', 'AuthController@logout');
+        Route::post('/auth/logout', 'AuthController@logout');
 
         Route::resource('tournament', 'TournamentController', [
             'only' => ['index', 'store']
