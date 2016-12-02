@@ -102,8 +102,6 @@ class Guard
         // so any further processing can be done. This allows the developer to be
         // listening for anytime a user signs out of this application manually.
 
-//        $this->clearUserDataFromStorage();
-
         MemberToken::where(['sessionId' => Session::getId()])->delete();
 
         if (isset($this->events)) {
