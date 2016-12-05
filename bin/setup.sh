@@ -6,7 +6,6 @@ cd $DIR/../
 
 # Install npm dependencies
 #echo "Create .env"
-cp .env.travis .env
 
 echo "Composer install"
 #install composer
@@ -19,7 +18,6 @@ echo "Composer install"
 #       ;;
 #esac
 #composer install --no-interaction --prefer-source
-
 
 echo "Generate application key"
 php artisan key:generate
