@@ -8,6 +8,12 @@ cd $DIR/../
 echo "Create .env"
 cp .env.example .env
 
+DB_CONNECTION=pgsql
+DB_HOST=localhost
+DB_DATABASE=homestead_test
+DB_USERNAME=postgres
+DB_PASSWORD=
+
 echo "Composer install"
 #install composer
 #case "$env" in
