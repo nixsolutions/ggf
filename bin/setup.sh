@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 cd $DIR/../
 
 # Install npm dependencies
-#echo "Create .env"
+echo "Create .env"
 cp .env.travis .env
 
 echo "Composer install"
@@ -19,7 +19,6 @@ echo "Composer install"
 #       ;;
 #esac
 #composer install --no-interaction --prefer-source
-
 
 echo "Generate application key"
 php artisan key:generate
