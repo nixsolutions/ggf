@@ -23,8 +23,6 @@ before_script:
   - yes | php artisan migrate
 script:
   - ./vendor/bin/phpunit
-# Code style
-  - php vendor/bin/phpcs ./app --standard=PSR1,PSR2 --encoding=utf-8
 cache:
   directories:
     - $HOME/.composer/cache
