@@ -6,13 +6,7 @@ cd $DIR/../
 
 # Install npm dependencies
 echo "Create .env"
-cp .env.example .env
-
-DB_CONNECTION=pgsql
-DB_HOST=localhost
-DB_DATABASE=homestead_test
-DB_USERNAME=postgres
-DB_PASSWORD=
+cp .env.travis .env
 
 echo "Composer install"
 #install composer
