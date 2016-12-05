@@ -21,7 +21,10 @@ before_script:
   - travis_retry ./bin/setup.sh
   - php artisan migrate:status
   - yes | php artisan migrate
-script: ./vendor/bin/phpunit
+script:
+  - ./vendor/bin/phpunit
+# Code style
+  - php vendor/bin/phpcs ./app --standard=PSR1,PSR2 --encoding=utf-8
 cache:
   directories:
     - $HOME/.composer/cache
