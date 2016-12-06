@@ -3907,16 +3907,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "3.2.1",
+            "version": "3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "b3063faa68b258d9423bf83e32f074919d069d3c"
+                "reference": "019a113b657aed90a4aa8f5e39696800779b8b2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/b3063faa68b258d9423bf83e32f074919d069d3c",
-                "reference": "b3063faa68b258d9423bf83e32f074919d069d3c",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/019a113b657aed90a4aa8f5e39696800779b8b2c",
+                "reference": "019a113b657aed90a4aa8f5e39696800779b8b2c",
                 "shasum": ""
             },
             "require": {
@@ -3925,7 +3925,7 @@
                 "php": "^5.6 || ^7.0",
                 "phpspec/php-diff": "^1.0.0",
                 "phpspec/prophecy": "^1.5",
-                "sebastian/exporter": "^1.0",
+                "sebastian/exporter": "^1.0 || ^2.0",
                 "symfony/console": "^2.7 || ^3.0",
                 "symfony/event-dispatcher": "^2.7 || ^3.0",
                 "symfony/finder": "^2.7 || ^3.0",
@@ -3985,7 +3985,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2016-12-04 21:06:57"
+            "time": "2016-12-05 13:46:47"
         },
         {
             "name": "phpspec/prophecy",
