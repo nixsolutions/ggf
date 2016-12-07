@@ -24,6 +24,9 @@ export default Model.extend(EmberValidations.Mixin, {
   isStarted: computed('status', function () {
     return this.get('status') === 'started';
   }),
+  isCompleted: computed('status', function () {
+    return this.get('status') === 'completed';
+  }),
 
   title: computed('name', 'type', function() {
     let name = this.get('name');
