@@ -2,7 +2,9 @@
 
   <div class="row">
     {{#if tournament.isDraft }}
-      {{ggf-tournament.complete-setup}}
+      {{#if session.isAuthenticated}}
+        {{ggf-tournament.complete-setup}}
+      {{/if}}
     {{else}}
       <div class="col s12">
 

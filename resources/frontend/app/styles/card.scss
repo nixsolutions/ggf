@@ -2,8 +2,10 @@
   position: inherit;
 
   .card-content {
-    height: 128px;
+    height: 130px;
     position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
     img {
       position: absolute;
       height: 104px;
@@ -17,9 +19,22 @@
       top: 8px;
       right: 8px;
     }
+    .card-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background-color: white;
+    }
+
+    p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
   }
 
   .card-action {
+    margin-top: 8px;
     min-height: 63px;
     a {
 
