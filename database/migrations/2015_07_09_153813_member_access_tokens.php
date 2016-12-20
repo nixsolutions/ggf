@@ -14,7 +14,7 @@ class MemberAccessTokens extends Migration
     public function up()
     {
         Schema::create('member_tokens', function (Blueprint $table) {
-            $table->integer('memberId');
+            $table->integer('memberId')->unsigned();
             $table->string('accessToken');
             $table->string('sessionId');
             $table->timestamps();

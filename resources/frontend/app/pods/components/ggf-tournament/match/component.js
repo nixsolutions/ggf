@@ -28,6 +28,7 @@ export default Component.extend({
       });
     },
 
+
     toggleOnEditState: function() {
       const session = this.get('session');
 
