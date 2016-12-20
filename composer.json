@@ -9,7 +9,7 @@
     "require": {
         "php": ">=5.6.5",
         "laravel/framework": "5.3.*",
-        "laravel/homestead": "~3.0",
+        "laravel/homestead": "~4.0",
         "laravelcollective/html": "^5.2",
         "sorskod/larasponse": "dev-L5",
         "doctrine/dbal": "^2.5",

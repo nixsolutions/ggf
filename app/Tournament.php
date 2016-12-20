@@ -36,6 +36,7 @@ class Tournament extends Model
     const STATUS_DRAFT = 'draft';
     const STATUS_STARTED = 'started';
     const STATUS_COMPLETED = 'completed';
+    const STATUS_DELETED = 'deleted';
 
     const MIN_TEAMS_AMOUNT = 2;
 
@@ -86,7 +87,8 @@ class Tournament extends Model
         return [
             self::STATUS_DRAFT,
             self::STATUS_STARTED,
-            self::STATUS_COMPLETED
+            self::STATUS_COMPLETED,
+            self::STATUS_DELETED
         ];
     }
 

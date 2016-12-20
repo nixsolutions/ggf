@@ -28,12 +28,11 @@ export default Component.extend({
       });
     },
 
+
     toggleOnEditState: function() {
       const session = this.get('session');
 
-      if (session.isAuthenticated &&
-        false === this.get('editState') &&
-        !this.get('match.tournament').get('isCompleted')) {
+      if (session.isAuthenticated && false === this.get('editState')) {
           this.set('editState', !this.get('editState'));
       }
     },

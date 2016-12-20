@@ -37,8 +37,9 @@
       {{#if tournament.id}}
         <div class="input-field col s12">
           {{#md-radios selection=status}}
-            <p>{{md-radio value='started' name='Started'}}</p>
+            <p>{{md-radio value='deleted' name='Deleted'}}</p>
             <p>{{md-radio value='draft' name='Draft'}}</p>
+            <p>{{md-radio value='started' name='Started'}}</p>
             <p>{{md-radio value='completed' name='Completed'}}</p>
           {{/md-radios}}
         </div>
