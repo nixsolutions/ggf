@@ -17,7 +17,7 @@
         "barryvdh/laravel-ide-helper": "^2.2",
         "guzzlehttp/guzzle": "^6.2",
         "barryvdh/laravel-cors": "^0.8.0",
-        "barryvdh/laravel-debugbar": "^2.2",
+        "barryvdh/laravel-debugbar": "^2.3",
         "intouch/laravel-newrelic": "~2.1",
         "illuminate/html": "~5.0",
         "pusher/pusher-php-server": "^2.6",
@@ -30,7 +30,7 @@
         "phpspec/phpspec": "~3.2",
         "symfony/dom-crawler": "~3.2",
         "symfony/css-selector": "~3.2",
-        "darkaonline/l5-swagger": "~3.0",
+        "darkaonline/l5-swagger": "~3.2",
         "phpmd/phpmd" : "@stable",
         "squizlabs/php_codesniffer": "2.*"
     },
