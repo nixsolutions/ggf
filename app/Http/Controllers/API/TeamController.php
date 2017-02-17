@@ -84,7 +84,7 @@ class TeamController extends Controller
      */
     public function search()
     {
-        $collection = Team::with('tournamentTeams.tournament')->where('name', 'like', Input::get('term') . '%')->get();
+        $collection = Team::with('tournamentTeams.tournament')->where('name', 'ilike', strtolower(Input::get('term')) . '%')->get();
 
         return $this->response->collection(
             $collection,
