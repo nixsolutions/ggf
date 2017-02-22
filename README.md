@@ -25,7 +25,7 @@
     ./vendor/bin/homestead make
 	```
 
-	> Remove the following lines from Homestead.yaml if you don't have this SSH keys on your machine (http://laravel.com/docs/5.0/homestead#installation-and-setup):
+	> Remove the following lines from Homestead.yaml if you don't have this SSH keys on your machine (https://laravel.com/docs/master/homestead#installation-and-setup):
 	> 
         authorize: ~/.ssh/id_rsa.pub
         keys:
