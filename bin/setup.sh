@@ -2,11 +2,28 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-cd $DIR/../
+while getopts e: flag; do
+    case ${flag} in
+        e)
+            env=$OPTARG;
+            ;;
+        ?)
+            echo "$OPTARG"
+            exit;
+            ;;
+    esac
+done
 
-# Install npm dependencies
-echo "Create .env"
-cp .env.travis .env
+cd $DIR/../
+echo "Setup EVN = ${env}"
+
+# Copy .env config for current environment
+echo "Create .env (Copy .env config for current environment )"
+if [ ! -f .env.${env}.example ]; then
+    echo "File .env.${env}.example not found! Set right env or create config file."
+    exit;
+fi
+cp .env.${env}.example .env
 
 echo "Composer install"
 #install composer

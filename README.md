@@ -15,9 +15,8 @@
 1. Clone project
 
 2. Run the following command to prepare project:
-	
     ```
-    EMBER_ENV=development bin/setup.sh
+    bin/setup.sh -e vagrant
 	```
 	
 3. Setup homestead/vagrant environment:
