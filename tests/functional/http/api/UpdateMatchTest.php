@@ -83,9 +83,8 @@ class UpdateMatchTest extends TestCase
                 'HTTP_CONTENT_TYPE' => 'application/json',
                 'HTTP_ACCEPT' => 'application/json'
             ]
-        );
-
-        $this->assertResponseStatus($response['status']);
+        )
+            ->assertStatus($response['status']);
 
         if (!empty($attributesToCheck)) {
             /**
@@ -310,9 +309,8 @@ class UpdateMatchTest extends TestCase
                 'HTTP_CONTENT_TYPE' => 'application/json',
                 'HTTP_ACCEPT' => 'application/json'
             ]
-        );
-
-        $this->assertResponseStatus(Response::HTTP_FORBIDDEN);
+        )
+            ->assertStatus(Response::HTTP_FORBIDDEN);
         $this->assertEquals(Match::findOrFail($match->id)->status, Match::STATUS_NOT_STARTED);
     }
 
@@ -390,9 +388,8 @@ class UpdateMatchTest extends TestCase
                 'HTTP_CONTENT_TYPE' => 'application/json',
                 'HTTP_ACCEPT' => 'application/json'
             ]
-        );
-
-        $this->assertResponseStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        )
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
 
@@ -497,9 +494,7 @@ class UpdateMatchTest extends TestCase
                 'HTTP_CONTENT_TYPE' => 'application/json',
                 'HTTP_ACCEPT' => 'application/json'
             ]
-        );
-
-        $this->assertResponseStatus($response['status']);
+        )->assertStatus($response['status']);
     }
 
     public function updateWithResults()

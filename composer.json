@@ -8,20 +8,16 @@
     "prefer-stable": true,
     "require": {
         "php": ">=5.6.5",
-        "laravel/framework": "5.3.*",
-        "laravel/homestead": "~4.0",
+        "laravel/framework": "5.4.*",
         "laravelcollective/html": "^5.2",
         "sorskod/larasponse": "dev-L5",
         "doctrine/dbal": "^2.5",
         "facebook/graph-sdk" : "^4.0",
-        "barryvdh/laravel-ide-helper": "^2.2",
         "guzzlehttp/guzzle": "^6.2",
         "barryvdh/laravel-cors": "^0.8.0",
-        "barryvdh/laravel-debugbar": "^2.3",
-        "intouch/laravel-newrelic": "~2.1",
         "illuminate/html": "~5.0",
         "pusher/pusher-php-server": "^2.6",
-        "mayflower/php-codebrowser": "~1.1"
+        "laravel/tinker": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -32,7 +28,11 @@
         "symfony/css-selector": "~3.2",
         "darkaonline/l5-swagger": "~3.2",
         "phpmd/phpmd" : "@stable",
-        "squizlabs/php_codesniffer": "2.*"
+        "squizlabs/php_codesniffer": "2.*",
+        "laravel/homestead": "^5.0",
+        "barryvdh/laravel-debugbar": "^2.3",
+        "mayflower/php-codebrowser": "^1.1",
+        "barryvdh/laravel-ide-helper": "^2.3"
     },
     "autoload": {
         "classmap": [

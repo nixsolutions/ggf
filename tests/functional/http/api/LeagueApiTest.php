@@ -16,7 +16,7 @@ class LeagueApiTest extends TestCase
     {
         factory(\App\League::class, 3)->create();
         $this->get('/api/v1/leagues')
-            ->seeJsonStructure([
+            ->assertJsonStructure([
                 'leagues' => [
                     '*' => $this->structure
                 ]
@@ -36,9 +36,9 @@ class LeagueApiTest extends TestCase
             'logo' => $uploadedFile,
         ];
 
-        $this->post('/api/v1/leagues', ['league' => $data]);
-        $this->assertResponseStatus(200)
-            ->seeInDatabase('leagues', [
+        $this->post('/api/v1/leagues', ['league' => $data])
+            ->assertStatus(200);
+        $this->assertDatabaseHas('leagues', [
                 'name' => 'example'
             ]);
     }
@@ -52,8 +52,8 @@ class LeagueApiTest extends TestCase
         Auth::login($member);
 
         $this->json('POST', '/api/v1/leagues', ['league' => [$field => $value]])
-            ->assertResponseStatus(422)
-            ->seeJson($expected);
+            ->assertStatus(422)
+            ->assertJsonFragment($expected);
     }
 
     public function leagueProvider()
@@ -80,7 +80,7 @@ class LeagueApiTest extends TestCase
         ]);
 
         $this->json('GET', '/api/v1/leagueTeams', ['leagueId' => $league->id])
-            ->seeJsonStructure([
+            ->assertJsonStructure([
                 'leagueTeams' => [
                     '*' => $this->teamStructure
                 ]

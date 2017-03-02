@@ -17,6 +17,6 @@ class MemberApiTest extends TestCase
         Auth::login($member);
 
         $this->get('/api/v1/me')
-            ->seeJsonStructure($this->structure);
+            ->assertJsonStructure($this->structure);
     }
 }

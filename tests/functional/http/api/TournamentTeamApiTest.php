@@ -43,8 +43,8 @@ class TournamentTeamApiTest extends TestCase
         $tournament = $this->createTournament();
 
         $this->json('GET', '/api/v1/teams', ['tournamentId' => $tournament->id])
-            ->assertResponseStatus(200)
-            ->seeJsonStructure([
+            ->assertStatus(200)
+            ->assertJsonStructure([
                 'teams' => [
                     '*' => $this->structure
                 ]
@@ -69,9 +69,9 @@ class TournamentTeamApiTest extends TestCase
             'tournamentId' => $tournament->id
         ];
 
-        $this->json('POST', '/api/v1/teams', ['team' => $data]);
-        $this->assertResponseStatus(200)
-            ->seeInDatabase('tournament_teams', $data);
+        $this->json('POST', '/api/v1/teams', ['team' => $data])
+            ->assertStatus(200);
+        $this->assertDatabaseHas('tournament_teams', $data);
     }
 
     /**
@@ -82,9 +82,9 @@ class TournamentTeamApiTest extends TestCase
         $member = factory(Member::class)->create();
         Auth::login($member);
 
-        $this->json('POST', '/api/v1/teams', ['team' => [$field => $value]]);
-        $this->assertResponseStatus(422)
-            ->seeJson($expected);
+        $this->json('POST', '/api/v1/teams', ['team' => [$field => $value]])
+            ->assertStatus(422)
+            ->assertJsonFragment($expected);
     }
 
     public function tournamentTeamProvider()

@@ -8,8 +8,7 @@ class ListMatchesTest extends TestCase
 {
     public function testCorrectResponseOnCatalogueAction()
     {
-        $this->call('get', '/api/v1/matches');
-
-        $this->assertResponseOk();
+        $this->call('get', '/api/v1/matches')
+            ->assertStatus(200);
     }
 }

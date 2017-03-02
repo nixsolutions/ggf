@@ -57,8 +57,8 @@ class TeamMemberApiTest extends TestCase
         $teamMember = $this->createTeamMember();
 
         $this->json('GET', '/api/v1/teamMembers', ['tournamentTeamId' => $teamMember->tournamentTeamId])
-            ->assertResponseStatus(200)
-            ->seeJsonStructure([
+            ->assertStatus(200)
+            ->assertJsonStructure([
                 'teamMembers' => [
                     '*' => $this->structure
                 ]
@@ -89,9 +89,9 @@ class TeamMemberApiTest extends TestCase
             ]
         ];
 
-        $this->json('POST', '/api/v1/teamMembers', $data);
-        $this->assertResponseStatus(200)
-            ->seeInDatabase('team_members', [
+        $this->json('POST', '/api/v1/teamMembers', $data)
+            ->assertStatus(200);
+        $this->assertDatabaseHas('team_members', [
                 'tournamentTeamId' => $tournamentTeam->id,
                 'memberId' => $member->id
             ]);
@@ -105,9 +105,9 @@ class TeamMemberApiTest extends TestCase
         $member = factory(Member::class)->create();
         Auth::login($member);
 
-        $this->json('POST', '/api/v1/teamMembers', ['teamMember' => [$field => $value]]);
-        $this->assertResponseStatus(422)
-            ->seeJson($expected);
+        $this->json('POST', '/api/v1/teamMembers', ['teamMember' => [$field => $value]])
+            ->assertStatus(422)
+            ->assertJsonFragment($expected);
     }
 
     public function teamMemberProvider()
@@ -126,9 +126,9 @@ class TeamMemberApiTest extends TestCase
     {
         $teamMember = $this->createTeamMember();
 
-        $this->json('DELETE', '/api/v1/teamMembers/' . $teamMember->memberId);
-        $this->assertResponseStatus(200)
-            ->dontSeeInDatabase('team_members', [
+        $this->json('DELETE', '/api/v1/teamMembers/' . $teamMember->memberId)
+            ->assertStatus(200);
+        $this->assertDatabaseMissing('team_members', [
                 'tournamentTeamId' => $teamMember->tournamentTeamId,
                 'memberId' => $teamMember->memberId
             ]);
@@ -139,8 +139,8 @@ class TeamMemberApiTest extends TestCase
         $teamMember = $this->createTeamMember();
 
         $this->json('GET', '/api/v1/teamMembers/search', ['tournamentId' => $teamMember->tournamentTeam->tournamentId])
-            ->assertResponseStatus(200)
-            ->seeJsonStructure([
+            ->assertStatus(200)
+            ->assertJsonStructure([
                 'members' => [
                     '*' => $this->structureSearch
                 ]
