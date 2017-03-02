@@ -14,7 +14,7 @@
 
 1. Clone project
 
-2. Run the following command to prepare project:
+2. Run the following command to set up project:
     ```
     bin/setup.sh -e vagrant
 	```
@@ -38,7 +38,14 @@
     vagrant up
     ```
     
-5. Add facebook settings to .env:
+5. Run the following command to prepare project (like run migration, build frontend):
+    
+    ```
+    EMBER_ENV=development bin/post-install.sh
+    ```
+    
+    
+6. Add facebook settings to .env:
 	
 
         FACEBOOK_APP_ID=1
@@ -46,7 +53,7 @@
         FACEBOOK_REDIRECT_URI=http://192.168.10.10/
 
 
-6. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
+7. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
 
 
 ## Testing

@@ -54,8 +54,8 @@ class TeamApiTest extends TestCase
         $tournamentTeam = $this->createTournamentTeam();
 
         $this->json('GET', '/api/v1/teams/' . $tournamentTeam->teamId)
-            ->assertResponseStatus(200)
-            ->seeJsonStructure([
+            ->assertStatus(200)
+            ->assertJsonStructure([
                 'teams' => [
                     '*' => $this->structure
                 ]
@@ -70,8 +70,8 @@ class TeamApiTest extends TestCase
         ]);
 
         $this->json('GET', '/api/v1/teams/search', ['term' => $team->name])
-            ->assertResponseStatus(200)
-            ->seeJsonStructure([
+            ->assertStatus(200)
+            ->assertJsonStructure([
                 'teams' => [
                     '*' => $this->structureSearch
                 ]
@@ -85,9 +85,9 @@ class TeamApiTest extends TestCase
 
         $tournamentTeam = $this->createTournamentTeam();
 
-        $this->json('DELETE', '/api/v1/teams/' . $tournamentTeam->teamId);
-        $this->assertResponseStatus(200)
-            ->dontSeeInDatabase('tournament_teams', [
+        $this->json('DELETE', '/api/v1/teams/' . $tournamentTeam->teamId)
+            ->assertStatus(200);
+        $this->assertDatabaseMissing('tournament_teams', [
                 'teamId' => $tournamentTeam->teamId,
                 'tournamentId' => $tournamentTeam->tournamentId
             ]);
@@ -97,7 +97,7 @@ class TeamApiTest extends TestCase
     {
         $this->createTeam();
         $this->get('/api/v1/teams/all')
-            ->seeJsonStructure([
+            ->assertJsonStructure([
                 'teams' => [
                     '*' => $this->teamStructure
                 ]
@@ -120,8 +120,8 @@ class TeamApiTest extends TestCase
         ];
 
         $this->post('/api/v1/leagueTeams', ['leagueTeam' => $data])
-            ->assertResponseStatus(200)
-            ->seeInDatabase('teams', [
+            ->assertStatus(200);
+        $this->assertDatabaseHas('teams', [
                 'leagueId' => $league->id,
                 'name' => 'example'
             ]);
@@ -136,8 +136,8 @@ class TeamApiTest extends TestCase
         Auth::login($member);
 
         $this->json('POST', '/api/v1/leagueTeams', ['leagueTeam' => [$field => $value]])
-            ->seeJson($expected)
-            ->assertResponseStatus(422);
+            ->assertJsonFragment($expected)
+            ->assertStatus(422);
     }
 
     public function teamProvider()
@@ -168,9 +168,9 @@ class TeamApiTest extends TestCase
         Auth::login($member);
 
         $team = $this->createTeam();
-        $this->json('DELETE', '/api/v1/leagueTeams/' . $team->id);
-        $this->assertResponseStatus(200)
-            ->dontSeeInDatabase('teams', [
+        $this->json('DELETE', '/api/v1/leagueTeams/' . $team->id)
+            ->assertStatus(200);
+        $this->assertDatabaseMissing('teams', [
                 'id' => $team->id,
                 'name' => $team->name
             ]);
