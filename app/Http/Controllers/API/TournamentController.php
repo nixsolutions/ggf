@@ -47,7 +47,7 @@ class TournamentController extends Controller
     {
         $collection = Tournament::with('tournamentTeams.team')->get();
 
-        return $this->response->collection($collection, new TournamentTransformer($this->response), 'tournaments');
+        return $this->response->collection($collection, new TournamentTransformer(), 'tournaments');
     }
 
     /**
@@ -76,7 +76,7 @@ class TournamentController extends Controller
     {
         $collection = Tournament::with('tournamentTeams.team')->where(['id' => $tournamentId])->get();
 
-        return $this->response->collection($collection, new TournamentTransformer($this->response), 'tournaments');
+        return $this->response->collection($collection, new TournamentTransformer(), 'tournaments');
     }
 
     /**
@@ -204,7 +204,7 @@ class TournamentController extends Controller
         $tournament = Auth::user()->tournaments()->create($input);
         $tournament = Tournament::where(['id' => $tournament->id])->get();
 
-        return $this->response->collection($tournament, new TournamentTransformer($this->response), 'tournaments');
+        return $this->response->collection($tournament, new TournamentTransformer(), 'tournaments');
     }
 
     /**

@@ -4,13 +4,12 @@ namespace App\Auth;
 
 use App\MemberToken;
 use App\Member;
-use Facebook\FacebookSession;
 use Facebook\FacebookAuthorizationException;
+use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 use Facebook\GraphUser;
 use Illuminate;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request as HttpRequest;
@@ -67,7 +66,7 @@ class Guard
         $session = new FacebookSession($accessToken);
 
         if (!$session) {
-            throw new FacebookAuthorizationException('Invalid code');
+            throw new FacebookAuthorizationException('Invalid code', ['Invalid code'], 401);
         }
 
         /**
@@ -96,24 +95,11 @@ class Guard
 
     public function logout()
     {
-        $user = Auth::user();
-
         // If we have an event dispatcher instance, we can fire off the logout event
         // so any further processing can be done. This allows the developer to be
         // listening for anytime a user signs out of this application manually.
 
         MemberToken::where(['sessionId' => Session::getId()])->delete();
-
-        if (isset($this->events)) {
-            $this->events->fire('auth.logout', [$user]);
-        }
-
-        // Once we have fired the logout event we will clear the users out of memory
-        // so they are no longer available as the user is no longer considered as
-        // being signed into this application and should not be available here.
-        $this->user = null;
-
-        $this->loggedOut = true;
     }
 
     /**

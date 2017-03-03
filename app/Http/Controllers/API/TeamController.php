@@ -33,7 +33,7 @@ class TeamController extends Controller
      */
     public function catalogue()
     {
-        return $this->response->collection(Team::all(), new TeamTransformer($this->response), 'teams');
+        return $this->response->collection(Team::all(), new TeamTransformer(), 'teams');
     }
 
     /**
