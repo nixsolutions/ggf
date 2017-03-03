@@ -18,6 +18,7 @@ class TournamentTeamController extends Controller
 
     /**
      * @SWG\Get(
+     *     tags={"Team"},
      *     path="/api/v1/teams",
      *     description="Returns all teams from specified tournament",
      *     operationId="catalogue",
@@ -44,6 +45,7 @@ class TournamentTeamController extends Controller
 
     /**
      * @SWG\Post(
+     *     tags={"Team"},
      *     path="/api/v1/teams",
      *     description="Add new team to specified tournament",
      *     operationId="add",

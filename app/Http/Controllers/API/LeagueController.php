@@ -27,6 +27,7 @@ class LeagueController extends Controller
 {
     /**
      * @SWG\Get(
+     *     tags={"League"},
      *     path="/api/v1/leagues",
      *     description="Returns all leagues from the database",
      *     operationId="catalogue",
@@ -44,6 +45,7 @@ class LeagueController extends Controller
 
     /**
      * @SWG\Post(
+     *     tags={"League"},
      *     path="/api/v1/leagues",
      *     description="Add new league to database",
      *     operationId="store",
@@ -80,6 +82,7 @@ class LeagueController extends Controller
 
     /**
      * @SWG\Get(
+     *     tags={"League"},
      *     path="/api/v1/leagueTeams",
      *     description="Returns all teams from the specified league",
      *     operationId="teams",

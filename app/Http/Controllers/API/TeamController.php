@@ -20,6 +20,7 @@ class TeamController extends Controller
 {
     /**
      * @SWG\Get(
+     *     tags={"Team"},
      *     path="/api/v1/teams/all",
      *     description="Returns all teams from the database",
      *     operationId="catalogue",
@@ -37,6 +38,7 @@ class TeamController extends Controller
 
     /**
      * @SWG\Get(
+     *     tags={"Team"},
      *     path="/api/v1/teams/{teamId}",
      *     description="Returns specified team from tournament",
      *     operationId="find",
@@ -65,6 +67,7 @@ class TeamController extends Controller
 
     /**
      * @SWG\Get(
+     *     tags={"Team"},
      *     path="/api/v1/teams/search",
      *     description="Returns teams we search from database",
      *     operationId="search",
@@ -95,6 +98,7 @@ class TeamController extends Controller
 
     /**
      * @SWG\Delete(
+     *     tags={"Team"},
      *     path="/api/v1/teams/{teamId}",
      *     description="Delete specified team from tournament",
      *     operationId="remove",
@@ -121,6 +125,7 @@ class TeamController extends Controller
 
     /**
      * @SWG\Post(
+     *     tags={"Team"},
      *     path="/api/v1/leagueTeams",
      *     description="Add new team to database",
      *     operationId="store",
@@ -162,6 +167,7 @@ class TeamController extends Controller
 
     /**
      * @SWG\Delete(
+     *     tags={"Team"},
      *     path="/api/v1/leagueTeams/{teamId}",
      *     description="Delete specified team from database",
      *     operationId="delete",
