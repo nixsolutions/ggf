@@ -12,6 +12,7 @@ class MemberController extends Controller
 {
     /**
      * @SWG\Get(
+     *     tags={"Member"},
      *     path="/api/v1/me",
      *     description="Returns authenticated user",
      *     operationId="current",

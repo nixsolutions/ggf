@@ -32,6 +32,7 @@ class TournamentController extends Controller
 
     /**
      * @SWG\Get(
+     *     tags={"Tournament"},
      *     path="/api/v1/tournaments",
      *     description="Returns all tournaments from database",
      *     operationId="catalogue",
@@ -51,6 +52,7 @@ class TournamentController extends Controller
 
     /**
      * @SWG\Get(
+     *     tags={"Tournament"},
      *     path="/api/v1/tournaments/{tournamentId}",
      *     description="Returns specified tournament from database",
      *     operationId="find",
@@ -79,6 +81,7 @@ class TournamentController extends Controller
 
     /**
      * @SWG\Get(
+     *     tags={"Tournament"},
      *     path="/api/v1/tablescores",
      *     description="Returns tablescores",
      *     operationId="tablescores",
@@ -118,6 +121,7 @@ class TournamentController extends Controller
 
     /**
      * @SWG\Get(
+     *     tags={"Tournament"},
      *     path="/api/v1/standings",
      *     description="Returns standings",
      *     operationId="standings",
@@ -151,6 +155,7 @@ class TournamentController extends Controller
 
     /**
      * @SWG\Post(
+     *     tags={"Tournament"},
      *     path="/api/v1/tournaments",
      *     description="Create new tournament",
      *     operationId="store",
@@ -204,6 +209,7 @@ class TournamentController extends Controller
 
     /**
      * @SWG\Put(
+     *     tags={"Tournament"},
      *     path="/api/v1/tournaments/{tournamentId}",
      *     description="Update specified tournament",
      *     operationId="update",

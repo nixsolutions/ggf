@@ -15,6 +15,7 @@ class MatchController extends Controller
 {
     /**
      * @SWG\Get(
+     *     tags={"Match"},
      *     path="/api/v1/matches",
      *     description="Returns all matches with specified tournamentId from the database",
      *     operationId="catalogue",
@@ -71,6 +72,7 @@ class MatchController extends Controller
 
     /**
      * @SWG\Put(
+     *     tags={"Match"},
      *     path="/api/v1/matches/{matchId}",
      *     description="Update specified match",
      *     operationId="update",

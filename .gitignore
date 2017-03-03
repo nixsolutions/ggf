@@ -14,3 +14,4 @@ public/leagues-logo
 public/font
 build/
 composer.phar
+storage/api-docs/

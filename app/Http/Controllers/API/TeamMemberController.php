@@ -18,6 +18,7 @@ class TeamMemberController extends Controller
 {
     /**
      * @SWG\Get(
+     *     tags={"Team"},
      *     path="/api/v1/teamMembers",
      *     description="Returns all members of specified team from tournament",
      *     operationId="catalogue",
@@ -44,6 +45,7 @@ class TeamMemberController extends Controller
 
     /**
      * @SWG\Post(
+     *     tags={"Team"},
      *     path="/api/v1/teamMembers",
      *     description="Create new member to specified team",
      *     operationId="assign",
@@ -87,6 +89,7 @@ class TeamMemberController extends Controller
 
     /**
      * @SWG\Delete(
+     *     tags={"Team"},
      *     path="/api/v1/teamMembers/{teamMemberId}",
      *     description="Remove member from specified team",
      *     operationId="remove",
@@ -113,6 +116,7 @@ class TeamMemberController extends Controller
 
     /**
      * @SWG\Get(
+     *     tags={"Team"},
      *     path="/api/v1/teamMembers/search",
      *     description="Returns members we search from database",
      *     operationId="search",
