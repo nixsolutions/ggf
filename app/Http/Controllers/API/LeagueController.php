@@ -40,7 +40,7 @@ class LeagueController extends Controller
      */
     public function catalogue()
     {
-        return $this->response->collection(League::all(), new LeagueTransformer($this->response), 'leagues');
+        return $this->response->collection(League::all(), new LeagueTransformer(), 'leagues');
     }
 
     /**

@@ -32,7 +32,7 @@ class AuthManager extends Illuminate\Auth\AuthManager
      */
     public function createEloquentDriver()
     {
-        $provider = $this->createEloquentProvider();
+        $provider = $this->createEloquentProvider((array)config());
 
         return new Guard($provider, $this->app['session.store']);
     }

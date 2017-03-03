@@ -23,8 +23,5 @@ abstract class Controller extends Controllers\Controller
     public function __construct(Larasponse $response)
     {
         $this->response = $response;
-
-        // The Fractal parseIncludes() is available to use here
-//        $this->response->parseIncludes(Input::get('includes'));
     }
 }
